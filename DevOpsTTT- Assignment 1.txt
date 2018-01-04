@@ -1,0 +1,557 @@
+1)    Can abstract class have constructors in Java?
+	Yes we can define a constructor in abstract class in java.  It is not possible to create object of abstract class directly but we can create object of abstract class from sub class which is actually extending abstract class.
+	When we create object of class which extends abstract class constructor of sub class will be called from that abstract class constructor will be called and memory will be created for all non static members.  If we are not defining any constructor default constructor will be executed.
+	So, we can define any number of constructor in abstract class.
+
+Ex:-    public  abstract class Demo 
+	{
+ 		Demo()
+		{
+        		System.out.println("constructor of abstract class");
+ 		}
+ 
+	}
+ 
+	public class Test extends Demo
+	{
+ 
+    		Test()
+		{
+        		System.out.println("Test class constructor");
+    		}
+    
+		public static void main(String[] args) 
+		{
+       			 Test obj = new Test();
+       
+ 
+		}
+	}
+
+
+2)  Can abstract class implements interface in Java? Do they require to implement all methods?
+	When a class is defined to implement an interface, the class must provide definitions of all the methods defined in the interface. Otherwise, we will get compiler time error.
+	A class must implement all methods of the interface, unless the class is declared as abstract. There are only two choices:
+	*) Implement every method defined by the interface.
+	*) Declare the class as an abstract class, as a result, forces you to subclass the class (and implement the missing methods).
+
+	The only case the class do not need to implement all methods in the interface is when any class in its inheritance tree has already provided concrete (i.e., non-abstract) method implementations then the subclass is under no obligation to re-implement those methods.
+
+Ex:-  public interface Interface1 
+      {
+ 		void m1();
+  		void m2();
+  		void m3();
+	}
+
+	public abstract class AbstDemo implements Interface1
+	{
+		public void m1()
+		{	}
+		
+		public void m3()
+		{       }
+	}
+
+
+
+3) Can abstract class be final in Java?
+	Abstract class can't be declare as final.  The reason behind it is  that, If we declare a class as abstract then we can't intantiate that class ( only we can extend that class) . And if create have class as final then we can't extend that class.
+	So, if we have a final abstract class then that class can never be extended  nor instantiated.  Because of abstract we can't not instantiate the class and because of final we can't extend that class.
+	So, that class will have no use.
+
+
+4)  Can abstract class have static methods in Java?
+	Yes, abstract class can declare and define static methods.  But, we must follow guidelines for making a method static in Java, as it’s not welcomed in a object oriented design, because static methods can not be overridden in Java.
+
+Ex:-   abstract class Demo
+	{
+		private static final String s="This program is an example of static methods inside a abstract class"
+
+		public Demo1() 
+		{	}
+		
+		public static String get()
+		{
+			return s;
+		}
+	}
+	
+	public class MainTest()
+	{
+		public static void main(String args[])
+		{
+			System.out.println(Demo1.get());
+		}
+	}
+
+
+5) Can you create instance of abstract class?
+	No, we cannot create instance for abstract class but we can create reference for abstract class.  A reference doesnot contain its own memory like object when it is created, but shares the memory of the class.  we can create an object for derived class.  We can use this object to call the methods.
+
+
+6) Is it necessary for abstract class to have abstract method?
+	No, its not mandatory for an abstract class to have any abstract method.  You can make a class abstract in java, by just using abstract keyword in class declaration.  And inside the abstract class you can define body for  all the available methods.
+	
+Ex:-   abstract class Student
+	{
+		Student()
+		{
+			System.out.println("Student Info");
+		}
+		abstract void read();
+		void write()
+		{
+			System.out.println("Writing....");
+		}
+	}
+
+	class College extends Student
+	{
+		void read()
+		{
+			System.out.println("Reading...");	
+		}
+	}
+
+	class TestAbstraction
+	{
+		public static void main(String args[])
+		{
+			Student s= new College();
+			s.read();
+			s.write();
+		}
+	}
+
+
+7) Difference between abstract class and interface in Java?
+	Both abstract class and interface are used for abstraction.
+But the differences are as folows:
+*) Type of methods: Interface can have only abstract methods.  Abstract class can have abstract and non-abstract methods.
+  
+*) Final Variables: Variables declared in a java interface are by default final.  An abstract class may contain non-final variables.
+
+*) Type of variables: Abstract class can have final, non-final, static and non-static variables. Interface has only static and final variables.
+
+*) Implementation: Abstract class can provide the implementation of interface.  Interface can’t provide the implementation of abstract class.
+
+*) Inheritance vs Abstraction: A Java interface can be implemented using keyword “implements” and abstract class can be extended using keyword “extends”.
+
+*) Multiple implementation: An interface can extend another Java interface only, an abstract class can extend another Java class and implement multiple Java interfaces.
+
+*) Accessibility of Data Members: Members of a Java interface are public by default. A Java abstract class can have class members like private, protected, etc.
+
+
+8)  When do you favor abstract class over interface?
+	Java allows a class to implement multiple interfaces but extend only one class, the interface might be considered advantageous when a particular implementation needs to be associated with multiple types.
+
+	Abstract class in Java evolves better than interface.  Since it’s almost impossible to add a new method on a published interface, it’s better to use abstract class.
+	Similarly, if you have too many methods inside interface, you are creating pain for all it’s implementation, consider providing an abstract class for default implementation.
+
+9) What is abstract method in Java?
+	A method without body (no implementation) is known as abstract method. A method must always be declared in an abstract class, or in other words you can say that if a class has an abstract method, it should be declared abstract as well.
+
+Rules of Abstract Method:-
+*) Abstract methods don’t have body, they just have method signature as shown above.
+*) If a class has an abstract method it should be declared abstract, the vice versa is not true, which means an abstract class doesn’t need to have an abstract method compulsory.
+*) If a regular class extends an abstract class, then the class must have to implement all the abstract methods of abstract parent class or it has to be declared abstract as well.
+
+Ex:- abstract class Sum
+	{
+		public abstract int sum(int a, int b);
+		public void disp()	
+		{
+			System.out.println("The Sum of 2 nos.");
+		}
+	}
+
+	class Demo extends Sum
+	{
+		public int sum(int n1, int n2)
+		{
+			return n1+n2;
+		}
+
+		public static void main(String args[])
+		{
+			Sum obj=new Demo();
+			System.out.println(obj.sum(2,3));
+			obj.disp();
+		}
+	}
+
+10) Can abstract class contains main method in Java ?
+	Yes, we can use the main method in abstract class. The main method is a static method so it is associated with Class, not with object/ instance. The abstract is applicable to the object so there is no problem if it contains the main method. In main method, you can not create an instance of the abstract class but you can instantiate other concrete class.
+
+Ex:-  public abstract class TestAbstract 
+	{
+		public static void main(String[] args)
+		{
+			System.out.println("Hello world");
+
+		}
+	}
+	
+
+11) what is static block in java?
+	Static block is used for initializing the static variables.This block gets executed when the class is loaded in the memory. A class can have multiple Static blocks, which will execute in the same sequence in which they have been written into the program.
+
+Ex:- class JavaExample
+     {
+   	static int num;
+   	static String mystr;
+   	static
+	{
+      		num = 97;
+      		mystr = "Static keyword in Java";
+   	}
+   	public static void main(String args[])
+   	{
+   	        System.out.println("Value of num: "+num);
+      	        System.out.println("Value of mystr: "+mystr);
+   	}
+    }
+
+
+
+12)  What is the need of static block?
+	Static block is executed the first time the class is loaded in JVM where as static methods are executed only when they are called.Hence static block can be used to perform key operations which could be required when the class is loaded.  So without creating the object we can execute this loop.
+
+
+13)   Can we overload static methods in java?
+	Yes, we can overload static methods.  We can have 2 or more static methods with same name, but differences in input parameters. 
+
+Ex:-	public class Test 
+	{
+    	public static void disp() 
+	{
+        	System.out.println("Display1 method ");
+    	}
+    	public static void disp(int a)
+        { 
+        	System.out.println("Display2 method with int parameter");
+    	}
+    	public static void main(String args[])
+    	{ 
+        	Test.disp();
+        	Test.disp(10);
+    	}
+   }
+
+
+14) Can we call super class static methods from sub class?
+	Yes we can call super class static method inside sub class using super_class_method();  We can also call super class static method using Sub_class_name.superclass_staticMethod().
+
+Ex:-public class SuperDemo
+	{
+		public static void show()
+		{
+ 			System.out.println("Super class show() method called");
+ 		}
+	}
+
+
+	public class SubDemo extends SuperDemo
+	{
+
+		public void print()
+		{
+			System.out.println("Sub class print() method called");
+		}
+ 
+ 		public static void main(String args[])
+		{
+			SuperDemo.show();
+			SubDemo.show();
+		}
+	}
+
+
+15)  What is the difference between final and static keywords?
+	Static and final both are the keywords used in Java.  Some of the differences between them are as follows:
+*) Applicable: Static keyword is applicable to nested static class, variables, methods and block.
+Final keyword is applicable to class, methods and variables.
+
+*) Initialization: It is not compulsory to initialize the static variable at the time of its declaration.
+It is compulsory to initialize the final variable at the time of its declaration.
+
+*) Modification:  The static variable can be reinitialized.
+The final variable can not be reinitialized.
+
+*) Methods:  Static methods can only access the static members of the class, and can only be called by other static methods.
+Final methods can not be inherited.
+
+*) Class:  Static class's object can not be created, and it only contains static members only.
+A final class can not be inherited by any class.
+
+*) Block: Static block is used to initialize the static variables.
+Final keyword supports no such block.
+
+16)  Write a note on covariant return type with example code.
+	The covariant return type specifies that the return type may vary in the same direction as the subclass.  It is possible to override method by changing the return type if subclass overrides any method whose return type is Non-Primitive but it changes its return type to subclass type.
+
+Ex:- class A
+     {  
+	A get()
+	{
+		return this;
+	}  
+     }  
+  
+     class B1 extends A
+     {  
+	B1 get()
+	{ 	
+		return this;
+	}  
+	void message()
+	{
+		System.out.println("welcome to covariant return type");
+	}  
+  
+	public static void main(String args[])
+	{  
+		new B1().get().message();  
+	}  
+  }  
+
+
+17)  Write a note on Enum with example code.
+	An enum is a special type of data type which is basically a collection (set) of constants.
+
+Features of Enum are:- 
+*) enum improves type safety
+*) enum can be easily used in switch
+*) enum can be traversed
+*) enum can have fields, constructors and methods
+*) enum may implement many interfaces but cannot extend any class because it internally extends Enum class
+
+Ex:- class EnumExample1
+	{  
+		public enum Season 
+		{
+			 WINTER, SPRING, SUMMER, FALL 
+		}  
+  
+		public static void main(String[] args) 
+		{  
+			for (Season s : Season.values())  
+			System.out.println(s);  
+  
+		}
+	}
+
+18)  Write a note on use of super keyword and super() method
+	
+
+	Supeer Keyword:The super keyword refers to the objects of immediate parent class.  When you have a variable in child class which is already present in the parent class then in order to access the variable of parent class, you need to use the super keyword.
+
+The use of super keyword:-
+*) To access the data members of parent class when both parent and child class have member with same name
+*) To explicitly call the no-arg and parameterized constructor of parent class
+*) To access the method of parent class when child class has overridden that method. 
+
+
+Ex:-
+class Superclass
+{
+   int num = 100;
+}
+class Subclass extends Superclass
+{
+   int num = 110;
+   void printNumber()
+   {
+	System.out.println(super.num);
+   }
+   public static void main(String args[]){
+	Subclass obj= new Subclass();
+	obj.printNumber();	
+   }
+}
+
+Super():  The super keyword can also be used to invoke parent class method. It should be used if subclass contains the same method as parent class. In other words, it is used if method is overridden.
+
+Ex:- class Animal
+	{  
+		void eat()
+		{
+			System.out.println("eating...");
+		}  
+	}  
+	class Dog extends Animal
+	{  
+		void eat()
+		{	
+			System.out.println("eating bread...");
+		}  
+		void bark()
+		{
+			System.out.println("barking...");
+		}  
+		void work()
+		{  
+			super.eat();  
+			bark();  
+		}  
+	}  
+	class TestSuper2
+	{  
+		public static void main(String args[])
+		{  
+			Dog d=new Dog();  
+			d.work();  
+		}
+	}  
+
+
+19)  Write a code to implement abstraction using interface.
+	Ex:- interface in1
+		{
+     			final int a = 10;
+			void display();
+		}
+ 
+
+	    class testClass implements in1
+		{
+    			public void display()
+    			{
+        			System.out.println("Implementing abstraction using interface");
+    			}
+ 
+    	    public static void main (String[] args)
+    		{
+        		testClass t = new testClass();
+        		t.display();
+        		System.out.println(a);
+   		 }
+	}
+
+
+20)  Write a Java program to sort a numeric array and a string array.
+	public class Exercise1 
+	{
+		public static void main(String[] args)
+		{   
+    
+    			int[] my_array1 = {1789, 2035, 1899, 1456, 2013, 
+1458, 2458, 1254, 1472, 2365, 1456, 2165, 1457, 2456};
+            
+    			String[] my_array2 = {"Java","Python","PHP","C#","C Programming","C++"}; 
+
+       
+    	System.out.println("Original numeric array : "+Arrays.toString(my_array1));
+    	Arrays.sort(my_array1);
+    	System.out.println("Sorted numeric array : "+Arrays.toString(my_array1));
+    
+    	System.out.println("Original string array : "+Arrays.toString(my_array2));
+    	Arrays.sort(my_array2);
+    	System.out.println("Sorted string array : "+Arrays.toString(my_array2));
+    }
+}
+
+21) Write a Java program to sum values of an array.
+	import java.util.Scanner;
+public class Array_Sum
+{
+    public static void main(String[] args) 
+    {
+        int n, sum = 0;
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter no. of elements you want in array:");
+        n = s.nextInt();
+        int a[] = new int[n];
+        System.out.println("Enter all the elements:");
+        for(int i = 0; i < n; i++)
+        {
+            a[i] = s.nextInt();
+            sum = sum + a[i];
+        }
+        System.out.println("Sum:"+sum);
+    }
+}
+
+
+22)  Write a Java program to remove a specific element from an array.
+	import java.util.Arrays; 
+public class ElementRemoval
+ {
+ 	public static void main(String[] args) 
+	{
+   		int[] my_array = {25, 14, 56, 15, 36, 56, 77, 18, 29, 49};
+   
+   		System.out.println("Original Array : "+Arrays.toString(my_array));     
+   
+  		 int removeIndex = 1;
+
+	   for(int i = removeIndex; i < my_array.length -1; i++){
+        	my_array[i] = my_array[i + 1];
+      	}
+	System.out.println("After removing the second element: "+Arrays.toString(my_array));
+ }
+ }
+
+
+23) Write a Java program to reverse an array of integer values.
+	import java.util.Scanner;
+
+public class Reverse
+{
+   public static void main(String args[])
+   {
+       int size, i, j, temp;
+       int arr[] = new int[50];
+       Scanner scan = new Scanner(System.in);
+	   
+       System.out.print("Enter Array Size : ");
+       size = scan.nextInt();
+	   
+       System.out.print("Enter Array Elements : ");
+       for(i=0; i<size; i++)
+       {
+           arr[i] = scan.nextInt();
+       }
+	   
+       j = i - 1;     // now j will point to the last element
+       i = 0;         // and i will point to the first element
+	   
+       while(i<j)
+       {
+           temp = arr[i];
+           arr[i] = arr[j];
+           arr[j] = temp;
+           i++;
+           j--;
+       }
+	   
+       System.out.print("Now the Reverse of Array is : \n");
+       for(i=0; i<size; i++)
+       {
+           System.out.print(arr[i]+ "  ");
+       }       
+   }
+}
+
+24)  Write a Java program to find the duplicate values of an array of integer values
+	import java.util.Arrays; 
+public class Duplicate {
+  public static void main(String[] args) 
+    {
+        int[] my_array = {1, 2, 5, 5, 6, 6, 7, 2};
+ 
+        for (int i = 0; i < my_array.length-1; i++)
+        {
+            for (int j = i+1; j < my_array.length; j++)
+            {
+                if ((my_array[i] == my_array[j]) && (i != j))
+                {
+                    System.out.println("Duplicate Element : "+my_array[j]);
+                }
+            }
+        }
+    }    
+}
+
+				
