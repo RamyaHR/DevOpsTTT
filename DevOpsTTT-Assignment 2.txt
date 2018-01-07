@@ -1,0 +1,1209 @@
+1.Write 3 different java programs to print the following patterns
+
+a)1
+  1 2
+  1 2 3
+  1 2 3 4
+  1 2 3 4 5
+
+public class Pattern {
+
+    public static void main(String[] args) {
+        int rows = 5;
+
+        for(int i = 1; i <= rows; ++i) {
+            for(int j = 1; j <= i; ++j) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+b) 5 4 3 2 1 
+   5 4 3 2 
+   5 4 3 
+   5 4
+   5
+ 
+public class MainClass
+{
+    public static void main(String[] args) 
+    {
+        
+        int rows = 5;
+         
+       for (int i = 1; i <= rows; i++) 
+        { 
+            for (int j = rows; j >= i; j--)
+            {
+                System.out.print(j+" ");
+            }
+             
+            System.out.println();
+        }
+         
+       
+    }
+}
+
+ c)    *    		      
+      ***
+     *****
+    *******
+     *****
+      ***
+       *                 
+Note: Shape will be Rhombus.
+
+class Star 
+{
+	public static void main(String[] args) 
+	{
+		int i, j, k;
+		for(i=1;i<=5;i++)
+		{
+			for(j=i;j<5;j++)
+			{
+				System.out.print(" ");
+			}
+			for(k=1;k<(i*2);k++)
+			{
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+		for(i=4;i>=1;i--)
+		{
+			for(j=5;j>i;j--)
+			{
+				System.out.print(" ");
+			}
+			for(k=1;k<(i*2);k++)
+			{
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+}
+
+2)  Write a java program to take the input from user and determine if it is a prime number or not.
+
+public class Prime {
+
+    public static void main(String[] args) {
+
+        int num = 29;
+        boolean flag = false;
+        for(int i = 2; i <= num/2; ++i)
+        {
+            if(num % i == 0)
+            {
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag)
+            System.out.println(num + " is a prime number.");
+        else
+            System.out.println(num + " is not a prime number.");
+    }
+}
+
+3) Write a java program to display the fibonacci series till less than 200 using only 2 variables.
+
+public class Fibonacci {
+
+    public static void main(String[] args) {
+
+        int n = 30 , t1 = 0, t2 = 1;
+        System.out.print("First " + n + " terms: ");
+       
+        for (int i = 1; i <= n; ++i)
+        {
+            if(t1<=200)
+            {
+                System.out.print(t1 + " ");
+                sum = t1 + t2;
+                t1 = t2;
+                t2 = sum;
+                
+            }
+        }
+    }
+}
+
+
+5)Write Java program to check if a name is palindrome
+
+import java.util.Scanner;
+ 
+class Palindrome
+{
+   public static void main(String args[])
+   {
+      String str, rev = "";
+      Scanner sc = new Scanner(System.in);
+ 
+      System.out.println("Enter a string:");
+      str = sc.nextLine();
+ 
+      int length = str.length();
+ 
+      for ( int i = length - 1; i >= 0; i-- )
+         rev = rev + str.charAt(i);
+ 
+      if (str.equals(rev))
+         System.out.println(str+" is a palindrome");
+      else
+         System.out.println(str+" is not a palindrome");
+ 
+   }
+}
+
+
+6) Write Java program to check if a number is Armstrong number or not? (input 153 output true,  123 output false)
+
+import java.util.*;
+ class ArmstrongExample{  
+  public static void main(String[] args)  {  
+    int c=0,a,temp,n;  
+    Scanner s= new Scanner(System.in);
+	n=s.nextInt();  
+    temp=n;  
+    while(n>0)  
+    {  
+    a=n%10;  
+    n=n/10;  
+    c=c+(a*a*a);  
+    }  
+    if(temp==c)  
+    System.out.println("armstrong number");   
+    else  
+        System.out.println("Not armstrong number");   
+   }  
+}  
+
+
+7) How to find factorial of number in Java using iteration?
+
+class FactorialExample2{  
+ static int factorial(int n){    
+  if (n == 0)    
+    return 1;    
+  else    
+    return(n * factorial(n-1));    
+ }    
+ public static void main(String args[]){  
+  int i,fact=1;  
+   Scanner s= new Scanner(System.in);
+	number= s.nextInt();
+  
+ fact = factorial(number);   
+  System.out.println("Factorial of "+number+" is: "+fact);    
+ }  
+} 
+
+8) Write a Java code to take a character as a input from user and determine if it is a vowel or a consonant using conditional construct.
+
+class Vowel
+{
+	public static void main(String[ ] arg)
+	{
+	int i=0;
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter a character : ");
+	char ch=sc.next( ).charAt(0);	 		
+	if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U')
+	{
+	System.out.println("Entered character "+ch+" is  Vowel"); 
+	}
+	else if((ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z'))
+		System.out.println("Entered character "+ch+" is Consonant");
+	      else
+		System.out.println("Not an alphabet");		
+	}
+}
+
+
+9) Write a switch case java code to create calculator with + - / * functionalities only.
+
+import java.util.Scanner;
+ 
+class Calculator 
+{
+    public static void main(String[] args) 
+    {
+           
+        Scanner s=new Scanner(System.in);
+        System.out.println("YOU HAVE FOLLOWING CHOICES : ");
+        System.out.println("1. ADDITION");
+        System.out.println("2. SUBTRACTION ");
+        System.out.println("3. MULTIPLICATION ");
+        System.out.println("4. DIVISION");
+        System.out.println("ENTER YOUR CHOICE : ");
+        int i=s.nextInt();
+           
+        System.out.println("ENTER FIRST NUMBER ");
+        int a=s.nextInt();
+           
+        System.out.println("ENTER SECOND NUMBER ");
+        int b=s.nextInt();
+           
+        double result=0;//'result' will store the result of operation
+           
+        switch(i)
+        {
+            case 1:
+                result=a+b;
+                break;
+            case 2:
+                result=a-b;
+                break;
+            case 3:
+                result=a*b;
+                break;
+            case 4:
+                if(b==0)//when denominator becomes zero
+                {
+                    System.out.println("DIVISION NOT POSSIBLE");
+                    break;
+                }
+                else
+                    result=a/b;
+            
+            default:
+                System.out.println("YOU HAVE ENTERED A WRONG CHOICE");
+            
+        }
+           
+        System.out.println("RESULT = "+result);
+    }
+}
+
+
+10) Write a java code to copy one array into another.
+
+public class Test
+{
+    public static void main(String[] args)
+    {
+        int a[] = {1, 8, 3};
+ 
+        int b[] = new int[a.length];
+ 
+            for (int i=0; i<a.length; i++)
+            b[i] = a[i];
+ 
+        b[0]++;
+ 
+        System.out.println("Contents of a[] ");
+        for (int i=0; i<a.length; i++)
+            System.out.print(a[i] + " ");
+ 
+        System.out.println("\n\nContents of b[] ");
+        for (int i=0; i<b.length; i++)
+            System.out.print(b[i] + " ");
+    }
+}
+
+
+11) Write a java code to compare the length of two arrays and display the longer array.
+public class EqualityOfTwoArrays
+{
+   
+	 public static void main(String[] args)
+   
+	 {
+		int[] arrayOne = {2, 5, 1, 7, 4};
+
+        
+        int[] arrayTwo = {2, 5, 1, 7, 4};
+  
+       
+         boolean equalOrNot = true;
+         
+       
+		if(arrayOne.length == arrayTwo.length)
+
+	        {
+            
+			for (int i = 0; i < arrayOne.length; i++)
+            			{
+               
+				 if(arrayOne[i] != arrayTwo[i])
+                				{
+   
+	                 		 equalOrNot = false;
+
+		                 }
+
+	                }
+            
+			double max = arrayOne[0];
+  
+		for (int i = 1; i < arrayOne.length; i++)
+		 {
+         
+			if (arrayOne[i] > max) max = arrayOne[i];
+ 
+		 }
+     
+		 System.out.println("Max is " + max); 
+        }
+         
+       
+	 else
+        
+	{
+            
+		equalOrNot = false;
+ 
+        }
+         
+        
+	if (equalOrNot)
+        
+	{
+            
+		System.out.println("Two Arrays Are Equal");
+        
+	}
+        
+	else
+       
+	{
+            
+		System.out.println("Two Arrays Are Not equal");
+        
+	}
+        
+    
+}
+
+}
+
+
+12) Write a java code to display a reverse String array.
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+ 
+class ReverseString
+{
+    public static void main(String[] args)
+    {
+        String input = "NIIT DTDevops Training";
+        char[] temparray = input.toCharArray();
+        int left, right=0;
+        right = temparray.length-1;
+ 
+        for (left=0; left < right ; left++ ,right--)
+        {
+           
+            char temp = temparray[left];
+            temparray[left] = temparray[right];
+            temparray[right]=temp;
+        }
+ 
+        for (char c : temparray)
+            System.out.print(c);
+        System.out.println();
+    }
+}
+
+
+
+13) Write the difference between checked and unchecked exception with example code.
+
+An Exception is an unwanted situation or event that occurs during the execution of a program, exceptions may lead to termination of the program if not handled properly.
+
+*) CheckedException:-
+Checked exceptions are checked at compile-time. It means if a method is throwing a checked exception then it should handle the exception using try-catch block or it should declare the exception using throws keyword, otherwise the program will give a compilation error.
+
+Some of the Checked Exceptions –
+
+SQLException
+IOException
+ClassNotFoundException
+
+Ex:-
+import java.io.*;
+class Example {  
+   public static void main(String args[])
+   {
+	FileInputStream fis = null;
+	try{
+	    fis = new FileInputStream("B:/myfile.txt"); 
+	}catch(FileNotFoundException fnfe){
+            System.out.println("The specified file is not " +
+			"present at the given path");
+	 }
+	int k; 
+	try{
+	    while(( k = fis.read() ) != -1) 
+	    { 
+		System.out.print((char)k); 
+	    } 
+	    fis.close(); 
+	}catch(IOException ioe){
+	    System.out.println("I/O error occurred: "+ioe);
+	 }
+   }
+}
+
+*)Unchecked Exception:-
+Unchecked exceptions are not checked at compile time. It means if your program is throwing an unchecked exception and even if you didn’t handle/declare that exception, the program won’t give a compilation error. Most of the times these exception occurs due to the bad data provided by user during the user-program interaction. It is up to the programmer to judge the conditions in advance, that can cause such exceptions and handle them appropriately. All Unchecked exceptions are direct sub classes of RuntimeException class.
+
+Some of the unchecked exception:
+
+NullPointerException
+ArrayIndexOutOfBoundsException
+ArithmeticException
+IllegalArgumentException
+NumberFormatException
+
+Ex:-
+class Example {  
+   public static void main(String args[]) {
+	try{
+	   int arr[] ={1,2,3,4,5};
+	   System.out.println(arr[7]);
+	}
+        catch(ArrayIndexOutOfBoundsException e){
+	   System.out.println("The specified index does not exist " +
+		"in array.");
+	}
+   }
+}
+
+
+14) Write the difference between throw and throws with example code.
+	Throw:- 
+*) Java throw keyword is used to explicitly throw an exception.
+*) Checked Exception cannot be propagated using throw only.
+*) Throw is followed by an instance.
+*) Throw is used within the method.
+*) Cannot throw multiple Exceptions.
+
+	Throws:-
+*) Java throws keyword is used to declare an exception.
+*) Checked Exception can be propagated with throws.
+*) Throws is followed by class.
+*) Throws is used with the method signature.
+*) Can declare multiple exceptions.
+
+Example of Throw:-
+
+class ThrowExcep
+{
+    static void fun()
+    {
+        try
+        {
+            throw new NullPointerException("demo");
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("Caught inside fun().");
+            throw e; // rethrowing the exception
+        }
+    }
+ 
+    public static void main(String args[])
+    {
+        try
+        {
+            fun();
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("Caught in main.");
+        }
+    }
+}
+
+Example of Throws:-
+
+class ThrowsExecp
+{
+    static void fun() throws IllegalAccessException
+    {
+        System.out.println("Inside fun(). ");
+        throw new IllegalAccessException("demo");
+    }
+    public static void main(String args[])
+    {
+        try
+        {
+            fun();
+        }
+        catch(IllegalAccessException e)
+        {
+            System.out.println("caught in main.");
+        }
+    }
+}
+
+
+
+
+15) Write a note or nested try…catch block with example code.
+When a try catch block is present in another try block then it is called the nested try catch block. Each time a try block does not have a catch handler for a particular exception, then the catch blocks of parent try block are inspected for that exception, if match is found that that catch block executes.
+
+If neither catch block nor parent catch block handles exception then the system generated message would be shown for the exception, similar to what we see when we don’t handle exception.
+
+Ex:-
+class NestingDemo{
+   public static void main(String args[]){
+      try{
+    	
+        try{     
+            
+            try{
+            	int arr[]= {1,2,3,4};
+            	
+            	System.out.println(arr[10]);
+            }catch(ArithmeticException e){
+            	System.out.print("Arithmetic Exception");
+            	System.out.println(" handled in try-block3");
+            }
+        }
+        catch(ArithmeticException e){
+           System.out.print("Arithmetic Exception");
+           System.out.println(" handled in try-block2");
+        }
+    }
+    catch(ArithmeticException e3){
+    	System.out.print("Arithmetic Exception");
+     	System.out.println(" handled in main try-block");
+    }
+    catch(ArrayIndexOutOfBoundsException e4){
+    	System.out.print("ArrayIndexOutOfBoundsException");
+     	System.out.println(" handled in main try-block");
+    }
+    catch(Exception e5){
+    	System.out.print("Exception");
+     	System.out.println(" handled in main try-block");
+     }
+  }
+}
+
+
+16) Write a note on MultiThreading and MultiTasking
+Multi threading:-
+An application typically is implemented as a separate process with several threads of control. In some situations a single application may be required to perform several similar tasks for example a web server accepts client requests for web pages, images, sound, and so forth. A busy web server may have several of clients concurrently accessing it. If the web server ran as a traditional single-threaded process, it would be able to service only one client at a time. The amount of time that a client might have to wait for its request to be serviced could be enormous. So it is efficient to have one process that contains multiple threads to serve the same purpose. 
+	This approach would multithread the web-server process, the server would create a separate thread that would listen for client requests when a request was made rather than creating another process it would create another thread to service the request.So to get the advantages like responsiveness, Resource sharing economy and utilization of multiprocessor architectures multithreading concept can be used.
+
+Multi tasking:-
+Multitasking is the logical extension of multiprogramming. The concept of multitasking is quite similar to multiprogramming but difference is that the switching between jobs occurs so frequently that the users can interact with each program while it is running. This concept is also known as time-sharing systems. A time-shared operating system uses CPU scheduling and multiprogramming to provide each user with a small portion of time-shared system.
+
+
+
+17)  Write a short note on Deque and give example code.
+	A double-ended queue (dequeue, often abbreviated to deque) is an abstract data structure that implements a queue for which elements can only be added to or removed from the front (head) or back (tail). It is also often called a head-tail linked list.
+
+Deque is a special type of data structure in which insertions and deletions will be done either at the front end or at the rear end of the queue. The operations that can be performed on deques are
+
+· Insert an item from front end
+
+· Insert an item from rear end
+
+· Delete an item from front end
+
+· Delete an item from rear end
+
+· Display the contents of queue
+
+
+Methods of deque:-
+
+*) add(element): Adds an element to the tail.
+*) addFirst(element): Adds an element to the head.
+*) addLast(element): Adds an element to the tail.
+*) offer(element): Adds an element to the tail and returns a boolean to explain if the insertion was successful.
+*) offerFirst(element): Adds an element to the head and returns a boolean to explain if the insertion was successful.
+*) offerLast(element): Adds an element to the tail and returns a boolean to explain if the insertion was successful.
+*) iterator(): Returns an iterator for this deque.
+descending
+*) Iterator(): Returns an iterator that has the reverse order for this deque.
+*) push(element): Adds an element to the head.
+*) pop(element): Removes an element from the head and returns it.
+*) removeFirst(): Removes the element at the head.
+*) removeLast(): Removes the element at the tail.
+
+
+Ex:-
+import java.util.*;
+ 
+public class DequeExample
+{
+    public static void main(String[] args)
+    {
+        Deque deque = new LinkedList<>();
+ 
+        deque.add("Element 1 (Tail)"); // add to tail
+        deque.addFirst("Element 2 (Head)");
+        deque.addLast("Element 3 (Tail)");
+        deque.push("Element 4 (Head)"); //add to head
+        deque.offer("Element 5 (Tail)");
+        deque.offerFirst("Element 6 (Head)");
+        deque.offerLast("Element 7 (Tail)");
+ 
+        System.out.println(deque + "\n");
+ 
+        System.out.println("Standard Iterator");
+        Iterator iterator = deque.iterator();
+        while (iterator.hasNext())
+            System.out.println("\t" + iterator.next());
+ 
+        Iterator reverse = deque.descendingIterator();
+        System.out.println("Reverse Iterator");
+        while (reverse.hasNext())
+            System.out.println("\t" + reverse.next());
+ 
+        System.out.println("Peek " + deque.peek());
+        System.out.println("After peek: " + deque);
+ 
+        System.out.println("Pop " + deque.pop());
+        System.out.println("After pop: " + deque);
+ 
+        System.out.println("Contains element 3: " +
+                        deque.contains("Element 3 (Tail)"));
+ 
+        deque.removeFirst();
+        deque.removeLast();
+        System.out.println("Deque after removing " +
+                            "first and last: " + deque);
+ 
+    }
+}
+
+
+
+18) Write a short note on Generics an all types of Parameters used in Generics with example code.
+
+	Generics in Java is similar to templates in C++. The idea is to allow type (Integer, String, … etc and user defined types) to be a parameter to methods, classes and interfaces. For example, classes like HashSet, ArrayList, HashMap, etc use generics very well. We can use them for any type.
+
+Advantage of Java Generics
+There are mainly 3 advantages of generics. They are as follows:
+1) Type-safety : We can hold only a single type of objects in generics. It doesn’t allow to store other objects.
+
+2) Type casting is not required: There is no need to typecast the object.
+
+3) Compile-Time Checking: It is checked at compile time so problem will not occur at runtime. The good programming strategy says it is far better to handle the problem at compile time than runtime.
+
+Type Parameters
+The type parameters naming conventions are important to learn generics thoroughly. The commonly type parameters are as follows:
+
+T - Type
+E - Element
+K - Key
+N - Number
+V - Value
+
+Ex:- 
+public class TestGenerics4{  
+  
+   public static < E > void printArray(E[] elements) {  
+        for ( E element : elements){          
+            System.out.println(element );  
+         }  
+         System.out.println();  
+    }  
+    public static void main( String args[] ) {  
+        Integer[] intArray = { 10, 20, 30, 40, 50 };  
+        Character[] charArray = { 'J', 'A', 'V', 'A', 'P','R','O','G','R','A','M'};  
+  
+        System.out.println( "Printing Integer Array" );  
+        printArray( intArray  );   
+  
+       System.out.println( "Printing Character Array" );  
+        printArray( charArray );   
+    }   
+}  
+
+
+
+19) Write a short note on Map Interface.
+
+	The java.util.Map interface represents a mapping between a key and a value. The Map interface is not a subtype of the Collection interface. Therefore it behaves a bit different from the rest of the collection types.
+
+	A Map cannot contain duplicate keys and each key can map to at most one value. Some implementations allow null key and null value (HashMap and LinkedHashMap) but some do not (TreeMap).
+
+Methods of Map:
+
+*) public Object put(Object key, Object value) :- is used to insert an entry in this map.
+*) public void putAll(Map map) :- is used to insert the specified map in this map.
+*) public Object remove(Object key) :- is used to delete an entry for the specified key.
+*) public Object get(Object key) :- is used to return the value for the specified key.
+*) public boolean containsKey(Object key) :- is used to search the specified key from this map.
+*) public Set keySet() :- returns the Set view containing all the keys.
+*) public Set entrySet() :- returns the Set view containing all the keys and values.
+
+
+Ex:-
+import java.util.*;
+class HashMapDemo
+{
+   public static void main(String args[])
+   {
+       HashMap< String,Integer> hm = 
+                            new HashMap< String,Integer>();
+       hm.put("a", new Integer(100));
+       hm.put("b", new Integer(200));
+       hm.put("c", new Integer(300));
+       hm.put("d", new Integer(400));
+ 
+       // Returns Set view     
+       Set< Map.Entry< String,Integer> > st = hm.entrySet();   
+ 
+       for (Map.Entry< String,Integer> me:st)
+       {
+           System.out.print(me.getKey()+":");
+           System.out.println(me.getValue());
+       }
+   }
+}
+
+
+20) Write the difference between LinkedList and ArrayList.
+
+ArrayList:-
+*) ArrayList internally uses dynamic array to store the elements.
+*) Manipulation with ArrayList is slow because it internally uses array.  If any element is removed from the array, all the bits are shifted in memory.
+*) ArrayList class can act as a list only because it implements List only.
+*) ArrayList is better for storing and accessing data.
+
+LinkedList:-
+*) LinkedList internally uses doubly linked list to store the elements.
+*) Manipulation with LinkedList is faster than ArrayList because it uses doubly linked list so no bit shifting is required in memory.
+*) LinkedList class an act as a list and queue both because it implements List and Deque interfaces.
+*) LinkedList is better for manipulating data.
+
+
+21) Write a note on Dynamic array in java.
+
+	A dynamic array has variable size and allows elements to be added or removed. For this, we can allocate a fixed-size array and divide it into two parts:
+*) the first part stores the elements of the dynamic array 
+*) the second part is reserved, but not used.
+
+	Then we can add or remove elements at the end of the array by using the reserved space, until this space is completely consumed. After that, we create a bigger array and copy the contents of the old array to the new one.
+
+ Methods:-
+
+*) int[] data: the array storing the elements
+*) int size: the number of elements
+*) DynamicArray():initialize this dynamic array with size 0
+*) DynamicArray(int capacity): initialize this dynamic array with the capacity
+*) int get(int index): get the element at the specified index
+*) int set(int index, int element): set the value of the element at the specified index
+*) boolean add(int element): add the element to the end of the array
+*) void ensureCapacity(int minCapacity): increase the capacity
+*) int size(): return the size of the dynamic array
+*) boolean isEmpty(): check whether the array is empty
+*) void clear(): clean up the elements
+
+Ex:-  import java.util.Arrays;
+ 
+public class DynamicArray
+{
+  private int[] data;
+  private int size;
+   
+  public DynamicArray()
+  {
+    data = new int[16];
+    size = 0;
+  }
+   
+  public DynamicArray(int capacity)
+  {
+    if (capacity < 16)
+    capacity = 16;
+    data = new int[capacity];
+    size = 0;
+  }
+   
+  public void ensureCapacity(int minCapacity)
+  {
+    int oldCapacity = data.length;
+    if (minCapacity > oldCapacity)
+    {
+      int newCapacity = (oldCapacity * 2);
+      if (newCapacity < minCapacity)
+        newCapacity = minCapacity;
+      data = Arrays.copyOf(data, newCapacity);
+    }
+  }
+   
+  public int size()
+  {
+    return size;
+  }
+   
+  public boolean isEmpty()
+  {
+    return size == 0;
+  }
+    
+  private void rangeCheck(int index)
+  {
+    if (index >= size || index < 0)
+      throw new IndexOutOfBoundsException("Index: " + 
+            index + ", Size: " + size);
+  }
+   
+    public int get(int index)
+  {
+    rangeCheck(index);
+    return data[index];
+  }
+   
+  public boolean add(int element)
+  {
+    ensureCapacity(size + 1);
+    data[size++] = element;
+    return true;
+  }
+
+  public void clear()
+  {
+    size = 0;
+  }
+   
+  public int set(int index, int element)
+  {
+    rangeCheck(index);
+    int oldValue = data[index];
+    data[index] = element;
+    return oldValue;
+  }
+   
+  public int capacity()
+  {
+    return data.length;
+  }
+}
+
+
+22) What is the purpose of the System class?
+
+	*) System class is provided with useful fields (static members) pertaining to the environment.
+*) Standard input,output and error output streams are provided with System class. These are used to access the externally defined properties and environment variables.
+
+Other useful methods that interact with external system / environment are:
+
+- currentTimeMillis() – returns the current time in milliseconds
+- exit() - terminates currently running JVM
+- gc() - invokes the garbage collector
+- getProperties() - returns the system properties.
+
+*)  The System class can not be instantiated.
+*) The System class contains several useful class fields and methods.
+*) Some System class features are:
+- Standard input
+- Standard output
+- Error output streams
+- Access to externally defined "properties"
+- A means of loading files and libraries
+- A utility method for quickly copying a portion of an array
+*) The System class cannot be instantiated.
+
+
+
+23) Which is the abstract parent class of FileWriter ?
+	OutputStreamWriter
+
+
+
+24) Which class is used to read streams of characters from a file?
+	Character Streams are specially designed to read and write data from and to the Streams of Characters. 
+
+
+
+25) Which class is used to read streams of raw bytes from a file?
+	 FileOutputStream:-
+It is used to write the data as a stream of bytes into a file. The FileOutputStream class is a subclass of OutputStream meaning you can use a FileOutputStream as an OutputStream.
+
+For writing character oriented data, we can use FileWriter.
+
+	FileInputStream:-
+It reads the content of File as a stream of bytes. It is a subclass of InputStream. For reading the stream of characters, we use FileReader class.
+
+It can be used to read byte-oriented data for example to read image, audio, video etc.
+
+	RandomAccessFile:-
+The RandomAccessFile class has methods that perform the direct access to data of any part of the file. RandomAccessFile class also provides the facilities to read and write data from a single file without closing the streams for each read or write. It provides the facilities to write primitive data to the fi0les.
+
+
+
+
+27)  Write a note on Channels and Buffer with example.
+	
+	Channels:-  The channel is a medium used to transports the data efficiently between the entity and byte buffers. It reads the data from an entity and places it inside buffer blocks for consumption.
+	Channels act as gateway provided by java NIO to access the I/O mechanism. Usually channels have one-to-one relationship with operating system file descriptor for providing the platform independence operational feature.
+
+In Java NIO the primary Channels used are given below:
+*) FileChannel: The file channel is used for reading the data from the files. It's object can be created only by calling the getChannel() method. We cannot create FileChannel object directly.
+
+*)DatagramChannel: The datagram channel can read and write the data over the network via UDP (User Datagram Protocol). It uses the factory methods for creating the new object.
+
+*) SocketChannel: The datagram channel can read and write the data over the network via TCP (Transmission Control Protocol). It also uses the factory methods for creating the new object.
+
+*) ServerSocketChannel: The ServerSocketChannel allows user to listen the incoming TCP connections, same as a web server. For every incoming connection a SocketChannel is created.
+
+Ex:-
+import java.io.FileInputStream;  
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+import java.nio.ByteBuffer;  
+import java.nio.channels.ReadableByteChannel;  
+import java.nio.channels.WritableByteChannel;  
+ public class Index {  
+    public static void main(String args[]) throws IOException {  
+    FileInputStream input = new FileInputStream ("D:\\testin.txt"); // Path of Input text file  
+        ReadableByteChannel source = input.getChannel();  
+    FileOutputStream output = new FileOutputStream ("D:\\testout.txt"); // Path of Output text file  
+        WritableByteChannel destination = output.getChannel();  
+  copyData(source, destination);  
+  source.close();  
+        destination.close();  
+    }  
+ private static void copyData(ReadableByteChannel src, WritableByteChannel dest) throws IOException   
+    {  
+        ByteBuffer buffer = ByteBuffer.allocateDirect(20 * 1024);  
+   while (src.read(buffer) != -1)   
+        {  
+            buffer.flip();  
+            while (buffer.hasRemaining())   
+            {  
+                dest.write(buffer);  
+            }  
+            buffer.clear(); 
+        }  
+    }  
+}  
+
+
+	Buffers:-  It defines the core functionality which is common to all buffers: limit, capacity and current position.
+	Java NIO buffers are used for interacting with NIO channels. It is the block of memory into which we can write data.  
+	The memory block is wrapped with a NIO buffer object, which provides easier methods to work with the memory block.
+
+Types of Buffer:-
+For every primitive type there is a buffer type and all buffer classes can implement the buffer interface. The mostly used buffer type is ByteBuffer.
+
+In Java NIO the core Buffer used are given below:
+
+CharBuffer
+DoubleBuffer
+IntBuffer
+LongBuffer
+ByteBuffer
+ShortBuffer
+FloatBuffer
+
+Ex:-
+import java.io.BufferedReader;  
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.io.InputStreamReader;  
+import java.nio.file.Files;  
+import java.nio.file.Path;  
+import java.nio.file.Paths;  
+   
+public class Index {  
+        public static void main(String[] args) {  
+        Path file = null;  
+        BufferedReader bufferedReader = null;  
+        try {  
+            file = Paths.get("D:\\testout.txt");  
+            InputStream inputStream = Files.newInputStream(file);  
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));  
+            System.out.println("Reading the Line of testout.txt file: "+ bufferedReader.readLine());  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } finally {  
+            try {  
+                bufferedReader.close();  
+            } catch (IOException ioe) {  
+                ioe.printStackTrace();  
+            }  
+        }  
+    }  
+ }  
+
+
+
+28)  What is the difference between System.out ,System.err and System.in?
+	System.in:-  System.in is an InputStream which is typically connected to keyboard input of console programs. System.in is not used as often since data is commonly passed to a command line Java application via command line arguments, or configuration files. In applications with GUI the input to the application is given via the GUI. This is a separate input mechanism from Java IO.
+
+System.out:-  System.out is a PrintStream. System.out normally outputs the data you write to it to the console. This is often used from console-only programs like command line tools. This is also often used to print debug statements of from a program (though it may arguably not be the best way to get debug info out of a program).
+
+System.err:-  System.err is a PrintStream. System.err works like System.out except it is normally only used to output error texts. Some programs (like Eclipse) will show the output to System.err in red text, to make it more obvious that it is error text.
+
+
+35)   Write a note on PreparedStatement and ResultSetMetaData interfaces with code snippets.
+	
+	PreparedStatement interface:-
+The PreparedStatement interface is a subinterface of Statement. It is used to execute parameterized query.
+
+Use of PreparedStatement:-
+Improves Performance:  The performance of the application will be faster if you use PreparedStatement interface because query is compiled only once.
+
+Methods of PreparedStatement interface:-
+
+*) public void setInt(int paramIndex, int value)- sets the integer value to the given parameter index.
+*) public void setString(int paramIndex, String value)- sets the String value to the given parameter index.
+*) public void setFloat(int paramIndex, float value)- sets the float value to the given parameter index.
+*) public void setDouble(int paramIndex, double value)- sets the double value to the given parameter index.
+*) public int executeUpdate()- executes the query. It is used for create, drop, insert, update, delete etc.
+*) public ResultSet executeQuery()- executes the select query. It returns an instance of ResultSet.
+
+Ex:- 
+import java.sql.*;  
+class InsertPrepared{  
+public static void main(String args[]){  
+try{  
+Class.forName("oracle.jdbc.driver.OracleDriver");  
+  
+Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","oracle");  
+  
+PreparedStatement stmt=con.prepareStatement("insert into Emp values(?,?)");  
+stmt.setInt(1,101);//1 specifies the first parameter in the query  
+stmt.setString(2,"Ramya");  
+  
+int i=stmt.executeUpdate();  
+System.out.println(i+" records inserted");  
+  
+con.close();  
+  
+}catch(Exception e){ System.out.println(e);}  
+  
+}  
+}  
+
+
+ResultSetMetaData Interface:-
+	The metadata means data about data i.e. we can get further information from the data.
+ResultSetMetaData interface is useful because it provides methods to get metadata from the ResultSet object.
+
+methods of ResultSetMetaData interface:-
+*) public int getColumnCount()throws SQLException- it returns the total number of columns in the ResultSet object.
+*) public String getColumnName(int index)throws SQLException- it returns the column name of the specified column index.
+*) public String getColumnTypeName(int index)throws SQLException- it returns the column type name for the specified index.
+*) public String getTableName(int index)throws SQLException- it returns the table name for the specified column index.
+
+Ex:- 
+import java.sql.*;  
+class Rsmd{  
+public static void main(String args[]){  
+try{  
+Class.forName("oracle.jdbc.driver.OracleDriver");  
+Connection con=DriverManager.getConnection(  
+"jdbc:oracle:thin:@localhost:1521:xe","system","oracle");  
+  
+PreparedStatement ps=con.prepareStatement("select * from emp");  
+ResultSet rs=ps.executeQuery();  
+ResultSetMetaData rsmd=rs.getMetaData();  
+  
+System.out.println("Total columns: "+rsmd.getColumnCount());  
+System.out.println("Column Name of 1st column: "+rsmd.getColumnName(1));  
+System.out.println("Column Type Name of 1st column: "+rsmd.getColumnTypeName(1));  
+  
+con.close();  
+}catch(Exception e){ System.out.println(e);}  
+}  
+}  
+
+
+36)  Write a note on DDL, DML, DQL, DDL with code snippets.
+
+DDL (Data Definition Language) :
+	Data Definition Language is used to define database structure or schema. DDL is also used to specify additional properties of the data. The storage structure and access methods used by the database system by a set of statements in a special type of DDL called a data storage and definition language. 
+	These statements defines the implementation details of the database schema, which are usually hidden from the users. The data values stored in the database must satisfy certain consistency constraints.
+
+Some Commands:-
+CREATE : to create objects in database
+ALTER : alters the structure of database
+DROP : delete objects from database
+RENAME : rename an objects
+
+Ex:-create table department
+(dept_name  char(20),
+  building   char(15),
+  budget     numeric(12,2));
+
+
+DML(Data Manipulation Language):-
+	DML statements are used for managing data with in schema objects.
+
+Some Commands :
+
+SELECT : retrieve data from the database
+INSERT : insert data into a table
+UPDATE : update existing data within a table
+DELETE : deletes all records from a table , space for the records remain
+
+Ex:-
+select instructor.name
+ from instructor
+ where instructor.dept_name = 'History';
+
+TCL (Transaction Control Language) :
+	Transaction Control Language commands are used to manage transactions in database. These are used to manage the changes made by DML-statements. It also allows statements to be grouped together into logical transactions.
+
+COMMIT :    Commit command is used to permanently save any transaction
+            into database.
+ROLLBACK :  This command restores the database to last committed state.
+            It is also use with savepoint command to jump to a savepoint
+            in a transaction.
+SAVEPOINT : Savepoint command is used to temporarily save a transaction so
+            that you can rollback to that point whenever necessary.
+
+
+DCL (Data Control Language) :
+	A Data Control Language is a syntax similar to a computer programming language used to control access to data stored in a database (Authorization). In particular, it is a component of Structured Query Language (SQL).
+
+GRANT : allow specified users to perform specified tasks.
+REVOKE : cancel previously granted or denied permissions.
+
+
+
+37) Write a note on HTML , CSS and Javascript.
+HTML:-  HTML is the standard markup language for creating Web pages.
+
+HTML stands for Hyper Text Markup Language
+HTML describes the structure of Web pages using markup
+HTML elements are the building blocks of HTML pages
+HTML elements are represented by tags
+HTML tags label pieces of content such as "heading", "paragraph", "table", and so on
+Browsers do not display the HTML tags, but use them to render the content of the page.
+
+CSS:-
+CSS stands for Cascading Style Sheets
+CSS describes how HTML elements are to be displayed on screen, paper, or in other media
+CSS saves a lot of work. It can control the layout of multiple web pages all at once
+External stylesheets are stored in CSS files
+CSS is used to define styles for your web pages, including the design, layout and variations in display for different devices and screen sizes. 
+CSS selectors are used to "find" (or select) HTML elements based on their element name, id, class, attribute, and more.
+
+JavaScript:-
+JavaScript is a lightweight, interpreted programming language. It is designed for creating network-centric applications. It is complimentary to and integrated with Java. JavaScript is very easy to implement because it is integrated with HTML. It is open and cross-platform.
+
+Javascript is a dynamic computer programming language. It is lightweight and most commonly used as a part of web pages, whose implementations allow client-side script to interact with the user and make dynamic pages. It is an interpreted programming language with object-oriented capabilities.
+
+
+39) Describe the different approaches of String processing.
+	String is a sequence of characters. But in Java, a string is an object that represents a sequence of characters. The java.lang.String class is used to create string object.
+	
+There are two ways to create a String object:
+
+*) By string literal : Java String literal is created by using double quotes.
+For Example: String s=“Welcome”;  
+*)By new keyword : Java String is created by using a keyword “new”.
+ For example: String s=new String(“Welcome”);  
+It creates two objects (in String pool and in heap) and one reference variable where the variable ‘s’ will refer to the object in the heap.
