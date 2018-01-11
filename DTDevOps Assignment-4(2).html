@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#img").animate({
+            
+            
+            height: '300px',
+            width: '500px'
+        });
+    });
+	$("#ph").click(function(){
+    $("#para1").toggle();
+});
+	
+	
+});
+</script> 
+</head>
+<body>
+
+
+
+
+<div class="container-fluid">
+<img id="img" src="images/image1.gif" style="float:left; width=250px; height=250px;"/>
+<p id="para1" style="float:right">This is my paragraph which will collapse in when i press the button. </p></div>
+</div>
+
+
+
+<div class="row">
+ <button class="btn btn-lg btn-success" style="margin-left:250px;margin-top:50px">Resize the Image</button>
+<button id="ph" class="btn btn-lg btn-success" style="margin-left:250px;margin-top:50px">Toggle Paragraph</button>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+
+		<script>
+		(function( $ ) {
+
+    //Function to animate slider captions 
+	function doAnimations( elems ) {
+		//Cache the animationend event in a variable
+		var animEndEv = 'webkitAnimationEnd animationend';
+		
+		elems.each(function () {
+			var $this = $(this),
+				$animationType = $this.data('animation');
+			$this.addClass($animationType).one(animEndEv, function () {
+				$this.removeClass($animationType);
+			});
+		});
+	}
+	
+	//Variables on page load 
+	var $myCarousel = $('#carousel-example-generic'),
+		$firstAnimatingElems = $myCarousel.find('.item:first').find("[data-animation ^= 'animated']");
+		
+	//Initialize carousel 
+	$myCarousel.carousel();
+	
+	//Animate captions in first slide on page load 
+	doAnimations($firstAnimatingElems);
+	
+	//Pause carousel  
+	$myCarousel.carousel('pause');
+	
+	
+	//Other slides to be animated on carousel slide event 
+	$myCarousel.on('slide.bs.carousel', function (e) {
+		var $animatingElems = $(e.relatedTarget).find("[data-animation ^= 'animated']");
+		doAnimations($animatingElems);
+	});  
+    $('#carousel-example-generic').carousel({
+        interval:3000,
+        pause: "false"
+    });
+	
+})(jQuery);	
+
+		</script>
+<style>
+
+
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700);
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-weight:700;
+}
+
+
+
+
+
+/********************************/
+/*          Main CSS     */
+/********************************/
+
+
+#first-slider .main-container {
+  padding: 0;
+}
+
+
+#first-slider .slide1 h3, #first-slider .slide2 h3, #first-slider .slide3 h3, #first-slider .slide4 h3{
+    color: #fff;
+    font-size: 30px;
+      text-transform: uppercase;
+      font-weight:700;
+}
+
+#first-slider .slide1 h4,#first-slider .slide2 h4,#first-slider .slide3 h4,#first-slider .slide4 h4{
+    color: #fff;
+    font-size: 30px;
+      text-transform: uppercase;
+      font-weight:700;
+}
+#first-slider .slide1 .text-left ,#first-slider .slide3 .text-left{
+    padding-left: 40px;
+}
+
+
+#first-slider .carousel-indicators {
+  bottom: 0;
+}
+#first-slider .carousel-control.right,
+#first-slider .carousel-control.left {
+  background-image: none;
+}
+#first-slider .carousel .item {
+  min-height: 425px; 
+  height: 100%;
+  width:100%;
+}
+
+.carousel-inner .item .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+
+#first-slider h3{
+  animation-delay: 1s;
+}
+#first-slider h4 {
+  animation-delay: 2s;
+}
+#first-slider h2 {
+  animation-delay: 3s;
+}
+
+
+#first-slider .carousel-control {
+    width: 6%;
+        text-shadow: none;
+}
+
+
+#first-slider h1 {
+  text-align: center;  
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#first-slider .p {
+  padding-top: 125px;
+  text-align: center;
+}
+
+#first-slider .p a {
+  text-decoration: underline;
+}
+#first-slider .carousel-indicators li {
+    width: 14px;
+    height: 14px;
+    background-color: rgba(255,255,255,.4);
+  border:none;
+}
+#first-slider .carousel-indicators .active{
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+  border:none;
+}
+
+
+.carousel-fade .carousel-inner .item {
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+.carousel-control .fa-angle-right, .carousel-control .fa-angle-left {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block;
+}
+.carousel-control .fa-angle-left{
+    left: 50%;
+    width: 38px;
+    height: 38px;
+    margin-top: -15px;
+    font-size: 30px;
+    color: #fff;
+    border: 3px solid #ffffff;
+    -webkit-border-radius: 23px;
+    -moz-border-radius: 23px;
+    border-radius: 53px;
+}
+.carousel-control .fa-angle-right{
+    right: 50%;
+    width: 38px;
+    height: 38px;
+    margin-top: -15px;
+    font-size: 30px;
+    color: #fff;
+    border: 3px solid #ffffff;
+    -webkit-border-radius: 23px;
+    -moz-border-radius: 23px;
+    border-radius: 53px;
+}
+.carousel-control {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+
+/********************************/
+/*       Slides backgrounds     */
+/********************************/
+#first-slider .slide1 {
+    background-image: url(http://s20.postimg.org/h50tgcuz1/image.jpg);
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+#first-slider .slide2 {
+  background-image: url(http://s20.postimg.org/uxf8bzlql/image.jpg);
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+#first-slider .slide3 {
+  background-image: url(http://s20.postimg.org/el56m97f1/image.jpg);
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+#first-slider .slide4 {
+  background-image: url(http://s20.postimg.org/66pjy66dp/image.jpg);
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+
+/********************************/
+/*          Media Queries       */
+/********************************/
+@media screen and (min-width: 980px){
+      
+}
+@media screen and (max-width: 640px){
+      
+}
+
+</style>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TrendyFashions</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active" class="glyphicon glyphicon-home"><a href="#">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Category <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Jeans</a></li>
+          <li><a href="#">Shirts</a></li>
+          <li><a href="#">Shoes</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Products</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+
+<div id="first-slider">
+    <div id="carousel-example-generic" class="carousel slide carousel-fade">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <!-- Item 1 -->
+            <div class="item active slide1">
+                <div class="row"><div class="container">
+                    <div class="col-md-3 text-right">
+                        
+                    </div>
+                    <div class="col-md-9 text-left">
+                        <h3 data-animation="animated bounceInDown">Winter Season Sale</h3>
+                        <h4 data-animation="animated bounceInUp">Grab IT!!!!!</h4>             
+                     </div>
+                </div></div>
+             </div> 
+            <!-- Item 2 -->
+            <div class="item slide2">
+                <div class="row"><div class="container">
+                    <div class="col-md-7 text-left">
+                        <h3 data-animation="animated bounceInDown"> Summer End Sale</h3>
+                        <h4 data-animation="animated bounceInUp">Trendy Collections!!!!</h4>
+                     </div>
+                    <div class="col-md-5 text-right">
+                        
+                    </div>
+                </div></div>
+            </div>
+            <!-- Item 3 -->
+            <div class="item slide3">
+                <div class="row"><div class="container">
+                    <div class="col-md-7 text-left">
+                        <h3 data-animation="animated bounceInDown">Month End Offer Sales</h3>
+                        <h4 data-animation="animated bounceInUp">Upto 50% Off!!!</h4>
+                     </div>
+                    <div class="col-md-5 text-right">
+                        
+                    </div>     
+                </div></div>
+            </div>
+            <!-- Item 4 -->
+            <div class="item slide4">
+                <div class="row"><div class="container">
+                    <div class="col-md-7 text-left">
+                        <h3 data-animation="animated bounceInDown">We are creative</h3>
+                        <h4 data-animation="animated bounceInUp">We provide you the featured and latest designs</h4>
+                     </div>
+                    <div class="col-md-5 text-right">
+                       
+                    </div>  
+                </div></div>
+            </div>
+            <!-- End Item 4 -->
+    
+        </div>
+        <!-- End Wrapper for slides-->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i><span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<style>
+.footer {
+	background-color: #212121;
+	margin-top:20px;
+} 
+.footer-info {
+	margin-top: 50px;
+} 
+.footer h4 {
+    color: grey;
+    padding: 0 0 20px 0;
+    font-weight: 600;
+    text-align: left;
+    font-size: 20px;
+} 
+.footer-info li {
+	color: #EEE;
+	display: block;
+	font-weight: 300;
+	font-size: 13px;
+	line-height: 25px;
+}
+.links a {
+    color: #EEE;
+    font-size: 1em;
+}
+.links a:hover {
+	color: #FFF;
+	text-decoration: underline;
+} 
+a.mail {
+	color: #EEE;
+} 
+a.mail:hover {
+	color: #bdd001;
+} 
+/*-- Newsletter --*/
+.footer-info p {
+	color: #EEE;
+	font-weight: 300;
+	font-size: 13px;
+	line-height: 23px;
+	margin-bottom: 10px;
+} 
+.connect {
+	padding-bottom: 30px;
+	text-align: center;
+}
+.connect h4 {
+	text-align: center;
+}
+.connect-social ul li {
+    display: inline-block;
+    margin: 0 2px;
+}
+.connect-social ul li a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-size: 300px;
+    color: #fff;
+    border: 1px solid #fff;
+    line-height: 2.4em;
+    border-radius: 50%;
+    text-align: center;
+} 
+.connect-social ul li a:hover {
+    color: #bdd001;
+    border-color: #bdd001;
+	-webkit-transform: rotatez(360deg);
+	-moz-transform: rotatez(360deg);
+	-o-transform: rotatez(360deg);
+	-ms-transform: rotatez(360deg);
+    transform: rotatez(360deg);
+}
+/*-- Footer-Social-Icons --*/ 
+/*-- Copyright --*/
+.copyright {
+	text-align: center;
+	padding: 30px 0;
+	border-top: 1px solid #EEE;
+}
+.copyright p {
+	color: #FFF;
+}
+.copyright a {
+	color: #FFF;
+	text-decoration: none;
+}
+.copyright a:hover {
+	color: #bdd001;
+	text-decoration: underline;
+}
+
+</style>
+
+<div class="footer">
+		<div class="container"> 
+			<div class="footer-info">
+				
+				<div class="col-md-4 col-sm-4 footer-info-grid address">
+					<h4>CONTACT US</h4>
+					<address>
+						<ul id="id1">
+							<li>TrendyFashions</li>
+							<li>Bangalore</li>
+							<li>India</li>
+							<li>Telephone : +91- 8197657435</li>
+							<li>Email : <a class="mail" href="mailto:trendyfashion@gmail.com">trendyfashion@gmail.com</a></li>
+						</ul>
+					</address>
+				</div>
+				
+				<div class="col-md-4 col-sm-4 footer-info-grid address">
+					<h4>ABOUT US</h4>
+					<address>
+						<ul>
+						<li>India's most-loved online fashion store featuring <br>new deals with great online discounts every day!</li>
+							<li>We have a unique collection of Fashion Wears.</li>
+							<li>Different Categories having distinct varieties.</li>
+							
+							<li></li>
+						</ul>
+					</address>
+				</div>
+			
+				<div class="col-md-4 col-sm-4 footer-info-grid address">
+				<div class="connect">
+				<div class="connect-social">
+					<h4>CONNECT</h4>  
+					<address>
+					<ul>
+						<li><a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#" class="social-button google"><i class="fa fa-google-plus"></i></a></li>
+						
+					</ul>
+					</address>
+				</div>
+			</div> 
+			</div>
+			
+			
+				<div class="clearfix"></div>
+			</div> 
+			
+				
+			
+			<div class="copyright">
+				<p>&copy; 2018. All Rights Reserved | Design by TrendyFashions</p>
+			</div> 
+		</div>
+	</div>
+
+
+        
+          
+</body>
+</html>
