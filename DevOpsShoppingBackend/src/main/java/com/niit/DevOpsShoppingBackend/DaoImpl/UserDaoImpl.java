@@ -4,11 +4,17 @@ package com.niit.DevOpsShoppingBackend.DaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.niit.DevOpsShoppingBackend.Dao.UserDao;
 import com.niit.DevOpsShoppingBackend.Model.User;
 
 
 public class UserDaoImpl implements UserDao{
+	
+	@Autowired 
+	SessionFactory sessionFactory;
 		
 	List<User> user;
 	
@@ -19,6 +25,10 @@ public class UserDaoImpl implements UserDao{
 		user.add(user1);
 	}
 	
+	public UserDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory= sessionFactory;
+	}
+
 	@Override
 	public List<User> getUser() {
 		

@@ -9,7 +9,7 @@
     <c:url value="/resources/css" var="css"/>
     <link rel="stylesheet" type="text/css" href="${css}/style.css">
  </head>
- <body>
+ <body bgcolor="white">
 <header>
     	<nav class="navbar navbar-default hidden-xs" role="navigation">
             <div class="container">
@@ -57,10 +57,10 @@
                     <span class="social"><a href="https://www.google.com/"><i aria-hidden="true" class="fa fa-google"></i></a></span>
                     
 					<ul class="nav navbar-nav" style="float:right">
-					 <li><a href="<c:url value="/login"/>">Login/Signup</a></li>
-<!-- 					<li><a data-toggle="modal" data-target="#loginModal"> -->
-<!-- 						<span class="glyphicon glyphicon-log-in"></span> Login/Signup -->
-<!--                           </a></li> -->
+<%-- 					 <li><a href="<c:url value="/login"/>">Login/Signup</a></li> --%>
+					<li><a data-toggle="modal" data-target="#loginModal">
+						<span class="glyphicon glyphicon-log-in"></span> Login/Signup
+                          </a></li>
 						  </ul>
                     
                </div> <!-- end col 5 -->
