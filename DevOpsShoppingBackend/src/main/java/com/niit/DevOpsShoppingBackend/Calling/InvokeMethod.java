@@ -10,11 +10,11 @@ public class InvokeMethod {
 	{
 		UserDao userDao= new UserDaoImpl();
 		
-		for(User user:userDao.getUser())
-		{
-			System.out.println(user.getEmail());
-		}
-		
+//		for(User user:userDao.getUser())
+//		{
+//			System.out.println(user.getEmail());
+//		}
+//		
 	}
 
 }

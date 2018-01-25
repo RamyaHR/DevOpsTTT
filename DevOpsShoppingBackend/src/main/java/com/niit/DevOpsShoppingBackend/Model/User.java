@@ -2,27 +2,46 @@ package com.niit.DevOpsShoppingBackend.Model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table
+@Component
 public class User implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
 	
-	public User(String name, String email, String password, String phone, String address, String country)
-	{
-		this.name=name;
-		this.email=email;
-		this.password=password;
-		this.phone=phone;
-		this.address=address;
-		this.country=country;
-		
-	}
+	@Id
+	private String userId;
 	private String name;
 	private String email;
 	private String password;
 	private String phone;
 	private String address;
 	private String country;
+	
+//	public User(String name, String email, String password, String phone, String address, String country)
+//	{
+//		this.name=name;
+//		this.email=email;
+//		this.password=password;
+//		this.phone=phone;
+//		this.address=address;
+//		this.country=country;
+//		
+//	}
+	
+	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public String getName() {
 		return name;
 	}
@@ -58,6 +77,16 @@ public class User implements Serializable{
 	}
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 	

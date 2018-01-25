@@ -6,7 +6,17 @@ import com.niit.DevOpsShoppingBackend.Model.User;
 
 public interface UserDao {
 
-	public List<User> getUser();
+	public List<User> list();
+	
+	public boolean insertUser(User user);
+	
+	public User get(String userId);
+	
+	public boolean delete(User user);
+	
+	public boolean updateUser(User user);
+	
+	
 	
 	
 }
