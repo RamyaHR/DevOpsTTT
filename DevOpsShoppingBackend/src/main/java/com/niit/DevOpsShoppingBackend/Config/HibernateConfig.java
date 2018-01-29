@@ -17,8 +17,11 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.DevOpsShoppingBackend.Dao.SupplierDao;
 import com.niit.DevOpsShoppingBackend.Dao.UserDao;
+import com.niit.DevOpsShoppingBackend.DaoImpl.SupplierDaoImpl;
 import com.niit.DevOpsShoppingBackend.DaoImpl.UserDaoImpl;
+import com.niit.DevOpsShoppingBackend.Model.Supplier;
 import com.niit.DevOpsShoppingBackend.Model.User;
 
 @Configuration
@@ -50,6 +53,7 @@ public class HibernateConfig {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClass(User.class);
+		sessionBuilder.addAnnotatedClass(Supplier.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 	
@@ -64,6 +68,12 @@ public class HibernateConfig {
 	@Bean("userDao")
 	public UserDao getUserDao(SessionFactory sessionFactory) {
 		return new UserDaoImpl(sessionFactory);
+	}
+	
+	@Autowired
+	@Bean("supplierDao")
+	public SupplierDao getSupplierDao(SessionFactory sessionFactory) {
+		return new SupplierDaoImpl(sessionFactory);
 	}
 
 

@@ -40,6 +40,7 @@
                             <li><a href="#">Link 4</a></li>
                           </ul>
                           <li><a href="<c:url value="/"/>">Contact Us</a></li>
+                          <li><a href="<c:url value="/supplier"/>">Supplier</a></li>
                     <!--<form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                           <input type="text" class="form-control" placeholder="Search">
@@ -93,6 +94,8 @@
                         <li><a href="#">Link 4</a></li>
                       </ul>
                       <li><a href="<c:url value="/"/>">Contact Us</a></li>
+                      <li><a href="<c:url value="/supplier"/>">Supplier</a></li>
+                    
                     
                  </ul>
             </div>
@@ -133,38 +136,60 @@
           
           <form action="/" method="post">
           
-          <div class="top-row">
+<!--           <div class="top-row"> -->
             <div class="field-wrap">
               <label>
-                First Name<span class="req">*</span>
+               Name<span class="req">*</span>
               </label>
               <input type="text" required autocomplete="off" />
             </div>
         
-            <div class="field-wrap">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
-          </div>
+<!--             <div class="field-wrap"> -->
+<!--               <label> -->
+<!--                 Last Name<span class="req">*</span> -->
+<!--               </label> -->
+<!--               <input type="text"required autocomplete="off"/> -->
+<!--             </div> -->
+<!--           </div> -->
 
           <div class="field-wrap">
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off"/>
+            <input type="email" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Set A Password<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off"/>
+            <input type="password" required autocomplete="off"/>
           </div>
           
-          <button type="submit" class="button button-block"/>Get Started</button>
+           <div class="field-wrap">
+            <label>
+              Phone Number<span class="req">*</span>
+            </label>
+            <input type="text" required autocomplete="off"/>
+          </div>
           
+           <div class="field-wrap">
+            <label>
+              Address<span class="req">*</span>
+            </label>
+            <input type="text" required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Country<span class="req">*</span>
+            </label>
+            <input type="text" required autocomplete="off"/>
+          </div>
+          <div style="margin-left:150px">
+          <button type="submit" class="button button-large">Submit</button>&nbsp;&nbsp;&nbsp;
+          <button type="reset" class="button button-large">Cancel</button>
+          </div>
           </form>
 
         </div>
