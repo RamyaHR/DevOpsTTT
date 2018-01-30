@@ -1,5 +1,7 @@
 package com.niit.DevOpsShoppingBackend.Model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,13 +11,16 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table
 @Component
-public class Supplier {
+public class Supplier{
 
 	@Id
 	private String supId;
 	private String supName;
 	
-	
+	public Supplier()
+	{
+		this.supId="SUP"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
 	public String getSupId() {
 		return supId;
 	}

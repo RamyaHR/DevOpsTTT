@@ -2,6 +2,7 @@ package com.niit.DevOpsShoppingBackend.DaoImpl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ import com.niit.DevOpsShoppingBackend.Dao.SupplierDao;
 import com.niit.DevOpsShoppingBackend.Model.Supplier;
 
 
-@Repository
+@Repository("supplierDao")
 @EnableTransactionManagement
 @Transactional
 public class SupplierDaoImpl implements SupplierDao {
-
+ 
 	@Autowired
 	SessionFactory sessionFactory;
 
@@ -45,7 +46,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		return true;
 		
 	}
-	
+	@Override
 public Supplier getSupp(String supId) {
 		
 		String c1="from Supplier where supId='"+supId+"'";
@@ -58,5 +59,12 @@ public Supplier getSupp(String supId) {
 			return list.get(0);
 		}
 		}
+@Override
+public List<Supplier> list() {
+		List<Supplier> supplier=(List<Supplier>)sessionFactory.getCurrentSession().createCriteria(Supplier.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		return supplier;
+	}
+
 
 }

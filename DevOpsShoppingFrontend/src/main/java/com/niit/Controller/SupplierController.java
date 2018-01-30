@@ -1,5 +1,7 @@
 package com.niit.Controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,15 @@ public class SupplierController {
 	@RequestMapping("/supplier")
 	public ModelAndView supplierform() 
 	{
-		ModelAndView obj = new ModelAndView("addsupplier");
+		List<Supplier> suplist=supplierDao.list();
+		ModelAndView obj = new ModelAndView("supplier");
 		obj.addObject("supplier", new Supplier());
+		obj.addObject("suppliers", suplist);
 		return obj;
 	}
 
 	@RequestMapping(value="/addsupplier", method=RequestMethod.POST)
-	public ModelAndView addsupplier(@ModelAttribute("supplier")Supplier supplier ) 
+	public ModelAndView addsupplier(@ModelAttribute("supplier")Supplier supplier) 
 	{
 		ModelAndView obj = new ModelAndView("redirect:/supplier");
 		if(supplierDao.insertSupp(supplier))
@@ -43,19 +47,25 @@ public class SupplierController {
 		}
 		return obj;
 	}
+	
 	@RequestMapping("/editsupplier/{supId}")
 	public ModelAndView edit(@PathVariable("supId")String id)
 	{
-		ModelAndView obj = new ModelAndView("addsupplier");
+		List<Supplier> suplist=supplierDao.list();
+		ModelAndView obj = new ModelAndView("supplier");
 		supplier=supplierDao.getSupp(id);
+		obj.addObject("suppliers", suplist);
 		obj.addObject("supplier",supplier);
+		
 		return obj;
 		
 	}
 	@RequestMapping("/deletesupplier/{supId}")
 	public ModelAndView deletesupplier(@PathVariable("supId")String SupId)
 	{
+		List<Supplier> suplist=supplierDao.list();
 		ModelAndView obj=new ModelAndView("redirect:/supplier");
+		obj.addObject("suppliers", suplist);
 		supplier=supplierDao.getSupp(SupId);
 				return obj;
 	}

@@ -38,9 +38,9 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public List<User> list() {
-		List<User> category=(List<User>)sessionFactory.getCurrentSession().createCriteria(User.class)
+		List<User> user=(List<User>)sessionFactory.getCurrentSession().createCriteria(User.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		return category;
+		return user;
 	}
 
 
