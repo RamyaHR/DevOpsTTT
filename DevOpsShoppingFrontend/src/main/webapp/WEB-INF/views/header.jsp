@@ -40,7 +40,7 @@
                             <li><a href="#">Link 4</a></li>
                           </ul>
                           <li><a href="<c:url value="/"/>">Contact Us</a></li>
-                          <li><a href="<c:url value="/supplier"/>">Supplier</a></li>
+                          <li><a href="<c:url value="/admin"/>">Admin</a></li>
                     <!--<form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                           <input type="text" class="form-control" placeholder="Search">
@@ -94,7 +94,7 @@
                         <li><a href="#">Link 4</a></li>
                       </ul>
                       <li><a href="<c:url value="/"/>">Contact Us</a></li>
-                      <li><a href="<c:url value="/supplier"/>">Supplier</a></li>
+                      <li><a href="<c:url value="/admin"/>">Admin</a></li>
                     
                     
                  </ul>

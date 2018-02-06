@@ -15,30 +15,30 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table
 @Component
-public class Supplier{
+public class Category {
 
 	@Id
-	private String supId;
-	private String supName;
+	private String catId;
+	private String catName;
 	
-	@OneToMany(targetEntity=Product.class, fetch=FetchType.EAGER, mappedBy="supplier")
+	@OneToMany(targetEntity=Product.class, fetch=FetchType.EAGER, mappedBy="category")
 	private Set<Product> products= new HashSet<Product>(0);
 	
-	public Supplier()
+	public Category()
 	{
-		this.supId="SUP"+UUID.randomUUID().toString().substring(30).toUpperCase();
+		this.catId="CAT"+UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
-	public String getSupId() {
-		return supId;
+	public String getCatId() {
+		return catId;
 	}
-	public void setSupId(String supId) {
-		this.supId = supId;
+	public void setCatId(String catId) {
+		this.catId = catId;
 	}
-	public String getSupName() {
-		return supName;
+	public String getCatName() {
+		return catName;
 	}
-	public void setSupName(String supName) {
-		this.supName = supName;
+	public void setCatName(String catName) {
+		this.catName = catName;
 	}
 	public Set<Product> getProducts() {
 		return products;

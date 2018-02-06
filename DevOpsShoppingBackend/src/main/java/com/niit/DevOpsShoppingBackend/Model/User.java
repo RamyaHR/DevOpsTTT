@@ -1,6 +1,7 @@
 package com.niit.DevOpsShoppingBackend.Model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,8 +38,9 @@ public class User implements Serializable{
 //	}
 	
 	
-	public User() {
-		// TODO Auto-generated constructor stub
+	public User() 
+	{
+		this.userId="USER"+UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
 
 
