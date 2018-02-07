@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+    <%@ taglib prefix="c1" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,8 +32,15 @@
 </head>
 
 <body>
-    <%@include file="header.jsp" %>
-<%@include file="carousel.jsp" %>
+<c1:if test="${not empty error}">
+			<div class="error">${error}</div>
+		</c1:if>
+		<c1:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c1:if>
+	
+<%@ include file="header.jsp" %>
+<%@ include file="carousel.jsp" %>
 </body>
-<%@include file="footer.jsp" %>
+<%@ include file="footer.jsp" %>
 </html>

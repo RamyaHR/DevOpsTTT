@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:webflow-config="http://www.springframework.org/schema/webflow-config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd  
       http://www.springframework.org/schema/security 
@@ -10,20 +10,19 @@
 	<security:http auto-config="true" use-expressions="true">
 		<security:csrf disabled="true"/>
 		<security:intercept-url pattern="/" access="permitAll" />
-		<security:intercept-url pattern="/about" access="permitAll" />
-		<security:intercept-url pattern="/contact" access="permitAll" />
+<!-- 		<security:intercept-url pattern="/allproducts" access="permitAll" /> -->
 		<security:intercept-url pattern="/signup" access="permitAll" />
 		<security:intercept-url pattern="/admin" access="hasROLE(ROLE_ADMIN)" />
 
-<!-- 		<security:form-login login-page="/login" -->
-<!-- 			authentication-failure-url="/login?error"  -->
-<!-- 			login-processing-url="/j_spring_security_check" -->
-<!-- 			default-target-url="/"  -->
-<!-- 			username-parameter="j_username" -->
-<!-- 			password-parameter="j_password" /> -->
-<!-- 		<security:logout logout-success-url="/login?logout" -->
-<!-- 			logout-url="/j_spring_security_logout" /> -->
-<!-- 	</security:http> -->
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login?error" 
+			login-processing-url="/j_spring_security_check"
+			default-target-url="/" 
+			username-parameter="j_username"
+			password-parameter="j_password" />
+		<security:logout logout-success-url="/login?logout"
+			logout-url="/j_spring_security_logout" />
+	</security:http>
 
 
 	<security:authentication-manager>
@@ -31,10 +30,9 @@
 
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				authorities-by-username-query="SELECT username, rolename FROM User WHERE username =?"
-				users-by-username-query="SELECT email, password, 'true' as enabled from User where email=? limit 1"/>
-					
-		</security:authentication-provider>
+				authorities-by-username-query="SELECT email, rolename FROM User WHERE email =?"
+				users-by-username-query="SELECT email, password from User where email=? limit 1"/>
+			</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
     

@@ -1,4 +1,7 @@
  <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+ <%@ taglib prefix="c1" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@page session="true"%>
 <html>
 <head>
 <title>Interior Deisgns</title>
@@ -63,6 +66,112 @@
 						<span class="glyphicon glyphicon-log-in"></span> Login/Signup
                           </a></li>
 						  </ul>
+						  
+						  
+						  <div id="loginModal" class="modal fade" role="dialog"> 
+    
+    <div class="form">
+      
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="signup">   
+          <h1>Sign Up for Free</h1>
+          <c:url value="/saveuser" var="user"/>
+          <form:form action="${user}" method="post" commandName="user">
+          
+<!--           <div class="top-row"> -->
+            <div class="field-wrap">
+              <label>
+               Name<span class="req">*</span>
+              </label>
+              <form:input type="text" required="required" autocomplete="off" path="name"/>
+            </div>
+        
+<!--             <div class="field-wrap"> -->
+<!--               <label> -->
+<!--                 Last Name<span class="req">*</span> -->
+<!--               </label> -->
+<!--               <input type="text"required autocomplete="off"/> -->
+<!--             </div> -->
+<!--           </div> -->
+
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <form:input type="email" required="required" autocomplete="off" path="email"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Set A Password<span class="req">*</span>
+            </label>
+            <form:input type="password" required="required" autocomplete="off" path="password"/>
+          </div>
+          
+           <div class="field-wrap">
+            <label>
+              Phone Number<span class="req">*</span>
+            </label>
+            <form:input type="text" required="required" autocomplete="off" path="phone"/>
+          </div>
+          
+           <div class="field-wrap">
+            <label>
+              Address<span class="req">*</span>
+            </label>
+            <form:input type="text" required="required" autocomplete="off" path="address"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Country<span class="req">*</span>
+            </label>
+            <form:input type="text" required="required" autocomplete="off" path="country"/>
+          </div>
+          <div style="margin-left:150px">
+          <button type="submit" class="button button-large">Submit</button>&nbsp;&nbsp;&nbsp;
+          <button type="reset" class="button button-large">Cancel</button>
+          </div>
+          </form:form>
+
+        </div>
+        
+         <div id="login">    
+           <h1>Welcome Back!</h1> 
+          
+           <form action="<c:url value='/login'/>" method="get"> 
+          
+             <div class="field-wrap"> 
+             <label> 
+              Email Address<span class="req">*</span> 
+             </label> 
+             <input type="text" name="email" required autocomplete="off"/> 
+           </div> 
+
+          <div class="field-wrap"> 
+             <label> 
+               Password<span class="req">*</span> 
+            </label> 
+             <input type="password" name="password" required autocomplete="off"/> 
+           </div> 
+          
+          <p class="forgot"><a href="#">Forgot Password?</a></p> 
+          
+          <button class="button button-block">Log In</button>          
+          <input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+          </form>
+
+<!--         </div> -->
+        </div>
+      </div>
+      
+</div> 
                     
                </div> <!-- end col 5 -->
              </div> <!-- end container -->
@@ -115,115 +224,143 @@
                         </div>
                     </form>
                 </div>
+                <ul>
+                <li><a href="<c:url value="/login"/>">Login</a></li>
+                <li><a href="<c:url value="/signup"/>">Signup</a></li></ul>
             </div>
+            
+<!--             <div id="loginModal" class="modal fade" role="dialog">   -->
+    
+<!--     <div class="form"> -->
+      
+<!--       <ul class="tab-group"> -->
+<!--         <li class="tab active"><a href="#signup">Sign Up</a></li> -->
+<!-- <!--         <li class="tab"><a href="#login">Log In</a></li> --> -->
+<!--       </ul> -->
+      
+<!--       <div class="tab-content"> -->
+<!--         <div id="signup">    -->
+<!--           <h1>Sign Up for Free</h1> -->
+<%--           <c:url value="/saveuser" var="user"/> --%>
+<%--           <form:form action="${user}" method="post" commandName="user"> --%>
+          
+<!-- <!--           <div class="top-row"> --> -->
+<!--             <div class="field-wrap"> -->
+<!--               <label> -->
+<!--                Name<span class="req">*</span> -->
+<!--               </label> -->
+<%--               <form:input type="text" required="required" autocomplete="off" path="name"/> --%>
+<!--             </div> -->
+        
+<!-- <!--             <div class="field-wrap"> --> -->
+<!-- <!--               <label> --> -->
+<!-- <!--                 Last Name<span class="req">*</span> --> -->
+<!-- <!--               </label> --> -->
+<!-- <!--               <input type="text"required autocomplete="off"/> --> -->
+<!-- <!--             </div> --> -->
+<!-- <!--           </div> --> -->
+
+<!--           <div class="field-wrap"> -->
+<!--             <label> -->
+<!--               Email Address<span class="req">*</span> -->
+<!--             </label> -->
+<%--             <form:input type="email" required="required" autocomplete="off" path="email"/> --%>
+<!--           </div> -->
+          
+<!--           <div class="field-wrap"> -->
+<!--             <label> -->
+<!--               Set A Password<span class="req">*</span> -->
+<!--             </label> -->
+<%--             <form:input type="password" required="required" autocomplete="off" path="password"/> --%>
+<!--           </div> -->
+          
+<!--            <div class="field-wrap"> -->
+<!--             <label> -->
+<!--               Phone Number<span class="req">*</span> -->
+<!--             </label> -->
+<%--             <form:input type="text" required="required" autocomplete="off" path="phone"/> --%>
+<!--           </div> -->
+          
+<!--            <div class="field-wrap"> -->
+<!--             <label> -->
+<!--               Address<span class="req">*</span> -->
+<!--             </label> -->
+<%--             <form:input type="text" required="required" autocomplete="off" path="address"/> --%>
+<!--           </div> -->
+          
+<!--           <div class="field-wrap"> -->
+<!--             <label> -->
+<!--               Country<span class="req">*</span> -->
+<!--             </label> -->
+<%--             <form:input type="text" required="required" autocomplete="off" path="country"/> --%>
+<!--           </div> -->
+<!--           <div style="margin-left:150px"> -->
+<!--           <button type="submit" class="button button-large">Submit</button>&nbsp;&nbsp;&nbsp; -->
+<!--           <button type="reset" class="button button-large">Cancel</button> -->
+<!--           </div> -->
+<%--           </form:form> --%>
+
+<!--         </div> -->
+        
+<!-- <!--         <div id="login">    --> 
+<!-- <!--           <h1>Welcome Back!</h1> --> 
+          
+<%-- <%--           <form action="<c:url value='/login'/>" method="get"> --%> 
+          
+<!-- <!--             <div class="field-wrap"> --> 
+<!-- <!--             <label> --> -->
+<!-- <!--               Email Address<span class="req">*</span> --> -->
+<!-- <!--             </label> --> -->
+<!-- <!--             <input type="text" name="email" required autocomplete="off"/> --> -->
+<!-- <!--           </div> --> -->
+          
+<!-- <!--           <div class="field-wrap"> --> -->
+<!-- <!--             <label> --> -->
+<!-- <!--               Password<span class="req">*</span> --> -->
+<!-- <!--             </label> --> -->
+<!-- <!--             <input type="password" name="password" required autocomplete="off"/> --> -->
+<!-- <!--           </div> --> -->
+          
+<!-- <!--           <p class="forgot"><a href="#">Forgot Password?</a></p> --> -->
+          
+<!-- <!--           <button class="button button-block">Log In</button> --> -->
+          
+<%-- <%--           <input type="hidden" name="${_csrf.parameterName}" --%> --%>
+<%-- <%-- 			value="${_csrf.token}" /> --%> --%>
+<%-- <%--           </form> --%> --%>
+
+<!-- <!--         </div> --> -->
+<!--         </div> -->
+<!--       </div> -->
+      
+<!-- </div> /form -->
+            
         </nav>
     </header> <!-- end header -->
     
     
     
-  <div id="loginModal" class="modal fade" role="dialog">  
-    
-    <div class="form">
-      
-      <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
-      </ul>
-      
-      <div class="tab-content">
-        <div id="signup">   
-          <h1>Sign Up for Free</h1>
-          
-          <form action="/" method="post">
-          
-<!--           <div class="top-row"> -->
-            <div class="field-wrap">
-              <label>
-               Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
-            </div>
-        
-<!--             <div class="field-wrap"> -->
-<!--               <label> -->
-<!--                 Last Name<span class="req">*</span> -->
-<!--               </label> -->
-<!--               <input type="text"required autocomplete="off"/> -->
-<!--             </div> -->
-<!--           </div> -->
+<c:url value="/j_spring_security_logout" var="logoutUrl" />
 
-          <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email" required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password" required autocomplete="off"/>
-          </div>
-          
-           <div class="field-wrap">
-            <label>
-              Phone Number<span class="req">*</span>
-            </label>
-            <input type="text" required autocomplete="off"/>
-          </div>
-          
-           <div class="field-wrap">
-            <label>
-              Address<span class="req">*</span>
-            </label>
-            <input type="text" required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Country<span class="req">*</span>
-            </label>
-            <input type="text" required autocomplete="off"/>
-          </div>
-          <div style="margin-left:150px">
-          <button type="submit" class="button button-large">Submit</button>&nbsp;&nbsp;&nbsp;
-          <button type="reset" class="button button-large">Cancel</button>
-          </div>
-          </form>
-
-        </div>
-        
-        <div id="login">   
-          <h1>Welcome Back!</h1>
-          
-          <form action="/" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
-          </div>
-          
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-          
-          <button class="button button-block"/>Log In</button>
-          
-          </form>
-
-        </div>
-        </div>
-      </div><!-- tab-content -->
-      
-</div> <!-- /form -->
+	<!-- csrt for log out-->
+	<form action="${logoutUrl}" method="post" id="logoutForm">
+	  <input type="hidden"
+		name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+	</form>
+	
+	<script>
+		function formSubmit() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
+	
+	<c1:if test="${pageContext.request.userPrincipal.name != null}">
+		<h2>
+			Welcome : ${pageContext.request.userPrincipal.name} | <a
+				href="javascript:formSubmit()"> Logout</a>
+		</h2>
+	</c1:if>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
   

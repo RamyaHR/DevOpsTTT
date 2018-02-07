@@ -1,6 +1,6 @@
 package com.niit.DevOpsShoppingBackend.Model;
 
-import java.io.Serializable;
+
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -12,11 +12,8 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table
 @Component
-public class User implements Serializable{
+public class User{
 
-
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	private String userId;
 	private String name;
@@ -25,6 +22,8 @@ public class User implements Serializable{
 	private String phone;
 	private String address;
 	private String country;
+	private String rolename;
+	private boolean enabled;
 	
 //	public User(String name, String email, String password, String phone, String address, String country)
 //	{
@@ -36,7 +35,6 @@ public class User implements Serializable{
 //		this.country=country;
 //		
 //	}
-	
 	
 	public User() 
 	{
@@ -81,14 +79,28 @@ public class User implements Serializable{
 		this.country = country;
 	}
 
-
 	public String getUserId() {
 		return userId;
 	}
 
-
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 	
