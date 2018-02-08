@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,7 @@ import com.niit.DevOpsShoppingBackend.Dao.SupplierDao;
 import com.niit.DevOpsShoppingBackend.Model.Category;
 import com.niit.DevOpsShoppingBackend.Model.Product;
 import com.niit.DevOpsShoppingBackend.Model.Supplier;
+import com.niit.DevOpsShoppingBackend.Model.User;
 
 @Controller
 public class AdminController {
@@ -40,9 +43,10 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/savecat", method=RequestMethod.POST)
-	public ModelAndView saveCategory(@RequestParam("catId")String catId, @RequestParam("catName")String catName)
+	public ModelAndView saveCategory(@RequestParam("catId")String catId, @RequestParam("catName")String catName, @ModelAttribute("user")User user)
 	{
 		ModelAndView obj= new ModelAndView();
+		obj.addObject("user", user);
 		Category c= new Category();
 		c.setCatId(catId);
 		c.setCatName(catName);
@@ -52,9 +56,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/updatecat", method=RequestMethod.POST)
-	public ModelAndView updateCategory(@RequestParam("catId")String catId, @RequestParam("catName")String catName)
+	public ModelAndView updateCategory(@RequestParam("catId")String catId, @RequestParam("catName")String catName, @ModelAttribute("user")User user)
 	{
 		ModelAndView obj= new ModelAndView();
+		obj.addObject("user", user);
 		category.setCatId(catId);
 		category.setCatName(catName);
 		categoryDao.updateCat(category);
@@ -64,9 +69,10 @@ public class AdminController {
 	
 
 	@RequestMapping(value="/savesup", method=RequestMethod.POST)
-	public ModelAndView saveSupplier(@RequestParam("supId")String supId, @RequestParam("supName")String supName)
+	public ModelAndView saveSupplier(@RequestParam("supId")String supId, @RequestParam("supName")String supName, @ModelAttribute("user")User user)
 	{
 		ModelAndView obj= new ModelAndView();
+		obj.addObject("user", user);
 		Supplier s= new Supplier();
 		s.setSupId(supId);
 		s.setSupName(supName);
@@ -76,9 +82,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/updatesup", method=RequestMethod.POST)
-	public ModelAndView updateSupplier(@RequestParam("supId")String supId, @RequestParam("supName")String supName)
+	public ModelAndView updateSupplier(@RequestParam("supId")String supId, @RequestParam("supName")String supName, @ModelAttribute("user")User user)
 	{
 		ModelAndView obj= new ModelAndView();
+		obj.addObject("user", user);
 		supplier.setSupId(supId);
 		supplier.setSupName(supName);
 		supplierDao.updateSupp(supplier);
@@ -87,9 +94,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/saveprod", method=RequestMethod.POST)
-	public String saveProduct(HttpServletRequest req, @RequestParam("pimage") MultipartFile file)
+	public String saveProduct(HttpServletRequest req, Model model, @RequestParam("pimage") MultipartFile file, @ModelAttribute("user")User user)
 	{
 		Product prod= new Product();
+		model.addAttribute("user", user);
 		prod.setProdName(req.getParameter("prodName"));
 		prod.setProdPrice(Double.parseDouble(req.getParameter("prodPrice")));
 		prod.setProdQuantity(Integer.parseInt(req.getParameter("prodQuantity")));

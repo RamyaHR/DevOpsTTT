@@ -50,13 +50,36 @@ public class IndexController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = { "/userLogged"})
+	public ModelAndView UserLoggedpage(@ModelAttribute("user")User user) {
 
-	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
-	public ModelAndView adminPage() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("user", user);
+		model.addObject("login","User has succcessfully looged in!!!");
+		model.setViewName("index");
+		return model;
+
+	}
+	
+	@RequestMapping(value = { "/error"})
+	public ModelAndView ErrorLoginpage(@ModelAttribute("user")User user) {
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("user", user);
+		model.addObject("error","Please enter the valid credentials!!!");
+		model.setViewName("index");
+		return model;
+
+	}
+
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public ModelAndView adminPage(@ModelAttribute("user")User user) {
 
 		ModelAndView model = new ModelAndView();
 		List<Category> catlist=categoryDao.list();
 		List<Supplier> suplist=supplierDao.list();
+		model.addObject("user", user);
 		model.addObject("categories", catlist);
 		model.addObject("suppliers", suplist);
 		model.addObject("title", "Spring Security Custom Login Form");
@@ -68,24 +91,23 @@ public class IndexController {
 	}
 
 	//Spring Security see this :
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(
-		@RequestParam(value = "error", required = false) String error,
-		@RequestParam(value = "logout", required = false) String logout) {
-
-		ModelAndView model = new ModelAndView();
-		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
-		}
-
-		if (logout != null) {
-			model.addObject("msg", "You've been logged out successfully.");
-		}
-		model.setViewName("index");
-
-		return model;
-
-	}
+//	@RequestMapping(value = "/login", method = RequestMethod.POST)
+//	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+//		@RequestParam(value = "logout", required = false) String logout) {
+//
+//		ModelAndView model = new ModelAndView();
+//		if (error != null) {
+//			model.addObject("error", "Invalid username and password!");
+//		}
+//
+//		if (logout != null) {
+//			model.addObject("msg", "You've been logged out successfully.");
+//		}
+//		model.setViewName("index");
+//
+//		return model;
+//
+//	}
 	
 	@RequestMapping(value="/saveuser", method=RequestMethod.POST)
 	public ModelAndView saveuser(@ModelAttribute("user")User user)

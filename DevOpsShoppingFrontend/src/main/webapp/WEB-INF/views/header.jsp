@@ -33,7 +33,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                       <ul class="nav navbar-nav">
                         <li class="active"><a href="<c:url value="/"/>">Home<span class="sr-only">(current)</span></a></li>
-                        <li><a href="<c:url value="/"/>">About Us</a></li>
+                        <li class="hover"><a href="<c:url value="/"/>">About Us</a></li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Products<span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
@@ -43,7 +43,7 @@
                             <li><a href="#">Link 4</a></li>
                           </ul>
                           <li><a href="<c:url value="/"/>">Contact Us</a></li>
-                          <li><a href="<c:url value="/admin"/>">Admin</a></li>
+                          <li><a href="<c:url value='/admin'/>">Admin</a></li>
                     <!--<form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                           <input type="text" class="form-control" placeholder="Search">
@@ -62,9 +62,11 @@
                     
 					<ul class="nav navbar-nav" style="float:right">
 <%-- 					 <li><a href="<c:url value="/login"/>">Login/Signup</a></li> --%>
+					<c1:if test="${pageContext.request.userPrincipal.name==null}">
+                
 					<li><a data-toggle="modal" data-target="#loginModal">
 						<span class="glyphicon glyphicon-log-in"></span> Login/Signup
-                          </a></li>
+                          </a></li></c1:if>
 						  </ul>
 						  
 						  
@@ -144,7 +146,7 @@
          <div id="login">    
            <h1>Welcome Back!</h1> 
           
-           <form action="<c:url value='/login'/>" method="get"> 
+           <form action="<c:url value='/login'/>" method="post"> 
           
              <div class="field-wrap"> 
              <label> 
@@ -162,9 +164,7 @@
           
           <p class="forgot"><a href="#">Forgot Password?</a></p> 
           
-          <button class="button button-block">Log In</button>          
-          <input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
+          <button class="button button-block">Log In</button>         
           </form>
 
 <!--         </div> -->
@@ -203,7 +203,7 @@
                         <li><a href="#">Link 4</a></li>
                       </ul>
                       <li><a href="<c:url value="/"/>">Contact Us</a></li>
-                      <li><a href="<c:url value="/admin"/>">Admin</a></li>
+                      <li><a href="<c:url value='/admin'/>">Admin</a></li>
                     
                     
                  </ul>
@@ -225,8 +225,10 @@
                     </form>
                 </div>
                 <ul>
+                <c1:if test="${pageContext.request.userPrincipal.name!=null}">
                 <li><a href="<c:url value="/login"/>">Login</a></li>
-                <li><a href="<c:url value="/signup"/>">Signup</a></li></ul>
+                <li><a href="<c:url value="/signup"/>">Signup</a></li>
+                </c1:if></ul>
             </div>
             
 <!--             <div id="loginModal" class="modal fade" role="dialog">   -->
@@ -339,26 +341,10 @@
     </header> <!-- end header -->
     
     
-    
-<c:url value="/j_spring_security_logout" var="logoutUrl" />
-
-	<!-- csrt for log out-->
-	<form action="${logoutUrl}" method="post" id="logoutForm">
-	  <input type="hidden"
-		name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
-	</form>
-	
-	<script>
-		function formSubmit() {
-			document.getElementById("logoutForm").submit();
-		}
-	</script>
-	
 	<c1:if test="${pageContext.request.userPrincipal.name != null}">
 		<h2>
 			Welcome : ${pageContext.request.userPrincipal.name} | <a
-				href="javascript:formSubmit()"> Logout</a>
+				href="<c:url value="/logout"/>"> Logout</a>
 		</h2>
 	</c1:if>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

@@ -3,7 +3,7 @@
 
 <style>
 .footer {
-	background-color: #026466;
+	background-color: #026456;
 	margin-top:20px;
 } 
 .footer-info {
@@ -15,13 +15,15 @@
     font-weight: 600;
     text-align: left;
     font-size: 20px;
+    margin-left:25px;
 } 
 .footer-info li {
 	color: #EEE;
 	display: block;
 	font-weight: 300;
-	font-size: 13px;
+	font-size: 15px;
 	line-height: 25px;
+	
 }
 .links a {
     color: #EEE;
@@ -104,7 +106,7 @@ a.mail:hover {
 				<div class="col-md-4 col-sm-4 footer-info-grid address">
 					<h4>CONTACT US</h4>
 					<address>
-						<ul id="id1">
+						<ul>
 							<li>Interior Designs</li>
 							<li>Bangalore</li>
 							<li>India</li>

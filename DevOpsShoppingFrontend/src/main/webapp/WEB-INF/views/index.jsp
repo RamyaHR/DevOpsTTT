@@ -32,13 +32,9 @@
 </head>
 
 <body>
-<c1:if test="${not empty error}">
-			<div class="error">${error}</div>
-		</c1:if>
-		<c1:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
-		</c1:if>
+${login}
 	
+${error}	
 <%@ include file="header.jsp" %>
 <%@ include file="carousel.jsp" %>
 </body>

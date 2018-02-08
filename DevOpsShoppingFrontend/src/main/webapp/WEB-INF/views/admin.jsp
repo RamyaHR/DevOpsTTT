@@ -77,7 +77,7 @@
             <label>
               Category Id<span class="req">*</span>
             </label>
-            <input type="text" required="required" autocomplete="off" name="catId"/>
+            <input type="text" name="catId"/>
           </div>
           
           <div class="field-wrap">
@@ -105,14 +105,14 @@
             <label>
              Supplier Id<span class="req">*</span>
             </label>
-            <input type="text" required="required" autocomplete="off" />
+            <input type="text" name="supId"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Supplier Name<span class="req">*</span>
             </label>
-            <input type="text" required="required" autocomplete="off" />
+            <input type="text" required="required" autocomplete="off" name="supName"/>
           </div>
                     
           <button class="button button-block">Submit</button>
