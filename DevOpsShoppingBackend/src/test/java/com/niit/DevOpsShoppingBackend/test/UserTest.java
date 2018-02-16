@@ -105,7 +105,7 @@ public class UserTest{
 	{
 		user= userDao.get("u103");
 		
-		assertEquals("Successfully deleted the user", true, userDao.delete(user));
+		assertEquals("Successfully deleted the user", true, userDao.delete(user.getUserId()));
 		 	       
 	}
 	

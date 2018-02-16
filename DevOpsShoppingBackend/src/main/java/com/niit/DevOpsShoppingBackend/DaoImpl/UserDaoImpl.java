@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.DevOpsShoppingBackend.Dao.UserDao;
+import com.niit.DevOpsShoppingBackend.Model.Cart;
 import com.niit.DevOpsShoppingBackend.Model.User;
 
 
@@ -38,15 +40,20 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public List<User> list() {
-		List<User> user=(List<User>)sessionFactory.getCurrentSession().createCriteria(User.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		return user;
+		Session session= sessionFactory.openSession();
+		session.beginTransaction();
+		List<User> userlist= session.createQuery("from User").list();
+		session.getTransaction().commit();
+		return userlist;
 	}
 
 
 	public boolean insertUser(User user) {
 		
-		sessionFactory.getCurrentSession().save(user);
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(user);
+		session.getTransaction().commit();
 		return true;
 		
 	}
@@ -54,28 +61,37 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public User get(String userId) {
 		
-//		return sessionFactory.getCurrentSession().get("User.class", String.valueOf(userId));
-		String c1="from User where userId='"+userId+"'";
-		Query q1=sessionFactory.getCurrentSession().createQuery(c1);
-		List<User> list=(List<User>) q1.list();
-		if(list==null|| list.isEmpty())
+		Session session= sessionFactory.openSession();
+		User user=null;
+		try
 		{
-		return null;}
-		else {
-			return list.get(0);
+			session.beginTransaction();
+			user=session.get(User.class, userId);
+			session.getTransaction().commit();
+			
 		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return user;
 		}
 
 	@Override
-	public boolean delete(User user) {
-		sessionFactory.getCurrentSession().delete(user);
+	public boolean delete(String userId) {
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		User user=(User) session.get(User.class, userId);
+		session.delete(user);
 		return true;
-		
 	}
 
 	@Override
 	public boolean updateUser(User user) {
-		sessionFactory.getCurrentSession().update(user);
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(user);
+		session.getTransaction().commit();
 		return true;
 	}
 	

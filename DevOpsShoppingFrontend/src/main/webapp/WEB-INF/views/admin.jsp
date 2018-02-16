@@ -33,7 +33,7 @@
 .form {
   background: rgba(19, 35, 47, 0.9);
   padding: 40px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 40px auto;
   border-radius: 4px;
   -webkit-box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
@@ -48,11 +48,39 @@
   color: #a0b3b0;
   font-size: 20px;
   float: left;
-  width:32%;
+  width:25%;
   text-align: center;
   cursor: pointer;
   -webkit-transition: .5s ease;
   transition: .5s ease;
+}
+
+table, tr, th, td
+{
+font-size:20px;
+color:white;
+border:1px solid white
+}
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #a0b3b0;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
 }
 
 </style>
@@ -61,15 +89,17 @@
       
       <ul class="tab-group">
 <%--       <c:url value="/admin/category" var="cat"/>  --%>
+<%-- 	<form action="/admin/category"> --%>
         <li class="tab"><a href="#category">Category</a></li>
+<%--         <li><a href="<c:url value='/admin/category'/>" class="tab">Category</a></li> --%>
         <li class="tab active"><a href="#supplier">Supplier</a></li>
         <li class="tab"><a href="#product">Product</a></li>
+        <li class="tab"><a href="#list">List</a></li>
       </ul>
       
       <div class="tab-content">
       <div id="category">   
           <h1>Add Category</h1>
-<%--           <%@include file="category.jsp" %> --%>
           <c:url value="/savecat" var="cat"/>
           <form action="${cat}" method="post">
           
@@ -77,7 +107,7 @@
             <label>
               Category Id<span class="req">*</span>
             </label>
-            <input type="text" name="catId"/>
+            <input type="text" name="catId" type="hidden"/>
           </div>
           
           <div class="field-wrap">
@@ -168,7 +198,7 @@
             <label>
              Select Category<span class="req"></span>
             </label>
-            <select class="form-control" name="category" required>
+            <select class="form-control" name="catId" required>
             <option value="">----Category----</option>
             <c1:forEach items="${categories}" var="cat">
             <option value="${cat.catId}">${cat.catName}</option></c1:forEach>
@@ -179,7 +209,7 @@
             <label>
              Select Supplier<span class="req"></span>
             </label>
-            <select class="form-control" name="supplier" required>
+            <select class="form-control" name="supId" required>
             <option value="">----Supplier----</option>
             <c1:forEach items="${suppliers}" var="sup">
             <option value="${sup.supId}">${sup.supName}</option></c1:forEach>
@@ -201,6 +231,43 @@
         </div>
         </div>
         
+        <div class="tab-content">
+        
+      <div id="list">   <h1>List Of Products</h1>
+<%--       	<c1:forEach items="${lcat}" var="cat"> --%>
+          
+          <form class="example" action="<c:url value="/dispcategory/${cat.getCatId()}"/>" style="margin-left:500px;max-width:200px">
+  <input type="text" placeholder="Search.." name="search2"><button type="submit"><i class="fa fa-search"></i></button>
+ </form>
+<%--  	</c1:forEach><br> --%>
+          <table>
+          <tr>
+          <th>ProdImageName</th>
+          <th>ProdName</th>
+          <th>ProdDescription</th>
+          <th>ProdPrice</th>
+          <th>ProdQuantity</th>
+          <th>CategoryName</th>
+          <th>SupplierName</th>
+          <th>Actions</th>
+          </tr>
+          
+          <c1:forEach items="${products}" var="prod">
+          <tr>
+          <td>${prod.getImagename()}</td>
+          <td>${prod.getProdName()}</td>
+          <td>${prod.getProdDescription()}</td>
+          <td>${prod.getProdPrice()}</td>
+          <td>${prod.getProdQuantity()}</td>
+          <td>${prod.getCategory().getCatName()}</td>
+          <td>${prod.getSupplier().getSupName()}</td>
+          <td><a href="<c:url value="/updateprod/${prod.getProdId()}"/>">Edit</a>/<a href="<c:url value="/deleteProduct/${prod.getProdId()}"/>">Delete</a></td>
+          </tr>
+          </c1:forEach>
+          
+          </table>
+
+        </div></div>
       </div><!-- tab-content -->
       
 </div> <!-- /form -->

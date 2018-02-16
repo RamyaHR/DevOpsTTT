@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.niit.DevOpsShoppingBackend.Dao.SupplierDao;
+import com.niit.DevOpsShoppingBackend.Model.Category;
 import com.niit.DevOpsShoppingBackend.Model.Supplier;
 
 
@@ -30,40 +32,57 @@ public class SupplierDaoImpl implements SupplierDao {
 	}
 	@Override
 	public boolean insertSupp(Supplier supplier) {
-		sessionFactory.getCurrentSession().save(supplier);
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(supplier);
+		session.getTransaction().commit();
 		return true;
 	}
 
 	@Override
 	public boolean updateSupp(Supplier supplier) {
-		sessionFactory.getCurrentSession().update(supplier);
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(supplier);
+		session.getTransaction().commit();
 		return true;
 	}
 
 	@Override
-	public boolean deleteSupp(Supplier supplier) {
-		sessionFactory.getCurrentSession().delete(supplier);
+	public boolean deleteSupp(String supId) {
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		Supplier sup=(Supplier) session.get(Supplier.class, supId);
+		session.delete(sup);
 		return true;
-		
 	}
+	
 	@Override
-public Supplier getSupp(String supId) {
-		
-		String c1="from Supplier where supId='"+supId+"'";
-		Query q1=sessionFactory.getCurrentSession().createQuery(c1);
-		List<Supplier> list=(List<Supplier>) q1.list();
-		if(list==null|| list.isEmpty())
+		public Supplier getSupp(String supId) {
+
+		Session session= sessionFactory.openSession();
+		Supplier supplier=null;
+		try
 		{
-		return null;}
-		else {
-			return list.get(0);
+			session.beginTransaction();
+			supplier=session.get(Supplier.class, supId);
+			session.getTransaction().commit();
+			
 		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
+		return supplier;
+		}
+	
 @Override
 public List<Supplier> list() {
-		List<Supplier> supplier=(List<Supplier>)sessionFactory.getCurrentSession().createCriteria(Supplier.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		return supplier;
+	Session session= sessionFactory.openSession();
+	session.beginTransaction();
+	List<Supplier> suplist= session.createQuery("from Supplier").list();
+	session.getTransaction().commit();
+	return suplist;
 	}
 
 

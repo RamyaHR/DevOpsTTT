@@ -1,6 +1,7 @@
 package com.niit.DevOpsShoppingBackend.Model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,13 +22,15 @@ public class Category {
 	private String catId;
 	private String catName;
 	
-	@OneToMany(targetEntity=Product.class, fetch=FetchType.EAGER, mappedBy="category")
-	private Set<Product> products= new HashSet<Product>(0);
-	
 	public Category()
 	{
 		this.catId="CAT"+UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="category")
+	private List<Product> product;
+	
+	
 	public String getCatId() {
 		return catId;
 	}
@@ -40,12 +43,13 @@ public class Category {
 	public void setCatName(String catName) {
 		this.catName = catName;
 	}
-	public Set<Product> getProducts() {
-		return products;
+	public List<Product> getProduct() {
+		return product;
 	}
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setProduct(List<Product> product) {
+		this.product = product;
 	}
+	
 	
 	
 }

@@ -35,16 +35,24 @@
                         <li class="active"><a href="<c:url value="/"/>">Home<span class="sr-only">(current)</span></a></li>
                         <li class="hover"><a href="<c:url value="/"/>">About Us</a></li>
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Products<span class="caret"></span></a>
+                          <a href="<c:url value='/productlist'/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Products<span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Link 1</a></li>
-                            <li><a href="#">Link 2</a></li>
-                            <li><a href="#">Link 3</a></li>
-                            <li><a href="#">Link 4</a></li>
-                          </ul>
+                          <c1:forEach items="${catlist}" var="clist">
+                            <li><a href="<c:url value='/dispcategory/${clist.getCatId()}'/>">${clist.getCatName()}</a></li>
+                            </c1:forEach> 
+                            </ul>
                           <li><a href="<c:url value="/"/>">Contact Us</a></li>
                           <li><a href="<c:url value='/admin'/>">Admin</a></li>
-                    <!--<form class="navbar-form navbar-right" role="search">
+                           <li class="dropdown">
+    						<a class="dropdown-toggle" data-toggle="dropdown" href="<c:url value='/admin'/>">Admin
+    						<span class="caret"></span></a>
+    							<ul class="dropdown-menu">
+     								 <li><a href="<c:url value='/category'/>">Category</a></li>
+      								<li><a href="#">Supplier</a></li>
+     								 <li><a href="#">Product</a></li> 
+   									 </ul>
+  							</li>
+  <!--<form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                           <input type="text" class="form-control" placeholder="Search">
                         </div>
@@ -66,6 +74,12 @@
                 
 					<li><a data-toggle="modal" data-target="#loginModal">
 						<span class="glyphicon glyphicon-log-in"></span> Login/Signup
+                          </a></li></c1:if>
+                          
+                          <c1:if test="${pageContext.request.userPrincipal.name!=null}">
+                
+					<li><a href="<c:url value='/gotoCart'/>">
+						<span class="glyphicon glyphicon-cart"></span> Cart
                           </a></li></c1:if>
 						  </ul>
 						  

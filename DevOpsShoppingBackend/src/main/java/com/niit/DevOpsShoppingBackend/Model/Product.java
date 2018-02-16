@@ -2,6 +2,7 @@ package com.niit.DevOpsShoppingBackend.Model;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -26,23 +27,26 @@ public class Product {
 	private int prodQuantity;
 	
 	@Transient
-	private String pimage;
+	MultipartFile pimage;
+	
+	private String imagename;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="catId")
+	private Category category;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="supId")
+	private Supplier supplier;
+	
+	
 	
 	public Product()
 	{
 		this.prodId="PROD"+UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
 	
-	@ManyToOne(targetEntity=Product.class, fetch=FetchType.LAZY)
-	@JoinColumn
-	private Category category;
-	
-	@ManyToOne(targetEntity=Product.class, fetch=FetchType.LAZY)
-	@JoinColumn
-	private Supplier supplier;
-	
-	
-	public String getProdId() {
+		public String getProdId() {
 		return prodId;
 	}
 	public void setProdId(String prodId) {
@@ -73,11 +77,17 @@ public class Product {
 		this.prodQuantity = prodQuantity;
 	}
 	
-	public String getPimage() {
+	public MultipartFile getPimage() {
 		return pimage;
 	}
-	public void setPimage(String pimage) {
+	public void setPimage(MultipartFile pimage) {
 		this.pimage = pimage;
+	}
+	public String getImagename() {
+		return imagename;
+	}
+	public void setImagename(String imagename) {
+		this.imagename = imagename;
 	}
 	public Category getCategory() {
 		return category;

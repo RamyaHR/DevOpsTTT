@@ -12,7 +12,7 @@ public interface UserDao {
 	
 	public User get(String userId);
 	
-	public boolean delete(User user);
+	public boolean delete(String userId);
 	
 	public boolean updateUser(User user);
 	

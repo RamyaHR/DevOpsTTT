@@ -1,4 +1,4 @@
-<c:url value="/addcategory" var="cat"/>
+<c:url value="/savecat" var="cat"/>
           <form:form action="${cat}" method="post" commandName="category">
           
             <div class="field-wrap">

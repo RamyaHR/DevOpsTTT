@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.DevOpsShoppingBackend.Dao.ProductDao;
+import com.niit.DevOpsShoppingBackend.Model.Category;
 import com.niit.DevOpsShoppingBackend.Model.Product;
 
 @Repository("productDao")
@@ -29,40 +31,89 @@ public class ProductDaoImpl implements ProductDao{
 	
 	@Override
 	public boolean insertProd(Product product) {
-		sessionFactory.getCurrentSession().save(product);
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(product);
+		session.getTransaction().commit();
 		return true;
 	}
 
 	@Override
 	public boolean updateProd(Product product) {
-		sessionFactory.getCurrentSession().update(product);
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(product);
+		session.getTransaction().commit();
 		return true;
 	}
 
 	@Override
-	public boolean deleteProd(Product product) {
-		sessionFactory.getCurrentSession().save(product);
+	public boolean deleteProd(String prodId) {
+		Session session=sessionFactory.openSession();
+//		session.beginTransaction();
+		Product pro=(Product) session.get(Product.class, prodId);
+		session.delete(pro);
 		return true;
 	}
 
 	@Override
 	public Product getProd(String prodId) {
-		String c1="from Product where prodId='"+prodId+"'";
-		Query q1=sessionFactory.getCurrentSession().createQuery(c1);
-		List<Product> list=(List<Product>) q1.list();
-		if(list==null|| list.isEmpty())
+		Session session= sessionFactory.openSession();
+		Product product=null;
+		try
 		{
-		return null;}
-		else {
-			return list.get(0);
+			session.beginTransaction();
+			product=session.get(Product.class, prodId);
+			session.getTransaction().commit();
+			
 		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return product;
+	}
+
+	
+	@Override
+	public Product getProdByCatId(String catId) {
+		Session session= sessionFactory.openSession();
+		Product product=null;
+		try
+		{
+			session.beginTransaction();
+			product=session.get(Product.class, catId);
+			session.getTransaction().commit();
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return product;
 	}
 
 	@Override
 	public List<Product> list() {
-		List<Product> product=(List<Product>)sessionFactory.getCurrentSession().createCriteria(Product.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		return product;
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		List<Product> li= session.createQuery("from Product").list();
+		session.getTransaction().commit();
+		return li;
 	}
+
+	@Override
+	public List<Product> getProductByCategory(String catId) {
+		String q1 = "from Product where catId='" + catId + "'";
+		Query w = sessionFactory.getCurrentSession().createQuery(q1);
+		List<Product> list1 = (List<Product>) w.list();
+		if (list1 == null || list1.isEmpty()) 
+		{
+			return null;
+		}
+		   return list1;
+	}
+	
+	
 
 }

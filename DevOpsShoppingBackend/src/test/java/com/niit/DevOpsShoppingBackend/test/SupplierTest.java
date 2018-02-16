@@ -88,7 +88,7 @@ private static AnnotationConfigApplicationContext context;
 	{
 		supplier= supplierDao.getSupp("s101");
 		
-		assertEquals("Successfully deleted the supplier", true, supplierDao.deleteSupp(supplier));
+		assertEquals("Successfully deleted the supplier", true, supplierDao.deleteSupp(supplier.getSupId()));
 		 	       
 	}
 	

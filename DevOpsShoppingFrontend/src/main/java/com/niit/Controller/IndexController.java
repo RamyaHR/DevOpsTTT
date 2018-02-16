@@ -5,15 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.DevOpsShoppingBackend.Dao.CategoryDao;
+import com.niit.DevOpsShoppingBackend.Dao.ProductDao;
 import com.niit.DevOpsShoppingBackend.Dao.SupplierDao;
 import com.niit.DevOpsShoppingBackend.Dao.UserDao;
+import com.niit.DevOpsShoppingBackend.Model.Cart;
 import com.niit.DevOpsShoppingBackend.Model.Category;
+import com.niit.DevOpsShoppingBackend.Model.Product;
 import com.niit.DevOpsShoppingBackend.Model.Supplier;
 import com.niit.DevOpsShoppingBackend.Model.User;
 
@@ -39,12 +43,20 @@ public class IndexController {
 	@Autowired
 	SupplierDao supplierDao;
 	
+	@Autowired 
+	Product product;
+	
+	@Autowired
+	ProductDao productDao;
 	
 		
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage(@ModelAttribute("user")User user) {
-
+		List<Product> plist=productDao.list();
+		List<Category> clist=categoryDao.list();
 		ModelAndView model = new ModelAndView();
+		model.addObject("prodlist", plist);
+		model.addObject("catlist", clist);
 		model.addObject("user", user);
 		model.setViewName("index");
 		return model;
@@ -79,11 +91,11 @@ public class IndexController {
 		ModelAndView model = new ModelAndView();
 		List<Category> catlist=categoryDao.list();
 		List<Supplier> suplist=supplierDao.list();
+		List<Product> prodlist=productDao.list();
 		model.addObject("user", user);
 		model.addObject("categories", catlist);
 		model.addObject("suppliers", suplist);
-		model.addObject("title", "Spring Security Custom Login Form");
-		model.addObject("message", "This is protected page!");
+		model.addObject("products", prodlist);
 		model.setViewName("admin");
 
 		return model;
@@ -113,6 +125,8 @@ public class IndexController {
 	public ModelAndView saveuser(@ModelAttribute("user")User user)
 	{
 		ModelAndView mv= new ModelAndView();
+		Cart cart= new Cart();
+		user.setCart(cart);
 		user.setRolename("ROLE_USER");
 		userDao.insertUser(user);
 		mv.setViewName("index");
@@ -120,4 +134,42 @@ public class IndexController {
 	}
 	
 
+	@RequestMapping(value="/productlist")
+	public ModelAndView prodlist(@ModelAttribute("user")User user)
+	{
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("user", user);
+		List<Product> prodlist=productDao.list();
+		mv.addObject("products", prodlist);
+		mv.setViewName("productlist");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/productdetails")
+	public ModelAndView proddetaillist(@ModelAttribute("user")User user)
+	{
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("user", user);
+		List<Product> prodlist=productDao.list();
+		mv.addObject("products", prodlist);
+		mv.setViewName("productdetails");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping("/dispcategory/{catId}")
+	public ModelAndView dispcategory(@ModelAttribute("user")User user, @PathVariable("catId")String id)
+	{
+		List<Category> categories= categoryDao.list();
+		ModelAndView obj=new ModelAndView();
+		List<Product> lc=productDao.getProductByCategory(id);
+		obj.addObject("products",lc);
+		obj.addObject("user", user);
+		obj.addObject("cat",new Category());
+		obj.addObject("lcat",categories);
+		obj.setViewName("productlist");
+		return obj;
+	}
 }

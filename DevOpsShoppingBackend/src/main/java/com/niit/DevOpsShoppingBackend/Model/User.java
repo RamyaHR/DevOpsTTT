@@ -3,8 +3,12 @@ package com.niit.DevOpsShoppingBackend.Model;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -24,6 +28,9 @@ public class User{
 	private String country;
 	private String rolename;
 	private boolean enabled;
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="cartId")
+	private Cart cart;
 	
 //	public User(String name, String email, String password, String phone, String address, String country)
 //	{
@@ -101,6 +108,16 @@ public class User{
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+
+	public Cart getCart() {
+		return cart;
+	}
+
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 	
 	

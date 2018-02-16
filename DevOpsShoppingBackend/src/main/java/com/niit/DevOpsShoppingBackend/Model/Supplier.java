@@ -21,7 +21,7 @@ public class Supplier{
 	private String supId;
 	private String supName;
 	
-	@OneToMany(targetEntity=Product.class, fetch=FetchType.EAGER, mappedBy="supplier")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="supplier")
 	private Set<Product> products= new HashSet<Product>(0);
 	
 	public Supplier()
