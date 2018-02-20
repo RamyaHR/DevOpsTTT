@@ -16,7 +16,7 @@ public interface UserDao {
 	
 	public boolean updateUser(User user);
 	
-	
+	public User getMail(String email);
 	
 	
 }

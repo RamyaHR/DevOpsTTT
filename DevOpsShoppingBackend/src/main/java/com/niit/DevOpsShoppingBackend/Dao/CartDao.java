@@ -6,19 +6,19 @@ import com.niit.DevOpsShoppingBackend.Model.Cart;
 
 public interface CartDao {
 
-public boolean insertCart(Cart cart);
-	
-	public boolean updateCart(Cart cart);
-	
+public boolean saveorupdateCart(Cart cart);
+
 	public boolean deleteCart(String cartId);
 	
 	public Cart getCart(String cartId);
 	
 	public List<Cart> list();
 	
-	public List<Cart> findCartById(String emailId);
+	public List<Cart> findCartById(String cartId);
 	
-	public Cart getCartById(String cartId, String email);
+	public Cart getCartById(String prodId, String email);
+
+	public boolean updateCart(Cart cart);
 	
 
 	

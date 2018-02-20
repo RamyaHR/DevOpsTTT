@@ -78,7 +78,7 @@
                           
                           <c1:if test="${pageContext.request.userPrincipal.name!=null}">
                 
-					<li><a href="<c:url value='/gotoCart'/>">
+					<li><a href="<c:url value='/viewcart'/>">
 						<span class="glyphicon glyphicon-cart"></span> Cart
                           </a></li></c1:if>
 						  </ul>

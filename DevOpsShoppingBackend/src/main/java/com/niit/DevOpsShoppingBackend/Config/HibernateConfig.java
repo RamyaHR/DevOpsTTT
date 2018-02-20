@@ -18,18 +18,21 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.DevOpsShoppingBackend.Dao.CartDao;
+import com.niit.DevOpsShoppingBackend.Dao.CartItemsDao;
 import com.niit.DevOpsShoppingBackend.Dao.CategoryDao;
 import com.niit.DevOpsShoppingBackend.Dao.OrderDao;
 import com.niit.DevOpsShoppingBackend.Dao.ProductDao;
 import com.niit.DevOpsShoppingBackend.Dao.SupplierDao;
 import com.niit.DevOpsShoppingBackend.Dao.UserDao;
 import com.niit.DevOpsShoppingBackend.DaoImpl.CartDaoImpl;
+import com.niit.DevOpsShoppingBackend.DaoImpl.CartItemsDaoImpl;
 import com.niit.DevOpsShoppingBackend.DaoImpl.CategoryDaoImpl;
 import com.niit.DevOpsShoppingBackend.DaoImpl.OrderDaoImpl;
 import com.niit.DevOpsShoppingBackend.DaoImpl.ProductDaoImpl;
 import com.niit.DevOpsShoppingBackend.DaoImpl.SupplierDaoImpl;
 import com.niit.DevOpsShoppingBackend.DaoImpl.UserDaoImpl;
 import com.niit.DevOpsShoppingBackend.Model.Cart;
+import com.niit.DevOpsShoppingBackend.Model.CartItems;
 import com.niit.DevOpsShoppingBackend.Model.Category;
 import com.niit.DevOpsShoppingBackend.Model.Order;
 import com.niit.DevOpsShoppingBackend.Model.Product;
@@ -45,7 +48,7 @@ public class HibernateConfig {
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test/DevOpsTTTdb");
+		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test/DevOpsTTTdb123");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("sa");
 		return dataSource;
@@ -69,6 +72,7 @@ public class HibernateConfig {
 		sessionBuilder.addAnnotatedClass(Category.class);
 		sessionBuilder.addAnnotatedClass(Product.class);
 		sessionBuilder.addAnnotatedClass(Cart.class);
+		sessionBuilder.addAnnotatedClass(CartItems.class);
 		sessionBuilder.addAnnotatedClass(Order.class);
 		
 		return sessionBuilder.buildSessionFactory();
@@ -109,6 +113,12 @@ public class HibernateConfig {
 	@Bean(name="cartDao")
 	public CartDao getCartDao(SessionFactory sessionFactory) {
 		return new CartDaoImpl(sessionFactory);
+	}
+	
+	@Autowired
+	@Bean(name="cartItemsDao")
+	public CartItemsDao getCartItemsDao(SessionFactory sessionFactory) {
+		return new CartItemsDaoImpl(sessionFactory);
 	}
 	
 	@Autowired

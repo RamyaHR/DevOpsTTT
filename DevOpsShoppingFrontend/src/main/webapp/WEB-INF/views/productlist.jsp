@@ -47,12 +47,12 @@
 <div class="product-model">	 
 
 	 <div class="container-fluid">
-			<h2>OUR PRODUCTS</h2><c:url value="/addToCart" var="cart"/>
-			<form action="${cart}" method="post">
+			<h2>OUR PRODUCTS</h2>
 				
 			<c1:forEach items="${products}" var="pro"> 
 				 <div>
-		 
+		 <c:url value="/addToCart/${pro.getProdId()}" var="cart"/>
+			<form action="${cart}" method="post">
 					 <a href=""><div class="product-grid love-grid">
 					 
 						<div class="more-product"><span> </span></div>						
@@ -74,9 +74,9 @@
 								<input type="submit" class="item_add items" value="ADD">
 							</div>													
 							<div class="clearfix"> </div>
-						</div>
+						</div></c1:forEach>
 					</div>	
-					</c1:forEach> </form></div>
+					 </form></div>
 <!-- 					 <a href="single.html"><div class="product-grid love-grid"> -->
 <!-- 						<div class="more-product"><span> </span></div>						 -->
 <!-- 						<div class="product-img b-link-stripe b-animate-go  thickbox"> -->

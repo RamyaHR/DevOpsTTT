@@ -1,5 +1,6 @@
 package com.niit.DevOpsShoppingBackend.Model;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,15 +20,15 @@ public class Cart {
 
 	@Id
 	private String cartId;
-	private String cartProductId;
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="email")
-	private User user;
+	private double grandtotal=0.0;
+	private int totalitem=0;
 	
-	private Double cartPrice;
-	private int cartQuantity;
-	private String cartImage;
-	private String cartProductName;
+	@OneToMany(mappedBy="cart", cascade=CascadeType.ALL)
+	private List<CartItems> cartItems;
+//	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+//	@JoinColumn(name="userId")
+//	private User user;
+	
 	public Cart()
 	{
 		this.cartId="CART"+UUID.randomUUID().toString().substring(30).toUpperCase();
@@ -37,43 +39,30 @@ public class Cart {
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
-	public String getCartProductId() {
-		return cartProductId;
+	public double getGrandtotal() {
+		return grandtotal;
 	}
-	public void setCartProductId(String cartProductId) {
-		this.cartProductId = cartProductId;
+	public void setGrandtotal(double grandtotal) {
+		this.grandtotal = grandtotal;
 	}
-	public User getUser() {
-		return user;
+	public int getTotalitem() {
+		return totalitem;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setTotalitem(int totalitem) {
+		this.totalitem = totalitem;
 	}
-	public Double getCartPrice() {
-		return cartPrice;
+	public List<CartItems> getCartItems() {
+		return cartItems;
 	}
-	public void setCartPrice(Double cartPrice) {
-		this.cartPrice = cartPrice;
+	public void setCartItems(List<CartItems> cartItems) {
+		this.cartItems = cartItems;
 	}
-	public int getCartQuantity() {
-		return cartQuantity;
-	}
-	public void setCartQuantity(int cartQuantity) {
-		this.cartQuantity = cartQuantity;
-	}
-	public String getCartImage() {
-		return cartImage;
-	}
-	public void setCartImage(String cartImage) {
-		this.cartImage = cartImage;
-	}
-	public String getCartProductName() {
-		return cartProductName;
-	}
-	public void setCartProductName(String cartProductName) {
-		this.cartProductName = cartProductName;
-	}
-	
+//	public User getUser() {
+//		return user;
+//	}
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 	
 	
 }

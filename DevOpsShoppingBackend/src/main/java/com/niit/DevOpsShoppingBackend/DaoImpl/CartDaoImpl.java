@@ -13,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.DevOpsShoppingBackend.Dao.CartDao;
 import com.niit.DevOpsShoppingBackend.Model.Cart;
+import com.niit.DevOpsShoppingBackend.Model.CartItems;
+import com.niit.DevOpsShoppingBackend.Model.User;
 
 @Repository("cartDao")
 @EnableTransactionManagement
-@Transactional
+
 public class CartDaoImpl implements CartDao{
 
 	@Autowired
@@ -27,14 +29,13 @@ public class CartDaoImpl implements CartDao{
 		this.sessionFactory=sessionFactory;
 	}
 	@Override
-	public boolean insertCart(Cart cart) {
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(cart);
-		session.getTransaction().commit();
+	@Transactional
+	public boolean saveorupdateCart(Cart cart) {
+		sessionFactory.getCurrentSession().saveOrUpdate(cart);
 		return true;
 	}
-
+	
+	
 	@Override
 	public boolean updateCart(Cart cart) {
 		Session session=sessionFactory.openSession();
@@ -80,8 +81,8 @@ public class CartDaoImpl implements CartDao{
 		return cartlist;
 	}
 	@Override
-	public List<Cart> findCartById(String emailId) {
-		String q1 = "from Cart where email='" + emailId + "'";
+	public List<Cart> findCartById(String cartId) {
+		String q1 = "from Cart where cartId='" + cartId + "'";
 		Query w = sessionFactory.getCurrentSession().createQuery(q1);
 		List<Cart> list1 = (List<Cart>) w.list();
 		if (list1 == null || list1.isEmpty()) 
@@ -92,8 +93,8 @@ public class CartDaoImpl implements CartDao{
 	}
 
 	@Override
-	public Cart getCartById(String cartId, String email) {
-		String q1 = "from Cart where cartProductId'" + cartId + "' and email='"+email+"'";
+	public Cart getCartById(String prodId, String email) {
+		String q1 = "from Cart where cartProductId='" + prodId + "' and userId='"+email+"'";
 		Query w = sessionFactory.getCurrentSession().createQuery(q1);
 		List<Cart> list1 = (List<Cart>) w.list();
 		if (list1 == null || list1.isEmpty()) 
@@ -101,6 +102,13 @@ public class CartDaoImpl implements CartDao{
 			return null;
 		}
 		   return list1.get(0);
+//		Session session= sessionFactory.openSession();
+//		Cart cart= null;
+//		session.beginTransaction();
+//		cart=(Cart)session.createQuery("from Cart where email=email and cartProductId= id").setString("email",email).setString("id",prodId).uniqueResult();
+//		session.getTransaction().commit();
+//		return cart;
 	}
 
+	
 }

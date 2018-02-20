@@ -14,12 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.DevOpsShoppingBackend.Dao.UserDao;
 import com.niit.DevOpsShoppingBackend.Model.Cart;
+import com.niit.DevOpsShoppingBackend.Model.CartItems;
 import com.niit.DevOpsShoppingBackend.Model.User;
 
 
 @Repository("userDao")
 @EnableTransactionManagement
-@Transactional
+
 public class UserDaoImpl implements UserDao{
 	
 	@Autowired
@@ -94,10 +95,29 @@ public class UserDaoImpl implements UserDao{
 		session.getTransaction().commit();
 		return true;
 	}
+
+	@Override
+	@Transactional
+	public User getMail(String email) {
+		String sql= "from User where email='" +email+"'";
+		Query q1= sessionFactory.getCurrentSession().createQuery(sql);
+		@SuppressWarnings("unchecked")
+		List<User> list=(List<User>) q1.list();
+		if(list==null || list.isEmpty()){
+			System.out.println("Item is not found");
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
+		
+		}
+	}
 	
 	
 
 	
 	
 	
-}
+

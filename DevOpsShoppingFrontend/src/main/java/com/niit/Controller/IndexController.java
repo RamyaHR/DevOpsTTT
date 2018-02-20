@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.niit.DevOpsShoppingBackend.Dao.CartDao;
 import com.niit.DevOpsShoppingBackend.Dao.CategoryDao;
 import com.niit.DevOpsShoppingBackend.Dao.ProductDao;
 import com.niit.DevOpsShoppingBackend.Dao.SupplierDao;
@@ -48,6 +49,12 @@ public class IndexController {
 	
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired 
+	Cart cart;
+	
+	@Autowired
+	CartDao cartDao;
 	
 		
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
@@ -125,9 +132,10 @@ public class IndexController {
 	public ModelAndView saveuser(@ModelAttribute("user")User user)
 	{
 		ModelAndView mv= new ModelAndView();
+		
+		user.setRolename("ROLE_USER");
 		Cart cart= new Cart();
 		user.setCart(cart);
-		user.setRolename("ROLE_USER");
 		userDao.insertUser(user);
 		mv.setViewName("index");
 		return mv;

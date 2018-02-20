@@ -28,7 +28,7 @@ public class User{
 	private String country;
 	private String rolename;
 	private boolean enabled;
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="cartId")
 	private Cart cart;
 	
