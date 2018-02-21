@@ -44,12 +44,19 @@ public class AdminController {
 	Supplier supplier;
 	
 	
-	@RequestMapping(value="/category")
-	public ModelAndView category()
+	@RequestMapping(value="/prod")
+	public ModelAndView product(@ModelAttribute("user")User user)
 	{
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("category");
-		return mv;
+		List<Product> listproduct=productDao.list();
+		List<Category> listcategory=categoryDao.list();
+		List<Supplier> listsupplier=supplierDao.list();
+		ModelAndView obj = new ModelAndView("addproduct");
+		obj.addObject("user", user);
+		obj.addObject("product", new Product());
+		obj.addObject("products",listproduct);
+		obj.addObject("categories", listcategory);
+		obj.addObject("suppliers", listsupplier);
+		return obj;
 	}
 	
 	
@@ -141,7 +148,7 @@ public class AdminController {
 		String filepath=req.getSession().getServletContext().getRealPath("/");
 		String filename=file.getOriginalFilename();
 		prod.setImagename(filename);
-		productDao.insertProd(prod);
+		productDao.saveorupdateProd(prod);
 		
 		try
 		{
@@ -171,12 +178,12 @@ public class AdminController {
 		obj.addObject("suppliers", suplist);
 		Product prod= productDao.getProd(prodId);
 		obj.addObject("prod", prod);
-		obj.setViewName("redirect:/admin");
+		obj.setViewName("addproduct");
 		return obj;
 	}
 	
 	
-	@RequestMapping(value="/updateproduct", method=RequestMethod.POST)
+	@RequestMapping(value="/updateproduct")
 	public ModelAndView updateProduct(HttpServletRequest req, @RequestParam("pimage") MultipartFile file, 
 			@ModelAttribute("user")User user)
 	{
@@ -216,7 +223,7 @@ public class AdminController {
 		{
 			
 		}
-		model.setViewName("redirect:/saveprod");
+		model.setViewName("redirect:/prod");
 		return model;
 	}
 

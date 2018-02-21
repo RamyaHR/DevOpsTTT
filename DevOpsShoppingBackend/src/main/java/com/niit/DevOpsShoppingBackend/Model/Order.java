@@ -1,5 +1,7 @@
 package com.niit.DevOpsShoppingBackend.Model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,6 +22,11 @@ public class Order {
 	@JoinColumn(name="email")	
 	private User user;
 	private String payment;
+	
+	public Order() 
+	{
+		this.orderId="ORDER"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
 	
 	public String getPayment() {
 		return payment;

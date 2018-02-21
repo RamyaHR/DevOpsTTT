@@ -1,6 +1,7 @@
 package com.niit.DevOpsShoppingBackend.Model;
 
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,6 +33,9 @@ public class User{
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="cartId")
 	private Cart cart;
+	
+	@OneToMany(mappedBy="user")
+	private List<Order> order;
 	
 //	public User(String name, String email, String password, String phone, String address, String country)
 //	{
@@ -118,6 +123,16 @@ public class User{
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
+	}
+
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
 	}
 	
 	

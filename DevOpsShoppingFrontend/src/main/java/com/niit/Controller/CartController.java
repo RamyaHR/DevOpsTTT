@@ -266,7 +266,7 @@ public class CartController {
 		Cart c=cartDao.getCart(u.getCart().getCartId());
 		c.setGrandtotal(c.getGrandtotal()-cartItems.getCartPrice());
 		c.setTotalitem(c.getTotalitem()-1);
-//		cartDao.saveorupdateCart(c);       //If i uncomment this line i am getting error like  Illegal attempt to associate a collection with two open sessions
+		cartDao.updateCart(c);       //If i uncomment this line i am getting error like  Illegal attempt to associate a collection with two open sessions
 		cartItemsDao.deleteCartItems(cartItems.getCartitemsId());
 		
 		return obj;
@@ -276,37 +276,66 @@ public class CartController {
 	
 	
 	@RequestMapping(value="/invoiceProcess", method=RequestMethod.POST)
-	public ModelAndView orderSave(HttpServletRequest req)
+	public ModelAndView orderSave(HttpServletRequest req, @ModelAttribute("user")User users, @ModelAttribute("product")Product prod)
 	{
 		ModelAndView mv= new ModelAndView("invoice");
+		mv.addObject("user", users);
 		Order order= new Order();
-		Principal principal= req.getUserPrincipal();
-		String email=principal.getName();
-		Double total= Double.parseDouble(req.getParameter("total"));
-		String payment= req.getParameter("payment");
-		User user= userDao.get(email);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken))
+		{
+			String currusername = authentication.getName();
+			User user = userDao.getMail(currusername);
 		order.setUser(user);
-		order.setTotal(total);
-		order.setPayment(payment);
-		orderDao.insertOrder(order);
-		mv.addObject("orderDetails", user);
-		return mv;
+		System.out.println(524);
+		Cart c=user.getCart();
+//		cartItems=cartItemsDao.getCartItems(c.getCartId());
+//		cartItems=cartItemsDao.getlistall(c.getCartId(), prod.getProdId());
+		List<CartItems> ci=cartItemsDao.getlist(c.getCartId());
+		CartItems cartItems1=cartItemsDao.get(c.getCartId());
+		System.out.println(c.getGrandtotal());
+		if (cartItems != null) 
+		{
+			order.setTotal(c.getGrandtotal());
+			order.setPayment("done");
+			orderDao.insertOrder(order);
+//			cartItemsDao.deleteCartItems(user.getCart().getCartId());
+//			c.setGrandtotal(c.getGrandtotal() - cartItems.getCartPrice());
+//			c.setTotalitem(c.getTotalitem() - 1);
+//			
+//			cartDao.saveorupdateCart(cart);
+			System.out.println(324);
+			
+		}
+			mv.addObject("citems", ci);
+			mv.addObject("cartitems", cartItems1);
+			mv.addObject("orderDetails", user);
+		
+	}return mv;
 	}
 	
 	
 	@RequestMapping(value="/checkout", method=RequestMethod.GET)
-	public ModelAndView checkoutprocess(HttpServletRequest req)
+	public ModelAndView checkoutprocess(@ModelAttribute("user")User user)
 	{
-		ModelAndView mv= new ModelAndView("checkout");
-		Principal pri= req.getUserPrincipal();
-		String email= pri.getName();
-		User user= userDao.get(email);
-		List<Cart> cart= cartDao.findCartById(email);
-		mv.addObject("user", user);
+		ModelAndView mv= new ModelAndView();
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken))
+		{
+			String currusername = authentication.getName();
+			User u = userDao.getMail(currusername);
+		        Cart c=u.getCart();
+		cart= cartDao.getCart(u.getCart().getCartId());
+		
+		mv.addObject("user", u);
+		System.out.println(u.getAddress());
 		mv.addObject("cart", cart);
+		mv.setViewName("shipping");
 		return mv;
 	}
-	
+		return mv;
+	}
+
 //	@RequestMapping(value="/deleteCart/{cartId}")
 //	public ModelAndView deleteCartItems(@PathVariable("cartId")String cartId, HttpServletRequest req)
 //	{
@@ -331,4 +360,13 @@ public class CartController {
 //		mv.setViewName("cart");
 //		return mv;
 //	}
+
+
+@RequestMapping("/thankyou")
+public String thankyou(@ModelAttribute("user")User user, Model model)
+{
+	model.addAttribute("user", user);
+		return "thankyou";
+}
+
 }

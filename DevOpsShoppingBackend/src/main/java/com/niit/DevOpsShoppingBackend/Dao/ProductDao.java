@@ -6,7 +6,7 @@ import com.niit.DevOpsShoppingBackend.Model.Product;
 
 public interface ProductDao {
 
-public boolean insertProd(Product product);
+public boolean saveorupdateProd(Product product);
 	
 	public boolean updateProd(Product product);
 	

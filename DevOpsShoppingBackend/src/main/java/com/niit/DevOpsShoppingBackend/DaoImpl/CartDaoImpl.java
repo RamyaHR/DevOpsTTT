@@ -18,7 +18,6 @@ import com.niit.DevOpsShoppingBackend.Model.User;
 
 @Repository("cartDao")
 @EnableTransactionManagement
-
 public class CartDaoImpl implements CartDao{
 
 	@Autowired
@@ -35,13 +34,10 @@ public class CartDaoImpl implements CartDao{
 		return true;
 	}
 	
-	
 	@Override
+	@Transactional
 	public boolean updateCart(Cart cart) {
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		session.update(cart);
-		session.getTransaction().commit();
+		sessionFactory.getCurrentSession().merge(cart);
 		return true;
 	}
 
@@ -81,6 +77,7 @@ public class CartDaoImpl implements CartDao{
 		return cartlist;
 	}
 	@Override
+	@Transactional
 	public List<Cart> findCartById(String cartId) {
 		String q1 = "from Cart where cartId='" + cartId + "'";
 		Query w = sessionFactory.getCurrentSession().createQuery(q1);
@@ -93,6 +90,7 @@ public class CartDaoImpl implements CartDao{
 	}
 
 	@Override
+	@Transactional
 	public Cart getCartById(String prodId, String email) {
 		String q1 = "from Cart where cartProductId='" + prodId + "' and userId='"+email+"'";
 		Query w = sessionFactory.getCurrentSession().createQuery(q1);

@@ -43,15 +43,15 @@
                             </ul>
                           <li><a href="<c:url value="/"/>">Contact Us</a></li>
                           <li><a href="<c:url value='/admin'/>">Admin</a></li>
-                           <li class="dropdown">
-    						<a class="dropdown-toggle" data-toggle="dropdown" href="<c:url value='/admin'/>">Admin
-    						<span class="caret"></span></a>
-    							<ul class="dropdown-menu">
-     								 <li><a href="<c:url value='/category'/>">Category</a></li>
-      								<li><a href="#">Supplier</a></li>
-     								 <li><a href="#">Product</a></li> 
-   									 </ul>
-  							</li>
+<!--                            <li class="dropdown"> -->
+<%--     						<a class="dropdown-toggle" data-toggle="dropdown" href="<c:url value='/admin'/>">Admin --%>
+<!--     						<span class="caret"></span></a> -->
+<!--     							<ul class="dropdown-menu"> -->
+<%--      								 <li><a href="<c:url value='/prod'/>">Product</a></li> --%>
+<!--       								<li><a href="#">Supplier</a></li> -->
+<!--      								 <li><a href="#">Product</a></li>  -->
+<!--    									 </ul> -->
+<!--   							</li> -->
   <!--<form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                           <input type="text" class="form-control" placeholder="Search">

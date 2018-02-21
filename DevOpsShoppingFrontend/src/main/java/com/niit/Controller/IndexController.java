@@ -93,13 +93,14 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ModelAndView adminPage(@ModelAttribute("user")User user) {
+	public ModelAndView adminPage(@ModelAttribute("user")User user, @ModelAttribute("product")Product product) {
 
 		ModelAndView model = new ModelAndView();
 		List<Category> catlist=categoryDao.list();
 		List<Supplier> suplist=supplierDao.list();
 		List<Product> prodlist=productDao.list();
 		model.addObject("user", user);
+		model.addObject("product", product);
 		model.addObject("categories", catlist);
 		model.addObject("suppliers", suplist);
 		model.addObject("products", prodlist);
@@ -171,12 +172,15 @@ public class IndexController {
 	public ModelAndView dispcategory(@ModelAttribute("user")User user, @PathVariable("catId")String id)
 	{
 		List<Category> categories= categoryDao.list();
+		List<Product> plist=productDao.list();
+		ModelAndView model = new ModelAndView();
+		model.addObject("prodlist", plist);
 		ModelAndView obj=new ModelAndView();
 		List<Product> lc=productDao.getProductByCategory(id);
 		obj.addObject("products",lc);
 		obj.addObject("user", user);
 		obj.addObject("cat",new Category());
-		obj.addObject("lcat",categories);
+		obj.addObject("clist",categories);
 		obj.setViewName("productlist");
 		return obj;
 	}

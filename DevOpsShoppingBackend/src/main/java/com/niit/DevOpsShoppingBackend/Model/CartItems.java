@@ -30,7 +30,7 @@ public class CartItems {
 	{
 		this.cartitemsId="CARTITEM"+UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="prodId")
 	private Product product;
 	

@@ -84,117 +84,52 @@ form.example button {
 }
 
 </style>
-
-  <div class="form">
+<div class="form">
       
       <ul class="tab-group">
-<%--       <c:url value="/admin/category" var="cat"/>  --%>
-<%-- 	<form action="/admin/category"> --%>
-        <li class="tab"><a href="#category">Category</a></li>
-<%--         <li><a href="<c:url value='/admin/category'/>" class="tab">Category</a></li> --%>
-        <li class="tab"><a href="#supplier">Supplier</a></li>
+    
         <li class="tab active"><a href="#product">Product</a></li>
-        <li class="tab"><a href="#list">List</a></li>
+        
       </ul>
-<!--       <ul class="tab-group"> -->
-<!--         <li class="tab"><a href="#list">List</a></li> -->
-<!--       </ul> -->
-      
-      <div class="tab-content">
-      <div id="category">   
-          <h1>Add Category</h1>
-          <c:url value="/savecat" var="cat"/>
-          <form action="${cat}" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              Category Id<span class="req">*</span>
-            </label>
-            <input type="text" name="catId" type="hidden"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-             Category Name<span class="req">*</span>
-            </label>
-            <input type="text" required="required" autocomplete="off" name="catName"/>
-          </div>
-                    
-          <button class="button button-block">Submit</button>
-          
-          </form>
-
-        </div>
-        </div>
-        
-        
-        <div class="tab-content">
-        <div id="supplier">   
-          <h1>Add Supplier</h1>
-          
-          <c:url value="/savesup" var="sup" />
-          <form action="${sup}" method="post">
-          
-            <div class="field-wrap">
-            <label>
-             Supplier Id<span class="req">*</span>
-            </label>
-            <input type="text" name="supId"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Supplier Name<span class="req">*</span>
-            </label>
-            <input type="text" required="required" autocomplete="off" name="supName"/>
-          </div>
-                    
-          <button class="button button-block">Submit</button>
-          
-          </form>
-
-        </div></div>
-        
-        <div class="tab-content">
-        <div id="product">   
+<div id="product">   
           <h1>Add Product</h1>
           
-          <c:url value="/addproduct" var="prod"/>
-          <form:form action="${prod}" method="post" enctype="multipart/form-data" commandName="product">
+          <c:url value="/saveprod" var="prod"/>
+          <form action="${prod}" method="post" enctype="multipart/form-data" >
           
             <div class="field-wrap">
             <label>
               Product Id<span class="req">*</span>
             </label>
-            <form:input type="text" name="prodId" path="prodId"/>
+            <input type="text" name="prodId"/>
           </div>
                  
           <div class="field-wrap">
             <label>
               Product Name<span class="req">*</span>
             </label>
-            <form:input type="text" required="required" autocomplete="off" name="prodName" path="prodName"/>
+            <input type="text" required="required" autocomplete="off" name="prodName"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Product Description<span class="req">*</span>
             </label>
-            <form:input type="text" required="required" autocomplete="off" name="prodDescription" path="prodDescription"/>
+            <input type="text" required="required" autocomplete="off" name="prodDescription"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Product Price<span class="req">*</span>
             </label>
-            <form:input type="text" required="required" autocomplete="off" name="prodPrice" path="prodPrice"/>
+            <input type="text" required="required" autocomplete="off" name="prodPrice"/>
           </div>
           
          <div class="field-wrap">
             <label>
               Product Quantity<span class="req">*</span>
             </label>
-            <form:input type="text" required="required" autocomplete="off" name="prodQuantity" path="prodQuantity"/>
+            <input type="text" required="required" autocomplete="off" name="prodQuantity" />
           </div>
           
            
@@ -202,81 +137,40 @@ form.example button {
             <label>
              Select Category<span class="req"></span>
             </label>
-            <form:select class="form-control" name="catId" path="category.catId" required="required">
+            <select class="form-control" name="catId" required="required">
             <option value="">----Category----</option>
             <c1:forEach items="${categories}" var="cat">
             <option value="${cat.catId}">${cat.catName}</option></c1:forEach>
-            </form:select>
+            </select>
              </div>
              
              <div class="field-wrap">
             <label>
              Select Supplier<span class="req"></span>
             </label>
-            <form:select class="form-control" name="supId" path="supplier.supId" required="required">
+            <select class="form-control" name="supId" required="required">
             <option value="">----Supplier----</option>
             <c1:forEach items="${suppliers}" var="sup">
             <option value="${sup.supId}">${sup.supName}</option></c1:forEach>
-            </form:select>
+            </select>
              </div>
           
           <div class="field-wrap">
             <label>
              <span class="req"></span>
             </label>
-            <form:input type="file" required="required" autocomplete="off" name="pimage" path="pimage"/>
+            <input type="file" required="required" autocomplete="off" name="pimage" />
           </div>
          
           
           <button class="button button-block">Submit</button>
           
-          </form:form>
+          </form>
 
 
 
 
-<!-- <div id="list">   <h1>List Of Products</h1> -->
-<%-- <%--       	<c1:forEach items="${lcat}" var="cat"> --%> --%>
-          
-<%--           <form class="example" action="<c:url value="/dispcategory/${cat.getCatId()}"/>" style="margin-left:500px;max-width:200px"> --%>
-<!--   <input type="text" placeholder="Search.." name="search2"><button type="submit"><i class="fa fa-search"></i></button> -->
-<%--  </form> --%>
-<%-- <%--  	</c1:forEach><br> --%> --%>
-<!--           <table> -->
-<!--           <tr> -->
-<!--           <th>ProdImageName</th> -->
-<!--           <th>ProdName</th> -->
-<!--           <th>ProdDescription</th> -->
-<!--           <th>ProdPrice</th> -->
-<!--           <th>ProdQuantity</th> -->
-<!--           <th>CategoryName</th> -->
-<!--           <th>SupplierName</th> -->
-<!--           <th>Actions</th> -->
-<!--           </tr> -->
-          
-<%--           <c1:forEach items="${products}" var="prod"> --%>
-<!--           <tr> -->
-<%--           <td>${prod.getImagename()}</td> --%>
-<%--           <td>${prod.getProdName()}</td> --%>
-<%--           <td>${prod.getProdDescription()}</td> --%>
-<%--           <td>${prod.getProdPrice()}</td> --%>
-<%--           <td>${prod.getProdQuantity()}</td> --%>
-<%--           <td>${prod.getCategory().getCatName()}</td> --%>
-<%--           <td>${prod.getSupplier().getSupName()}</td> --%>
-<%--           <td><a href="<c:url value="/editproduct/${prod.getProdId()}"/>">Edit</a>/<a href="<c:url value="/deleteProduct/${prod.getProdId()}"/>">Delete</a></td> --%>
-<!--           </tr> -->
-<%--           </c1:forEach> --%>
-          
-<!--           </table> -->
-
-<!--         </div></div> -->
-<!--       </div>tab-content -->
-<!--       </div> -->
-
-       
-        </div>
-      
-      <div id="list">   <h1>List Of Products</h1>
+<div id="list">   <h1>List Of Products</h1>
 <%--       	<c1:forEach items="${lcat}" var="cat"> --%>
           
           <form class="example" action="<c:url value="/dispcategory/${cat.getCatId()}"/>" style="margin-left:500px;max-width:200px">
@@ -304,25 +198,17 @@ form.example button {
           <td>${prod.getProdQuantity()}</td>
           <td>${prod.getCategory().getCatName()}</td>
           <td>${prod.getSupplier().getSupName()}</td>
-          <td><a href="<c:url value="/editproduct/${prod.getProdId()}"/>">Edit</a>/<a href="<c:url value="/deleteProduct/${prod.getProdId()}"/>">Delete</a></td>
+          <td><a href="<c:url value="/updateproduct"/>">Edit</a>/<a href="<c:url value="/deleteProduct/${prod.getProdId()}"/>">Delete</a></td>
           </tr>
           </c1:forEach>
           
           </table>
 
         </div></div>
-      </div>
+      </div><!-- tab-content -->
       
-</div></form>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
+</div>
+       
   
-
-    <script  src="${js}/index.js"></script>
-
-
-
-
 </body>
-
 </html>

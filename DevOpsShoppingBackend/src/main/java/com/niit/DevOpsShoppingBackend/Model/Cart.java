@@ -23,7 +23,7 @@ public class Cart {
 	private double grandtotal=0.0;
 	private int totalitem=0;
 	
-	@OneToMany(mappedBy="cart", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="cart")
 	private List<CartItems> cartItems;
 //	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 //	@JoinColumn(name="userId")

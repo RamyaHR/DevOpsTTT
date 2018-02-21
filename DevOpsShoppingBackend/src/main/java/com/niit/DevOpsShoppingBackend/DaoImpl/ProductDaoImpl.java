@@ -26,14 +26,13 @@ public class ProductDaoImpl implements ProductDao{
 	public ProductDaoImpl(SessionFactory sessionFactory)
 	{
 		this.sessionFactory=sessionFactory;
-		
 	}
 	
 	@Override
-	public boolean insertProd(Product product) {
+	public boolean saveorupdateProd(Product product) {
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		session.save(product);
+		session.saveOrUpdate(product);
 		session.getTransaction().commit();
 		return true;
 	}
@@ -50,9 +49,10 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public boolean deleteProd(String prodId) {
 		Session session=sessionFactory.openSession();
-//		session.beginTransaction();
+		session.beginTransaction();
 		Product pro=(Product) session.get(Product.class, prodId);
 		session.delete(pro);
+		session.getTransaction().commit();
 		return true;
 	}
 

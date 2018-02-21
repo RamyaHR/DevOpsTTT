@@ -16,7 +16,7 @@ import com.niit.DevOpsShoppingBackend.Model.CartItems;
 
 @Repository("cartItemsDao")
 @EnableTransactionManagement
-@Transactional
+
 public class CartItemsDaoImpl implements CartItemsDao{
 
 	@Autowired
@@ -43,6 +43,7 @@ public class CartItemsDaoImpl implements CartItemsDao{
 		session.beginTransaction();
 		CartItems cartItems=(CartItems) session.get(CartItems.class, cartitemsId);
 		session.delete(cartItems);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -74,23 +75,25 @@ public class CartItemsDaoImpl implements CartItemsDao{
 	}
 	
 	
-	@Override
-	public CartItems getlistall(String cartId, String pro) {
-		String sql= "from CartItems where cartId='" +cartId+ "'and cartProductId ='"+pro+ "'";
-		Query q1= sessionFactory.getCurrentSession().createQuery(sql);
-		@SuppressWarnings("unchecked")
-		List<CartItems> list=(List<CartItems>) q1.list();
-		if(list==null || list.isEmpty()){
-			System.out.println("Item is not found");
-			return null;
-		}
-		else
-		{
-			return list.get(0);
-		}
-		
-	}
+//	@Override
+//	@Transactional
+//	public CartItems getlistall(String cartId, String pro) {
+//		String sql= "from CartItems where cartId='" +cartId+ "'and cartProductId ='"+pro+ "'";
+//		Query q1= sessionFactory.getCurrentSession().createQuery(sql);
+//		@SuppressWarnings("unchecked")
+//		List<CartItems> list=(List<CartItems>) q1.list();
+//		if(list==null || list.isEmpty()){
+//			System.out.println("Item is not found");
+//			return null;
+//		}
+//		else
+//		{
+//			return list.get(0);
+//		}
+//		
+//	}
 	
+	@Transactional
 	public List<CartItems> getlist(String cartId)
 	{
 		String Sq1="from CartItems where cartId='"+cartId+"'";
@@ -105,6 +108,26 @@ public class CartItemsDaoImpl implements CartItemsDao{
 		else
 		{
 			return list;
+		}
+		
+	}
+
+	
+	@Transactional
+	public CartItems get(String cartId)
+	{
+		String Sq1="from CartItems where cartId='"+cartId+"'";
+		Query q1=sessionFactory.getCurrentSession().createQuery(Sq1);
+		@SuppressWarnings("unchecked")
+		List<CartItems> list=(List<CartItems>)q1.list();
+		if(list==null||list.isEmpty())
+		{
+			System.out.println("Item is not found");
+			return null;
+		}
+		else
+		{
+			return list.get(0);
 		}
 		
 	}
