@@ -3,19 +3,26 @@ package com.niit.LetsChatBackend.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table
+@SequenceGenerator(name="blogidseq", sequenceName="blog_id_seq")
 public class Blog {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="blogidseq")
 	private int blogId;
 	private String blogName;
 	private String blogContent;
+//	@JsonFormat(shape=JSONFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date createDate;
 	private String userName;
 	private String status;
+	int likes;
 	
 	public int getBlogId() {
 		return blogId;
@@ -52,6 +59,12 @@ public class Blog {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	
 	

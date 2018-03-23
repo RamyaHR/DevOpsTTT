@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.LetsChatBackend.Dao.JobDao;
+import com.niit.LetsChatBackend.model.ApplyJob;
 import com.niit.LetsChatBackend.model.Job;
 
 @Repository("jobDao")
@@ -117,5 +118,17 @@ public class JobDaoImpl implements JobDao{
 		List<Job> li= session.createQuery("from Job").list();
 		session.getTransaction().commit();
 		return li;
+	}
+
+	@Override
+	public List<Job> getAllAppliedJobDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean applyJob(ApplyJob applyJob) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -3,6 +3,7 @@ package com.niit.LetsChatBackend.Dao;
 import java.util.List;
 
 import com.niit.LetsChatBackend.model.Blog;
+import com.niit.LetsChatBackend.model.BlogComment;
 
 public interface BlogDao {
 
@@ -12,6 +13,12 @@ public interface BlogDao {
 	public Blog getBlog(int blogId);
 	public boolean approveBlog(Blog blog);
 	public boolean rejectBlog(Blog blog);
-	public List<Blog> listBlog();
+	public List<Blog> listBlog(String userName);
+	public boolean incrementLike(Blog blog);
+	
+	public boolean addBlogComment(BlogComment blogComment);
+	public boolean deleteBlogComment(BlogComment blogComment);
+	public BlogComment getBlogComment(int commentId);
+	public List<BlogComment> listBlogComments(int blogId);
 	
 }

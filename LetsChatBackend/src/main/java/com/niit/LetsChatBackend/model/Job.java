@@ -18,6 +18,8 @@ public class Job {
 	private String skillsRequired;
 	private String salary;
 	private String location;
+	private String lastDateApply;
+	
 	public int getJobId() {
 		return jobId;
 	}
@@ -59,6 +61,12 @@ public class Job {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public String getLastDateApply() {
+		return lastDateApply;
+	}
+	public void setLastDateApply(String lastDateApply) {
+		this.lastDateApply = lastDateApply;
 	}
 	
 	

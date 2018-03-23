@@ -43,7 +43,7 @@ public class BlogDaoTest {
 	}
 	
 	
-//	@Test
+	@Test
 	public void addBlogTest()
 	{
 //		Timestamp dt_date = new Timestamp(System.currentTimeMillis());
@@ -53,6 +53,7 @@ public class BlogDaoTest {
 		blog.setBlogContent("abcd");
 		blog.setUserName("dfg");
 		blog.setStatus("A");
+		blog.setLikes(0);
 		blog.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		assertEquals("Blog is saved",true, blogDao.addBlog(blog));
 	
@@ -61,6 +62,7 @@ public class BlogDaoTest {
 		blog.setBlogContent("def");
 		blog.setUserName("abcd");
 		blog.setStatus("A");
+		blog.setLikes(0);
 		blog.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		assertEquals("Blog is saved",true, blogDao.addBlog(blog));
 		
@@ -69,6 +71,7 @@ public class BlogDaoTest {
 		blog.setBlogContent("fghi");
 		blog.setUserName("lmno");
 		blog.setStatus("A");
+		blog.setLikes(0);
 		blog.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		assertEquals("Blog is saved",true, blogDao.addBlog(blog));
 	}
@@ -104,7 +107,7 @@ public class BlogDaoTest {
 	public void testlistBlog()
 	{
 		
-		assertEquals("Successfully fetched the blog list", 2, blogDao.listBlog().size());
+		assertEquals("Successfully fetched the blog list", 2, blogDao.listBlog("abcd").size());
 		 	       
 	}
 	
@@ -115,7 +118,7 @@ public class BlogDaoTest {
 		assertEquals("Successfully accepted", true, blogDao.approveBlog(blog));
 	}
 	
-	@Test
+//	@Test
 	public void testRejectBlog()
 	{
 		blog=blogDao.getBlog(103);

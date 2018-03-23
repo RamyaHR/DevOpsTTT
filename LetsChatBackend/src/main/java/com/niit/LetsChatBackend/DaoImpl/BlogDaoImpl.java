@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.LetsChatBackend.Dao.BlogDao;
 import com.niit.LetsChatBackend.model.Blog;
+import com.niit.LetsChatBackend.model.BlogComment;
 
 @Repository("blogDao")
 @Transactional
@@ -112,13 +113,85 @@ public class BlogDaoImpl implements BlogDao
 	}
 
 	@Override
-	public List<Blog> listBlog() {
+	public List<Blog> listBlog(String userName) {
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		List<Blog> li= session.createQuery("from Blog").list();
-		session.getTransaction().commit();
-		return li;
+		Query query= session.createQuery("from Blog where userName=:userName");
+		query.setParameter("username", userName);
+		List<Blog> listBlogs=query.list();
+		session.close();
+		return listBlogs;
 	}
+
+	@Override
+	public boolean incrementLike(Blog blog) {
+		try
+		{
+			int likes=blog.getLikes();
+			likes++;
+			blog.setLikes(likes);
+			sessionFactory.getCurrentSession().update(blog);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean addBlogComment(BlogComment blogComment) {
+		try
+		{
+			sessionFactory.getCurrentSession().save(blogComment);
+			return true;
+		}
+		catch(Exception e)
+		{
+			
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteBlogComment(BlogComment blogComment) {
+		try
+		{
+			sessionFactory.getCurrentSession().delete(blogComment);
+			return true;
+		}
+		catch(Exception e)
+		{
+			
+			return false;
+		}
+	}
+
+	@Override
+	public BlogComment getBlogComment(int commentId) {
+		try
+		{
+			Session session=sessionFactory.openSession();
+			BlogComment blogComment=(BlogComment)session.get(BlogComment.class, commentId);
+			return blogComment;
+		}
+		catch(Exception e)
+		{
+			
+			return null;
+		}
+	}
+
+	@Override
+	public List<BlogComment> listBlogComments(int blogId) {
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from BlogComment where blogId=:blogId");
+		query.setParameter("blogId", new Integer(blogId));
+		List<BlogComment> listBlogComments=query.list();
+		return listBlogComments;
+	}
+	
+	
 	}
 
 	

@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.niit.LetsChatBackend.Dao.BlogDao;
 import com.niit.LetsChatBackend.Dao.ForumDao;
 import com.niit.LetsChatBackend.Dao.JobDao;
+import com.niit.LetsChatBackend.Dao.UserDao;
 import com.niit.LetsChatBackend.DaoImpl.BlogDaoImpl;
 import com.niit.LetsChatBackend.DaoImpl.ForumDaoImpl;
 import com.niit.LetsChatBackend.DaoImpl.JobDaoImpl;
+import com.niit.LetsChatBackend.DaoImpl.UserDaoImpl;
 import com.niit.LetsChatBackend.model.Blog;
 import com.niit.LetsChatBackend.model.Forum;
 import com.niit.LetsChatBackend.model.Job;
+import com.niit.LetsChatBackend.model.User;
 
 @Configuration
 @ComponentScan("com.niit.*")
@@ -54,7 +57,7 @@ public class DBConfig {
 		sessionFactoryBuilder.addAnnotatedClass(Blog.class);
 		sessionFactoryBuilder.addAnnotatedClass(Forum.class);
 		sessionFactoryBuilder.addAnnotatedClass(Job.class);
-		
+		sessionFactoryBuilder.addAnnotatedClass(User.class);
 		SessionFactory sessionFactory= sessionFactoryBuilder.buildSessionFactory();
 		System.out.println("----------------SessionFactory-------------");
 		return sessionFactory;
@@ -86,6 +89,13 @@ public class DBConfig {
 	{
 		System.out.println("Job Dao object created");
 		return new JobDaoImpl(sessionFactory);
+	}
+	
+	@Bean
+	public UserDao getUserDao(SessionFactory sessionFactory)
+	{
+		System.out.println("User Dao object created");
+		return new UserDaoImpl(sessionFactory);
 	}
 	
 }
