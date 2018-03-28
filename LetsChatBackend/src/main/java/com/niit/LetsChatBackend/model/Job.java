@@ -3,14 +3,19 @@ package com.niit.LetsChatBackend.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table
+@SequenceGenerator(name="jobidseq", sequenceName="job_id_seq")
 public class Job {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="jobidseq")
 	private int jobId;
 	private String jobTitle;
 	private String jobDescription;
@@ -18,7 +23,7 @@ public class Job {
 	private String skillsRequired;
 	private String salary;
 	private String location;
-	private String lastDateApply;
+	private Date lastDateApply;
 	
 	public int getJobId() {
 		return jobId;
@@ -62,12 +67,13 @@ public class Job {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getLastDateApply() {
+	public Date getLastDateApply() {
 		return lastDateApply;
 	}
-	public void setLastDateApply(String lastDateApply) {
+	public void setLastDateApply(Date lastDateApply) {
 		this.lastDateApply = lastDateApply;
 	}
+	
 	
 	
 	

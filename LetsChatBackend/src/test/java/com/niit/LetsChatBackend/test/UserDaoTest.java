@@ -45,7 +45,7 @@ private static AnnotationConfigApplicationContext context;
 	public void addUserTest()
 	{
 		User user= new User();
-		user.setUserId(101);
+//		user.setUserId(101);
 		user.setUserName("abcd");
 		user.setAddress("def");
 		user.setCity("fs");
@@ -54,7 +54,7 @@ private static AnnotationConfigApplicationContext context;
 		user.setPassword("abcd");
 		assertEquals("User is saved",true, userDao.addUser(user));
 	
-		user.setUserId(102);
+//		user.setUserId(102);
 		user.setUserName("defg");
 		user.setAddress("fgh");
 		user.setCity("abcd");
@@ -63,7 +63,7 @@ private static AnnotationConfigApplicationContext context;
 		user.setPassword("defg");
 		assertEquals("User is saved",true, userDao.addUser(user));
 		
-		user.setUserId(103);
+//		user.setUserId(103);
 		user.setUserName("xyz");
 		user.setAddress("hjnk");
 		user.setCity("ghjb");

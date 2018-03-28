@@ -116,8 +116,8 @@ public class BlogDaoImpl implements BlogDao
 	public List<Blog> listBlog(String userName) {
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		Query query= session.createQuery("from Blog where userName=:userName");
-		query.setParameter("username", userName);
+		Query query= session.createQuery("from Blog where userName=:userName").setString("userName",userName);
+		query.setParameter("userName", userName);
 		List<Blog> listBlogs=query.list();
 		session.close();
 		return listBlogs;

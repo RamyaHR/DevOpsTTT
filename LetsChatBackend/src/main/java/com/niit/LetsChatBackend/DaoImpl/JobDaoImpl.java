@@ -2,6 +2,7 @@ package com.niit.LetsChatBackend.DaoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.LetsChatBackend.Dao.JobDao;
 import com.niit.LetsChatBackend.model.ApplyJob;
+import com.niit.LetsChatBackend.model.BlogComment;
 import com.niit.LetsChatBackend.model.Job;
 
 @Repository("jobDao")
@@ -122,13 +124,20 @@ public class JobDaoImpl implements JobDao{
 
 	@Override
 	public List<Job> getAllAppliedJobDetails() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		List<Job> joblist= session.createQuery("from ApplyJob").list();
+		session.getTransaction().commit();
+		return joblist;
 	}
 
 	@Override
 	public boolean applyJob(ApplyJob applyJob) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			sessionFactory.getCurrentSession().save(applyJob);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

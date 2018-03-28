@@ -21,8 +21,11 @@ import com.niit.LetsChatBackend.DaoImpl.BlogDaoImpl;
 import com.niit.LetsChatBackend.DaoImpl.ForumDaoImpl;
 import com.niit.LetsChatBackend.DaoImpl.JobDaoImpl;
 import com.niit.LetsChatBackend.DaoImpl.UserDaoImpl;
+import com.niit.LetsChatBackend.model.ApplyJob;
 import com.niit.LetsChatBackend.model.Blog;
+import com.niit.LetsChatBackend.model.BlogComment;
 import com.niit.LetsChatBackend.model.Forum;
+import com.niit.LetsChatBackend.model.ForumComment;
 import com.niit.LetsChatBackend.model.Job;
 import com.niit.LetsChatBackend.model.User;
 
@@ -58,6 +61,9 @@ public class DBConfig {
 		sessionFactoryBuilder.addAnnotatedClass(Forum.class);
 		sessionFactoryBuilder.addAnnotatedClass(Job.class);
 		sessionFactoryBuilder.addAnnotatedClass(User.class);
+		sessionFactoryBuilder.addAnnotatedClass(ApplyJob.class);
+		sessionFactoryBuilder.addAnnotatedClass(BlogComment.class);
+		sessionFactoryBuilder.addAnnotatedClass(ForumComment.class);
 		SessionFactory sessionFactory= sessionFactoryBuilder.buildSessionFactory();
 		System.out.println("----------------SessionFactory-------------");
 		return sessionFactory;
@@ -70,28 +76,28 @@ public class DBConfig {
 		return new HibernateTransactionManager(sessionFactory);
 	}
 	
-	@Bean
+	@Bean(name="blogDao")
 	public BlogDao getBlogDao(SessionFactory sessionFactory)
 	{
 		System.out.println("Blog Dao object created");
 		return new BlogDaoImpl(sessionFactory);
 	}
 	
-	@Bean
+	@Bean(name="forumDao")
 	public ForumDao getForumDao(SessionFactory sessionFactory)
 	{
 		System.out.println("Forum Dao object created");
 		return new ForumDaoImpl(sessionFactory);
 	}
 	
-	@Bean
+	@Bean(name="jobDao")
 	public JobDao getJobDao(SessionFactory sessionFactory)
 	{
 		System.out.println("Job Dao object created");
 		return new JobDaoImpl(sessionFactory);
 	}
 	
-	@Bean
+	@Bean(name="userDao")
 	public UserDao getUserDao(SessionFactory sessionFactory)
 	{
 		System.out.println("User Dao object created");

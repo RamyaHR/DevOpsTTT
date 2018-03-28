@@ -9,19 +9,17 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	private int userId;
+	private String loginname;
 	private String userName;
 	private String address;
 	private String mobile;
 	private String city;
 	private String emailId;
 	private String password;
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+
+	private String role;
+	private String isOnline;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -57,6 +55,24 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getLoginname() {
+		return loginname;
+	}
+	public void setLoginname(String loginname) {
+		this.loginname = loginname;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getIsOnline() {
+		return isOnline;
+	}
+	public void setIsOnline(String isOnline) {
+		this.isOnline = isOnline;
 	}
 	
 	

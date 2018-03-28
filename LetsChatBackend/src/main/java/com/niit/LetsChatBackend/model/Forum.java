@@ -3,19 +3,25 @@ package com.niit.LetsChatBackend.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table
+@SequenceGenerator(name="forumidseq", sequenceName="forum_id_seq")
 public class Forum {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="forumidseq")
 	private int forumId;
 	private String forumName;
 	private String forumContent;
 	private Date forumDate;
 	private String userName;
 	private String status;
+	
 	public int getForumId() {
 		return forumId;
 	}
