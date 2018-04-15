@@ -22,11 +22,11 @@ public class ForumController {
 	@Autowired
 	ForumDao forumDao;
 	
-	//-----------ListForum--------------//
+	//-----------ListForum--------------//						Working
 	@GetMapping(value="/listForums")
 	public ResponseEntity<List<Forum>> getlistForums()
 	{
-		List<Forum> listForums= forumDao.listForum("dfg");
+		List<Forum> listForums= forumDao.listForum();
 		if(listForums.size()>0)
 		{
 			return new ResponseEntity<List<Forum>>(listForums, HttpStatus.OK);
@@ -37,12 +37,12 @@ public class ForumController {
 		}
 	}
 
-	//-------------Add Forum---------------//
+	//-------------Add Forum---------------//				Working
 	@PostMapping(value="/addForum")
 	public ResponseEntity<String> addForum(@RequestBody Forum forum)
 	{
-		forum.setForumDate(new java.util.Date());
-		forum.setUserName("abcd1");
+		forum.setForumDate(new Date());
+//		forum.setUserName("abcd1");
 		forum.setStatus("A");
 		
 		if(forumDao.addForum(forum))
@@ -55,7 +55,7 @@ public class ForumController {
 		}
 	}
 	
-	//---------------DeleteForum-------------------//
+	//---------------DeleteForum-------------------				Working				
 	@PostMapping(value="/deleteForum")
 	public ResponseEntity<String> deleteForum(@RequestBody Forum forum)
 	{
@@ -69,7 +69,7 @@ public class ForumController {
 		}
 	}
 	
-	//---------------------Update Forum-------------------//
+	//---------------------Update Forum-------------------//		Working
 	@PostMapping(value = "/updateForum/{forumId}")
 	public ResponseEntity<String> updateForum(@PathVariable("forumId") int forumId, @RequestBody Forum forum) {
 		System.out.println("Updating Forum " + forumId);
@@ -89,7 +89,7 @@ public class ForumController {
 		return new ResponseEntity<String>("Update Forum Success", HttpStatus.OK);
 	}
 
-	// -----------------------Get Forum --------------------//
+	// -----------------------Get Forum --------------------//		Working
 
 	@GetMapping(value = "/getForum/{forumId}")
 	public ResponseEntity<String> getForum(@PathVariable("forumId") int forumId) {
@@ -102,7 +102,7 @@ public class ForumController {
 		}
 	}
 
-	// -----------------------Approve Forum ------------//
+	// -----------------------Approve Forum ------------//		Working
 
 	@PostMapping(value = "/approveForum/{forumId}")
 	public ResponseEntity<String> approveForum(@PathVariable("forumId") int forumId) {
@@ -118,7 +118,7 @@ public class ForumController {
 		}
 	}
 
-	// --------------------Reject Forum ------------------//
+	// --------------------Reject Forum ------------------//			Working
 
 	@PostMapping(value = "/rejectForum/{forumId}")
 	public ResponseEntity<String> rejectForum(@PathVariable("forumId") int forumId) {
@@ -136,45 +136,49 @@ public class ForumController {
 	}
 
 	
-	// ---------------- Add ForumComments --------------------//
+	// ---------------- Add ForumComments --------------------//Working
 
-		@PostMapping(value = "/addForumComment")  //Not working with postman
+		@PostMapping(value = "/addForumComment")  
 		public ResponseEntity<String> addForumComments(@RequestBody ForumComment forumComment) {
 			forumComment.setCommentDate(new Date());
-			Forum forum = forumDao.getForum(1);
-			String username = forum.getUserName();
-			int forumId = forum.getForumId();
-			forumComment.setForumId(forumId);
-			forumComment.setUsername(username);
+			forumComment.setForumId(forumComment.getForumcommmentID());
+			forumComment.setCommentText(forumComment.getCommentText());
+			forumComment.setUsername(forumComment.getUsername());
+			
+//			Forum forum = forumDao.getForum(1);
+//			String username = forum.getUserName();
+//			int forumId = forum.getForumId();
+//			forumComment.setForumId(forumId);
+//			forumComment.setUsername(username);
 			if (forumDao.addForumComment(forumComment)) {
 				return new ResponseEntity<String>("ForumComment Added- Success", HttpStatus.OK);
 			} else {
-				return new ResponseEntity<String>("BlodComment insertion failed", HttpStatus.NOT_FOUND);
+				return new ResponseEntity<String>("ForumComment insertion failed", HttpStatus.NOT_FOUND);
 			}
 		}
 
-		// -------------------------Delete ForumComment	 ---------------//
+		// -------------------------Delete ForumComment	 ---------------//		Working
 
-		@PostMapping(value = "/deleteForumComment/{commentId}")    //not working with postman
-		public ResponseEntity<String> deleteForumComment(@PathVariable("commentId") int commentId) {
-			System.out.println("Delete forumComment with comment Id: " + commentId);
-			ForumComment forumComment = forumDao.getForumComment(commentId);
+		@PostMapping(value = "/deleteForumComment/{forumcommmentID}")    
+		public ResponseEntity<String> deleteForumComment(@PathVariable("forumcommmentID") int forumcommmentID) {
+			System.out.println("Delete forumComment with forumcommmentID: " + forumcommmentID);
+			ForumComment forumComment = forumDao.getForumComment(forumcommmentID);
 			if (forumComment == null) {
-				System.out.println("No forum " + commentId + " found to delete");
-				return new ResponseEntity<String>("No forumcomment with comment Id: " + commentId + " found to delete",
+				System.out.println("No forum " + forumcommmentID + " found to delete");
+				return new ResponseEntity<String>("No forumcomment with comment Id: " + forumcommmentID + " found to delete",
 						HttpStatus.NOT_FOUND);
 			} else {
 				forumDao.deleteForumComment(forumComment);
-				return new ResponseEntity<String>("ForumComment with comment Id " + commentId + " deleted successfully", HttpStatus.OK);
+				return new ResponseEntity<String>("ForumComment with comment Id " + forumcommmentID + " deleted successfully", HttpStatus.OK);
 			}
 
 		}
-		// -----------------------Get ForumComment ---------------//
+		// -----------------------Get ForumComment ---------------//			Working
 
-		@GetMapping(value = "/getForumComment/{commentId}")    //not working with postman
-		public ResponseEntity<String> getForumComment(@PathVariable("commentId") int commentId) {
-			System.out.println("Get ForumComment " + commentId);
-			ForumComment forumComment = forumDao.getForumComment(commentId);
+		@GetMapping(value = "/getForumComment/{forumcommmentID}")    
+		public ResponseEntity<String> getForumComment(@PathVariable("forumcommmentID") int forumcommmentID) {
+			System.out.println("Get ForumComment " + forumcommmentID);
+			ForumComment forumComment = forumDao.getForumComment(forumcommmentID);
 			if (forumComment == null) {
 				return new ResponseEntity<String>("Get forumComment failure", HttpStatus.NOT_FOUND);
 			} else {
@@ -182,7 +186,7 @@ public class ForumController {
 			}
 		}
 
-		// -----------------list Forums ---------------------------------
+		// -----------------list ForumComments ---------------------------------
 		@GetMapping(value = "/listForumComments")
 		public ResponseEntity<List<ForumComment>> listForumComments() {
 			List<ForumComment> listForumComments = forumDao.listForumComments(1);

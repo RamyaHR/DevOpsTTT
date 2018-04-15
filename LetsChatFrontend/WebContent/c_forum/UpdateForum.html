@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blog Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Credit Login / Register Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/angular.js"></script>
+<!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script> -->
+		<script src="js/angular-route.js"></script>
+		<script src="js/angular-cookies.js"></script>
+		<script src="MyRouteConfig.js"></script>
+		<script src="c_blog/BlogController.js"></script>
+		<script src="c_user/UserController.js"></script>
+		
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //web font -->
+
+<style>
+input[type="text"], textarea{
+	outline: none;
+  font-size: 15px;
+    color: #000;
+  border:none;
+    width: 90%;
+  display: inline-block;
+  background: transparent;
+	font-family: 'Muli', sans-serif;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+body
+{
+background-image: url("images/img2.jpg");
+}
+
+table
+{
+border:1px solid black;
+}
+</style>
+</head>
+<body>
+
+<!-- main -->
+<div class="w3ls-header">
+	<h1>Blog form</h1>
+	<div class="header-main">
+		<h2> <a href="#"></a>Forum Page <span></span> <a href="#"></a></h2>
+			<div class="header-bottom">
+				<div class="header-right w3agile">
+					<div class="header-left-bottom agileinfo" > 
+						<form action="#" id="forumform" method="post" ng-controller="ForumController">
+							<div class="icon1">
+								<input type="text" placeholder="ForumName" required="required" ng-model="forum.forumName"/>{{blog.blogName}}
+							</div>
+							<div class="icon1">
+								<textarea rows="5" cols="30" placeholder="ForumContent" required="required" ng-model="forum.forumContent"></textarea>
+							</div>
+							
+							<div class="bottom">
+								<input type="submit" value="Add Forum" ng-click="updateForum()"/>
+							</div>
+							<p><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a> : login with google-plus</p>
+					</form>	
+					</div>
+				</div>
+			</div>
+	</div>
+</div><br>
+<br>
+<!--header end here-->
+<!-- copyright start here -->
+<div class="copyright">
+	<p style="color:red">© 2017 LetsChat Form. All rights reserved | Design by LetsChat </a></p>
+</div>
+<!--copyright end here-->
+</body>
+</html>

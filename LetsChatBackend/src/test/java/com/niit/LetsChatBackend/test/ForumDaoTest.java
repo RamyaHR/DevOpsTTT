@@ -104,7 +104,7 @@ private static AnnotationConfigApplicationContext context;
 	public void testlistForum()
 	{
 		
-		assertEquals("Successfully fetched the forum list", 2, forumDao.listForum("dfg").size());
+		assertEquals("Successfully fetched the forum list", forumDao.listForum().size()>0);
 		 	       
 	}
 	

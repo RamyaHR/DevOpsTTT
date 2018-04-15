@@ -7,27 +7,27 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.niit.LetsChatBackend.Dao.UserDao;
-import com.niit.LetsChatBackend.model.User;
+import com.niit.LetsChatBackend.Dao.UserDetailDao;
+import com.niit.LetsChatBackend.model.UserDetail;
 
 public class UserDaoTest {
 
 private static AnnotationConfigApplicationContext context;
 	
-	private static UserDao userDao;
+	private static UserDetailDao userDetailDao;
 	
-	private static User user;
+	private static UserDetail userDetail;
 	
 	@BeforeClass
 	public static void setup()
 	{
-		User user= new User();
+		UserDetail userDetail= new UserDetail();
 	}
 	
 	@AfterClass
 	public static void teardown()
 	{
-		user=null;
+		userDetail=null;
 	}
 
 	@BeforeClass
@@ -37,14 +37,14 @@ private static AnnotationConfigApplicationContext context;
 		context.scan("com.niit.*");
 		context.refresh();
 		
-		userDao=(UserDao)context.getBean("userDao");
+		userDetailDao=(UserDetailDao)context.getBean("userDetailDao");
 	}
 	
 	
-//	@Test
+	//@Test
 	public void addUserTest()
 	{
-		User user= new User();
+		UserDetail user= new UserDetail();
 //		user.setUserId(101);
 		user.setUserName("abcd");
 		user.setAddress("def");
@@ -52,7 +52,11 @@ private static AnnotationConfigApplicationContext context;
 		user.setEmailId("abcd@gmail.com");
 		user.setMobile("96874526931");
 		user.setPassword("abcd");
-		assertEquals("User is saved",true, userDao.addUser(user));
+		user.setLoginname("abcd");
+		user.setRole("ROLEUSER");
+		user.setIsOnline("N");
+		
+		assertEquals("User is saved",true, userDetailDao.addUser(user));
 	
 //		user.setUserId(102);
 		user.setUserName("defg");
@@ -61,7 +65,10 @@ private static AnnotationConfigApplicationContext context;
 		user.setEmailId("defg@gmail.com");
 		user.setMobile("9685646931");
 		user.setPassword("defg");
-		assertEquals("User is saved",true, userDao.addUser(user));
+		user.setLoginname("defg");
+		user.setRole("ROLEUSER");
+		user.setIsOnline("N");
+		assertEquals("User is saved",true, userDetailDao.addUser(user));
 		
 //		user.setUserId(103);
 		user.setUserName("xyz");
@@ -70,43 +77,61 @@ private static AnnotationConfigApplicationContext context;
 		user.setEmailId("xyz@gmail.com");
 		user.setMobile("9965526931");
 		user.setPassword("xyz");
-		assertEquals("User is saved",true, userDao.addUser(user));
+		user.setLoginname("xyz");
+		user.setRole("ROLEUSER");
+		user.setIsOnline("N");
+		assertEquals("User is saved",true, userDetailDao.addUser(user));
 	}
 	
 //	@Test
 	public void testgetUser()
 	{
-		user= userDao.getUser(101);
-		 assertEquals("Successfully retrieved the user", "abcd", user.getUserName());
+		userDetail= userDetailDao.getUserbyid(101);
+		 assertEquals("Successfully retrieved the user", "abcd", userDetail.getUserName());
 	       
 	}
 	
 //	@Test
 	public void testupdateUser()
 	{
-		user= userDao.getUser(101);
-		user.setUserName("abc");
-		 assertEquals("Successfully updated the user", true, userDao.updateUser(user));
+		userDetail= userDetailDao.getUserbyid(101);
+		userDetail.setUserName("abc");
+		 assertEquals("Successfully updated the user", true, userDetailDao.updateUser(userDetail));
 	       
 	}
 	
 //	@Test
 	public void testdeleteUser()
 	{
-		user= userDao.getUser(102);
+		userDetail= userDetailDao.getUserbyid(102);
 		
-		assertEquals("Successfully deleted the user", true, userDao.deleteUser(user));
+		assertEquals("Successfully deleted the user", true, userDetailDao.deleteUser(userDetail));
+		 	       
+	}
+	
+	
+	//@Test
+	public void testlistUser()
+	{
+		
+		assertEquals("Successfully fetched the user list",userDetailDao.listUser().size()>0);
 		 	       
 	}
 	
 	
 	@Test
-	public void testlistUser()
+	public void updateOnlineStatusTest()
 	{
-		
-		assertEquals("Successfully fetched the user list", 2, userDao.listUser().size());
-		 	       
+		UserDetail user= userDetailDao.getUser("abcd");
+		assertTrue("Problem in updating", userDetailDao.updateOnlineStatus("Y", user));
 	}
-	
 
+	//@Test
+	public void checkUserTest()
+	{
+		UserDetail user= new UserDetail();
+		user.setLoginname("abcd");
+		user.setPassword("abcd");
+		assertTrue("Check user Fail", userDetailDao.checkLogin(user));
+	}
 }

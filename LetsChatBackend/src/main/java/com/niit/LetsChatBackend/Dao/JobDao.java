@@ -14,7 +14,7 @@ public interface JobDao {
 //	public boolean approveJob(Job job);
 //	public boolean rejectJob(Job job);
 	public List<Job> listJob();
-	public List<Job> getAllAppliedJobDetails();
+	public List<ApplyJob> getAllAppliedJobDetails();
 	public boolean applyJob(ApplyJob applyJob);
 	
 }

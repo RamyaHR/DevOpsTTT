@@ -26,17 +26,17 @@ public class BlogController {
 	@Autowired
 	BlogDao blogDao;
 	
-	@GetMapping(value="/demo")
+	@GetMapping(value="/demo")							//Working
 	public ResponseEntity<String> demoPurpose()
 	{
 		return new ResponseEntity<String>("Demo Data", HttpStatus.OK);
 	}
 	
-	//-----------ListBlog--------------//
+	//-----------ListBlog--------------					//Working
 	@GetMapping(value="/listBlogs")
 	public ResponseEntity<List<Blog>> getlistBlogs()
 	{
-		List<Blog> listBlogs= blogDao.listBlog("abcd");
+		List<Blog> listBlogs= blogDao.listBlog();
 		if(listBlogs.size()>0)
 		{
 			return new ResponseEntity<List<Blog>>(listBlogs, HttpStatus.OK);
@@ -47,15 +47,16 @@ public class BlogController {
 		}
 	}
 
-	//-------------Add Blog---------------//
+	//-------------Add Blog---------------							Working
 	@PostMapping(value="/addBlog")
 	public ResponseEntity<String> addBlog(@RequestBody Blog blog)
 	{
 		blog.setCreateDate(new java.util.Date());
 		blog.setLikes(0);
-		blog.setUserName("abcd");
+		blog.setUserName(blog.getUserName());
 		blog.setStatus("A");
 		
+		System.out.println("Blog Name:"+blog.getBlogName());
 		if(blogDao.addBlog(blog))
 		{
 			return new ResponseEntity<String>("Success", HttpStatus.OK);
@@ -66,7 +67,7 @@ public class BlogController {
 		}
 	}
 	
-	//---------------DeleteBlog-------------------//
+	//---------------DeleteBlog-------------------//                Working
 	@PostMapping(value="/deleteBlog")
 	public ResponseEntity<String> deleteBlog(@RequestBody Blog blog)
 	{
@@ -80,7 +81,7 @@ public class BlogController {
 		}
 	}
 	
-	//---------------------Update Blog-------------------//
+	//---------------------Update Blog-------------------//				Working
 	@PostMapping(value = "/updateBlog/{blogId}")
 	public ResponseEntity<String> updateBlog(@PathVariable("blogId") int blogId, @RequestBody Blog blog) {
 		System.out.println("Updating Blog " + blogId);
@@ -100,7 +101,7 @@ public class BlogController {
 		return new ResponseEntity<String>("Update Blog Success", HttpStatus.OK);
 	}
 
-	// -----------------------Get Blog --------------------//
+	// -----------------------Get Blog --------------------//		Working
 
 	@GetMapping(value = "/getBlog/{blogId}")
 	public ResponseEntity<String> getBlog(@PathVariable("blogId") int blogId) {
@@ -113,7 +114,7 @@ public class BlogController {
 		}
 	}
 
-	// -----------------------Approve Blog ------------//
+	// -----------------------Approve Blog ------------//         Working
 
 	@PostMapping(value = "/approveBlog/{blogId}")
 	public ResponseEntity<String> approveBlog(@PathVariable("blogId") int blogId) {
@@ -129,7 +130,7 @@ public class BlogController {
 		}
 	}
 
-	// --------------------Reject Blog ------------------//
+	// --------------------Reject Blog ------------------//		Working
 
 	@PostMapping(value = "/rejectBlog/{blogId}")
 	public ResponseEntity<String> rejectBlog(@PathVariable("blogId") int blogId) {
@@ -147,16 +148,20 @@ public class BlogController {
 	}
 
 	
-	// ---------------- Add BlogComments --------------------//
+	// ---------------- Add BlogComments --------------------//   	Working
 
-		@PostMapping(value = "/addBlogComment")  //Not working with postman
+		@PostMapping(value = "/addBlogComment")  
 		public ResponseEntity<String> addBlogComments(@RequestBody BlogComment blogComment) {
 			blogComment.setCommentDate(new Date());
-			Blog blog = blogDao.getBlog(1);
-			String username = blog.getUserName();
-			int blogId = blog.getBlogId();
-			blogComment.setBlogId(blogId);
-			blogComment.setLoginname(username);
+			blogComment.setBlogId(blogComment.getBlogId());
+			blogComment.setCommentDate(new Date());
+			blogComment.setCommentText(blogComment.getCommentText());
+			blogComment.setLoginname(blogComment.getLoginname());
+//			Blog blog = blogDao.getBlog(1);
+//			String username = blog.getUserName();
+//			int blogId = blog.getBlogId();
+//			blogComment.setBlogId(blogId);
+//			blogComment.setLoginname(username);
 			if (blogDao.addBlogComment(blogComment)) {
 				return new ResponseEntity<String>("BlogComment Added- Success", HttpStatus.OK);
 			} else {
@@ -164,9 +169,9 @@ public class BlogController {
 			}
 		}
 
-		// -------------------------Delete BlogComment	 ---------------//
+		// -------------------------Delete BlogComment	 ---------------//    Working
 
-		@PostMapping(value = "/deleteBlogComment/{commentId}")    //not working with postman
+		@PostMapping(value = "/deleteBlogComment/{commentId}")    
 		public ResponseEntity<String> deleteBlogComment(@PathVariable("commentId") int commentId) {
 			System.out.println("Delete blogComment with comment Id: " + commentId);
 			BlogComment blogComment = blogDao.getBlogComment(commentId);
@@ -193,10 +198,10 @@ public class BlogController {
 			}
 		}
 
-		// -----------------list Blogs ---------------------------------
-		@GetMapping(value = "/listBlogComments")
-		public ResponseEntity<List<BlogComment>> listBlogComments() {
-			List<BlogComment> listBlogComments = blogDao.listBlogComments(1);
+		// -----------------list Blogs ---------------------------------Working
+		@GetMapping(value = "/listBlogComments/{blogId}")
+		public ResponseEntity<List<BlogComment>> listBlogComments(@PathVariable("blogId")int blogId) {
+			List<BlogComment> listBlogComments = blogDao.listBlogComments(blogId);
 			if (listBlogComments.size() != 0) {
 				return new ResponseEntity<List<BlogComment>>(listBlogComments, HttpStatus.OK);
 			} else {
@@ -204,7 +209,7 @@ public class BlogController {
 			}
 		}
 		
-		// -----------------increment likes ---------------------//
+		// -----------------increment likes ---------------------//		Working
 				@PostMapping(value = "/incrementLikes/{blogId}")
 				public ResponseEntity<String> incrementLikes(@PathVariable("blogId")int blogId) {
 					System.out.println("Increment likes for BlogId " + blogId);

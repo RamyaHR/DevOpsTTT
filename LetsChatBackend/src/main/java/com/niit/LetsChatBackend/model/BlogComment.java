@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table
 @SequenceGenerator(name="blogcommidseq", sequenceName="blogcomm_id_seq")
@@ -19,6 +21,7 @@ public class BlogComment {
 		private String commentText;
 		private String loginname;
 		private int blogId;
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 		private Date commentDate;
 		public int getCommentId() {
 			return commentId;

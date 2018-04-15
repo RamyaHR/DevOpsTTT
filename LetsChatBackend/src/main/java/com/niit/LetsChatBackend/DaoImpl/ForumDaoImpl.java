@@ -115,14 +115,20 @@ public class ForumDaoImpl implements ForumDao{
 	}
 
 	@Override
-	public List<Forum> listForum(String userName) {
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		Query query= session.createQuery("from Forum where userName=:userName").setString("userName",userName);
-		query.setParameter("userName", userName);
-		List<Forum> listForums=query.list();
-		session.close();
-		return listForums;
+	public List<Forum> listForum() {
+		try{
+			Session session=sessionFactory.openSession();
+			session.beginTransaction();
+			Query query= session.createQuery("from Forum");
+			List<Forum> listForums=query.list();
+			session.close();
+			return listForums;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+		
 	}
 
 	@Override

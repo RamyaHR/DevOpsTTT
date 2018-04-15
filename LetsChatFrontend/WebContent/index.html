@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" >
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -11,12 +11,31 @@
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		
 		<script src="js/modernizr.custom.js"></script>
+	
+		<script src="js/angular.js"></script>
+<!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script> -->
+		<script src="js/angular-route.js"></script>
+		<script src="js/angular-cookies.js"></script>
+		<script src="MyRouteConfig.js"></script>
+		<script src="c_blog/BlogController.js"></script>
+		<script src="c_user/UserController.js"></script>
+		
+		
+		<style>
+		body
+		{
+			background-image: url("images/img2.jpg");
+			background-size:1500px;
+		}
+		</style>
+
 	</head>
-	<body background-color="#D6EAF8">
+	<body ng-app="myApp">
 		<center>
-			<div style="background-color:#A3E4D7; padding:5px;">
-		<h1>Company Name</h1>
+			<div padding:5px;">
+		<h1>LetsChat</h1>
 	</div>
 	</center>
 		<div class="container">
@@ -47,7 +66,7 @@
 								<span>About Us</span>
 							</a>
 						</li>
-						<li>
+						<li ng-show="currentUser.role=='ROLEUSER'||currentUser.role=='ROLEADMIN'">
 							<a href="#/Blog">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-blog"></i>
@@ -55,7 +74,31 @@
 								<span>Blog</span>
 							</a>
 						</li>
-						<li>
+						<li ng-show="currentUser.role=='ROLEUSER'||currentUser.role=='ROLEADMIN'">
+							<a href="#/Forum">
+								<span class="icon">
+									<i aria-hidden="true" class="icon-blog"></i>
+								</span>
+								<span>Forum</span>
+							</a>
+						</li>
+						<li ng-show="currentUser.role=='ROLEUSER'||currentUser.role=='ROLEADMIN'">
+							<a href="#/Job">
+								<span class="icon">
+									<i aria-hidden="true" class="icon-blog"></i>
+								</span>
+								<span>Job</span>
+							</a>
+						</li>
+						<li ng-show="currentUser.role=='ROLEUSER'||currentUser.role=='ROLEADMIN'">
+							<a href="#/Chat">
+								<span class="icon">
+									<i aria-hidden="true" class="icon-blog"></i>
+								</span>
+								<span>Chat</span>
+							</a>
+						</li>
+						<li ng-hide="currentUser.role=='ROLEUSER'||currentUser.role=='ROLEADMIN'">
 							<a href="#/Register">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-team"></i>
@@ -63,7 +106,7 @@
 								<span>Register</span>
 							</a>
 						</li>
-						<li>
+						<li ng-hide="currentUser.role=='ROLEUSER'||currentUser.role=='ROLEADMIN'">
 							<a href="#/Login">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-login"></i>
@@ -71,10 +114,65 @@
 								<span>Login</span>
 							</a>
 						</li>
-					</ul>
+						<li ng-show="currentUser.role=='ROLEUSER'||currentUser.role=='ROLEADMIN'">
+							<a href="#/uploadProfilePicture">
+								<span class="icon">
+									<i aria-hidden="true" class="icon-login"></i>
+								</span>
+								<span>ProfilePic</span>
+							</a>
+						</li>
+						<div ng-controller="UserController" ng-hide="currentUser==undefined">
+						<li>
+							<a href="">{{currentUser.loginname}}
+							</a>
+						</li>
+						
+						<li><button ng-click="logout()">
+									<span class="icon">
+									<i aria-hidden="true" class="icon-login"></i>
+								</span>
+								<span>Logout</span>
+							</button>
+						</li>
+						<li><img id="image" src="http://localhost:6261/LetsChatMiddleWare/getImage/{{currentUser.loginname}}" alt="user" width="50px" height="50px">
+									<span class="icon">
+									<i aria-hidden="true" class="icon-login"></i>
+								</span>
+								<span>Logout</span>
+							</button>
+						</li>
+						
+						
+						</div>
+<!-- 						<li ng-show="currentUser.role=='ROLEUSER'" class="dropdown"> -->
+<!-- 						<p class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:white;padding-top:10px">Profile -->
+<!--         				<span class="caret"></span></p> -->
+<!--         				<ul class="dropdown-menu"> -->
+        				
+<!--           					<li><a href="#/displayProfile">View Profile</a></li> -->
+<!--           					<li><a href="#">Update Profile</a></li> -->
+<!--           					<li><a href="#/uploadProfilePicture">Upload Profile Picture</a></li> -->
+<!--           				</ul> -->
+<!--       				</li> -->
+<!-- 					</ul> -->
+					
+<!-- 					<ul class="nav navbar-nav navbar-right" ng-hide="currentUser==undefined" style="padding-top:20px"> -->
+<!-- 					<li style="color:white;padding-right:20px;font-size:20px">Welcome {{currentUser.firstName}} {{currentUser.lastName}}</li> -->
+<!-- 					<li> -->
+<!-- 					</li></ul> -->
+					
+<!-- 					<img id="img1"   -->
+<!-- 					src="http://localhost:6061/LetsChatMiddleWare/viewProfilePicture/{{currentUser.loginName}}" -->
+<!-- 					onerror="if (this.src != 'images/profilepicture.png') this.src = 'images/profilepicture.png';" -->
+<!-- 					style="height:80px;width:100px" onshow="checkSRC"></li>  -->
+								
+<!-- 					<li><form ng-controller="UserController"><input type="submit" value="LogOut" ng-click="logout()"></form></li> -->
+<!-- 				</ul> -->
 				</nav>
+				<div ng-view></div>
 			</div>
-			<div ng-view></div>
+			
 		</div><!-- /container -->
 		
 		

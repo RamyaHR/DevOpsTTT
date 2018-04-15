@@ -9,8 +9,9 @@
 
   <name>LetsChatBackend</name>
   <url>http://maven.apache.org</url>
-
-  <properties>
+	<properties>
+		<jackson.version>2.9.0</jackson.version>
+	
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -58,6 +59,23 @@
     <version>5.2.12.Final</version>
 </dependency>
     
+    <dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
     
   </dependencies>
+  
+  
 </project>

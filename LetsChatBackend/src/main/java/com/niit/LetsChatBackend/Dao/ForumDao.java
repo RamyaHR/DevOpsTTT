@@ -13,7 +13,7 @@ public interface ForumDao {
 	public Forum getForum(int forumId);
 	public boolean approveForum(Forum forum);
 	public boolean rejectForum(Forum forum);
-	public List<Forum> listForum(String userName);
+	public List<Forum> listForum();
 	
 	public boolean addForumComment(ForumComment forumComment);
 	public boolean deleteForumComment(ForumComment forumComment);

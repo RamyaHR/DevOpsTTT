@@ -68,7 +68,7 @@ a, li {
 /* Global CSS that are applied for all screen sizes */
 
 .nav ul {
-	max-width: 1240px;
+	max-width: 1250px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -148,7 +148,7 @@ a, button {
 	/* Transforms the list into a horizontal navigation */
 	.nav li {
 		float: left;
-		width: 16.66666666666667%;
+		width: 10.66666666666667%;
 		text-align: center;
 		-webkit-transition: border .5s;
 		-moz-transition: border .5s;

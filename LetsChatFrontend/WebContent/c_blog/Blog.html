@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Blog Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Credit Login / Register Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/angular.js"></script>
+<!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script> -->
+		<script src="js/angular-route.js"></script>
+		<script src="js/angular-cookies.js"></script>
+		<script src="MyRouteConfig.js"></script>
+		<script src="c_blog/BlogController.js"></script>
+		<script src="c_user/UserController.js"></script>
+		
+	
+<!-- //Custom Theme files -->
+<!-- web font -->
+	
+			
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //web font -->
+
+<style>
+input[type="text"], textarea{
+	outline: none;
+  font-size: 15px;
+    color: #000;
+  border:none;
+    width: 90%;
+  display: inline-block;
+  background: transparent;
+	font-family: 'Muli', sans-serif;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+body
+{
+background-image: url("images/img2.jpg");
+}
+
+table
+{
+border:1px solid black;
+}
+</style>
+</head>
+<body ng-app="myApp">
+
+<!-- main -->
+<div class="w3ls-header">
+	<h1>Blog form</h1>
+	<div class="header-main">
+		<h2> <a href="#"></a>Blog Page <span></span> <a href="#"></a></h2>
+			<div class="header-bottom">
+				<div class="header-right w3agile">
+					<div class="header-left-bottom agileinfo" > 
+						<form action="#" id="blogform" method="post" ng-controller="BlogController">
+							<div class="icon1">
+								<input type="text" placeholder="BlogName" required="required" ng-model="blog.blogName"/>{{blog.blogName}}
+							</div>
+							<div class="icon1">
+								<textarea rows="5" cols="30" placeholder="BlogContent" required="required" ng-model="blog.blogContent"></textarea>
+							</div>
+							
+							<div class="bottom">
+								<input type="submit" value="Add Blog" ng-click="insertBlog()"/>
+							</div>
+							<p><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a> : login with google-plus</p>
+					</form>	
+					</div>
+				</div>
+			</div>
+	</div>
+</div><br>
+<br> 
+<form id="blogform" method="post">
+<table ng-controller="BlogController">
+<tr>
+<th>BlogName</th>
+<th>BlogContent</th>
+<th>Likes</th>
+</tr>
+<tr ng-repeat="blog in blogdata">
+<td>{{blog.blogName}}</td>
+<td>{{blog.blogContent}}</td>
+<td>{{blog.likes}}
+<input type="submit" value="like" ng-click="incrementLikes(blog.blogId)"/></td>
+<td>
+<div ng-show="blog.userName==currentUser.loginname">
+<input type="submit" value="Delete" ng-click="deleteBlog(blog.blogId)"/>
+<input type="submit" value="Edit" ng-click="updateBlog(blog.blogId)"/>
+</div></td>
+</tr>
+</table>
+</form>
+
+<!--header end here-->
+<!-- copyright start here -->
+<div class="copyright">
+	<p style="color:red">© 2017 LetsChat Form. All rights reserved | Design by LetsChat </a></p>
+</div>
+<!--copyright end here-->
+</body>
+</html>

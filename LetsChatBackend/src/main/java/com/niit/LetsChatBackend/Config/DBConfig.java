@@ -15,19 +15,26 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.LetsChatBackend.Dao.BlogDao;
 import com.niit.LetsChatBackend.Dao.ForumDao;
+import com.niit.LetsChatBackend.Dao.FriendDao;
 import com.niit.LetsChatBackend.Dao.JobDao;
-import com.niit.LetsChatBackend.Dao.UserDao;
+import com.niit.LetsChatBackend.Dao.ProfilePictureDao;
+import com.niit.LetsChatBackend.Dao.UserDetailDao;
 import com.niit.LetsChatBackend.DaoImpl.BlogDaoImpl;
 import com.niit.LetsChatBackend.DaoImpl.ForumDaoImpl;
+import com.niit.LetsChatBackend.DaoImpl.FriendDaoImpl;
 import com.niit.LetsChatBackend.DaoImpl.JobDaoImpl;
-import com.niit.LetsChatBackend.DaoImpl.UserDaoImpl;
+import com.niit.LetsChatBackend.DaoImpl.ProfilePictureDaoImpl;
+import com.niit.LetsChatBackend.DaoImpl.UserDetailDaoImpl;
 import com.niit.LetsChatBackend.model.ApplyJob;
 import com.niit.LetsChatBackend.model.Blog;
 import com.niit.LetsChatBackend.model.BlogComment;
 import com.niit.LetsChatBackend.model.Forum;
 import com.niit.LetsChatBackend.model.ForumComment;
+import com.niit.LetsChatBackend.model.Friend;
 import com.niit.LetsChatBackend.model.Job;
-import com.niit.LetsChatBackend.model.User;
+import com.niit.LetsChatBackend.model.Message;
+import com.niit.LetsChatBackend.model.ProfilePicture;
+import com.niit.LetsChatBackend.model.UserDetail;
 
 @Configuration
 @ComponentScan("com.niit.*")
@@ -60,10 +67,14 @@ public class DBConfig {
 		sessionFactoryBuilder.addAnnotatedClass(Blog.class);
 		sessionFactoryBuilder.addAnnotatedClass(Forum.class);
 		sessionFactoryBuilder.addAnnotatedClass(Job.class);
-		sessionFactoryBuilder.addAnnotatedClass(User.class);
+		sessionFactoryBuilder.addAnnotatedClass(UserDetail.class);
 		sessionFactoryBuilder.addAnnotatedClass(ApplyJob.class);
 		sessionFactoryBuilder.addAnnotatedClass(BlogComment.class);
 		sessionFactoryBuilder.addAnnotatedClass(ForumComment.class);
+		sessionFactoryBuilder.addAnnotatedClass(ProfilePicture.class);
+		sessionFactoryBuilder.addAnnotatedClass(Friend.class);
+		sessionFactoryBuilder.addAnnotatedClass(Message.class);
+				
 		SessionFactory sessionFactory= sessionFactoryBuilder.buildSessionFactory();
 		System.out.println("----------------SessionFactory-------------");
 		return sessionFactory;
@@ -97,11 +108,24 @@ public class DBConfig {
 		return new JobDaoImpl(sessionFactory);
 	}
 	
-	@Bean(name="userDao")
-	public UserDao getUserDao(SessionFactory sessionFactory)
+	@Bean(name="userDetailDao")
+	public UserDetailDao getUserDetailDao(SessionFactory sessionFactory)
 	{
 		System.out.println("User Dao object created");
-		return new UserDaoImpl(sessionFactory);
+		return new UserDetailDaoImpl(sessionFactory);
 	}
 	
+	@Bean(name="profilePictureDao")
+	public ProfilePictureDao getProfilePictureDao(SessionFactory sessionFactory)
+	{
+		System.out.println("ProfilePicture Dao object created");
+		return new ProfilePictureDaoImpl(sessionFactory);
+	}
+	
+	@Bean(name="friendDao")
+	public FriendDao getFriendDao(SessionFactory sessionFactory)
+	{
+		System.out.println("Friend Dao object created");
+		return new FriendDaoImpl(sessionFactory);
+	}
 }

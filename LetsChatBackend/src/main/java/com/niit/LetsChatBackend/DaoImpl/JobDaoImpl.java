@@ -115,20 +115,32 @@ public class JobDaoImpl implements JobDao{
 
 	@Override
 	public List<Job> listJob() {
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		List<Job> li= session.createQuery("from Job").list();
-		session.getTransaction().commit();
-		return li;
+		try{
+			Session session=sessionFactory.openSession();
+			session.beginTransaction();
+			List<Job> li= session.createQuery("from Job").list();
+			session.getTransaction().commit();
+			return li;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 	}
 
 	@Override
-	public List<Job> getAllAppliedJobDetails() {
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		List<Job> joblist= session.createQuery("from ApplyJob").list();
-		session.getTransaction().commit();
-		return joblist;
+	public List<ApplyJob> getAllAppliedJobDetails() {
+		try{
+			Session session=sessionFactory.openSession();
+			session.beginTransaction();
+			List<ApplyJob> joblist= session.createQuery("from ApplyJob").list();
+			session.getTransaction().commit();
+			return joblist;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 	}
 
 	@Override

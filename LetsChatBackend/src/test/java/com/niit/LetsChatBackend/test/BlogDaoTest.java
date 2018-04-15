@@ -107,7 +107,7 @@ public class BlogDaoTest {
 	public void testlistBlog()
 	{
 		
-		assertEquals("Successfully fetched the blog list", 2, blogDao.listBlog("abcd").size());
+		assertEquals("Successfully fetched the blog list",  blogDao.listBlog().size()>0);
 		 	       
 	}
 	
